@@ -6,22 +6,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-open-terminal 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-22 19:46+0100\n"
-"PO-Revision-Date: 2004-02-22 19:46+0100\n"
+"POT-Creation-Date: 2005-02-23 16:36+0100\n"
+"PO-Revision-Date: 2005-02-23 16:08+0100\n"
 "Last-Translator:  <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/nautilus-open-terminal.c:130 ../src/nautilus-open-terminal.c:153
+#: ../src/nautilus-open-terminal.c:146
+msgid "Open _Terminal"
+msgstr "_Terminal öffnen"
+
+#: ../src/nautilus-open-terminal.c:147 ../src/nautilus-open-terminal.c:176
 msgid "Open In _Terminal"
 msgstr "Im _Terminal öffnen"
 
-#: ../src/nautilus-open-terminal.c:131
+#: ../src/nautilus-open-terminal.c:149
+msgid "Open a terminal"
+msgstr "Ein _Terminal öffnen"
+
+#: ../src/nautilus-open-terminal.c:150
 msgid "Open the currently open folder in a terminal"
 msgstr "Den momentan geöffneten Ordner in einem Terminal öffnen."
 
-#: ../src/nautilus-open-terminal.c:154
+#: ../src/nautilus-open-terminal.c:177
 msgid "Open the selected folder in a terminal"
 msgstr "Den gewählten Ordner in einem Terminal öffnen"

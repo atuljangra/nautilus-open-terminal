@@ -41,49 +41,79 @@ static void nautilus_open_terminal_class_init    (NautilusOpenTerminalClass *cla
 
 static GType terminal_type = 0;
 
+typedef int TerminalFileInfo;
+
+enum {
+	FILE_INFO_IS_LOCAL   = 1 << 1,
+	FILE_INFO_IS_DESKTOP = 1 << 2
+};
+
+static TerminalFileInfo
+get_terminal_file_info (NautilusFileInfo *file_info)
+{
+	TerminalFileInfo  ret;
+	gchar            *uri_scheme;
+
+	g_assert (file_info);
+
+	uri_scheme = nautilus_file_info_get_uri_scheme (file_info);
+
+	if (!strcmp (uri_scheme, "file"))
+		ret |= FILE_INFO_IS_LOCAL;
+	else if (!strcmp (uri_scheme, "x-nautilus-desktop"))
+		ret |= FILE_INFO_IS_LOCAL | FILE_INFO_IS_DESKTOP;
+	else
+		ret = 0;
+
+	g_free (uri_scheme);
+
+	return ret;
+}
+
 static void
 open_terminal_callback (NautilusMenuItem *item,
 			NautilusFileInfo *file_info)
 {
-	gchar **argv, *uri, *terminal_exec;
-	gchar *filename;
+	gchar **argv, *terminal_exec;
+	gchar *working_directory;
 	static GConfClient *client;
-	gboolean desktop_is_home_dir = FALSE;
+
+	TerminalFileInfo terminal_file_info;
 
 	g_print ("Open Terminal selected\n");
 
-	client = gconf_client_get_default ();
+	terminal_file_info = get_terminal_file_info (file_info);
 
-	uri = nautilus_file_info_get_uri (file_info);
-	if (uri == NULL)
-		filename = g_strdup (g_get_home_dir ());
-	else if (strcmp (uri, "x-nautilus-desktop:///") == 0) {
-		desktop_is_home_dir = gconf_client_get_bool (client,
-							     "/apps/nautilus/preferences/"
-							     "desktop_is_home_dir",
-							     NULL);
-		filename = desktop_is_home_dir ? g_strdup (g_get_home_dir ()) :
-						  g_build_filename (g_get_home_dir (),
-								    "Desktop",
-								    NULL);
+	g_assert (terminal_file_info & FILE_INFO_IS_LOCAL);
+
+	if (terminal_file_info & FILE_INFO_IS_DESKTOP)
+		working_directory = g_strdup (g_get_home_dir ());
+	else {
+		gchar *uri;
+
+		uri = nautilus_file_info_get_uri (file_info);
+
+		working_directory = uri ?
+			g_filename_from_uri (uri, NULL, NULL) :
+			g_strdup (g_get_home_dir ());
+
+		g_free (uri);
 	}
-	else
-		filename = g_filename_from_uri (uri, NULL, NULL);
 
-	if (filename == NULL)
-		filename = g_strdup (g_get_home_dir ());
+
+	client = gconf_client_get_default ();
 
 	terminal_exec = gconf_client_get_string (client,
 						 "/desktop/gnome/applications/terminal/"
 						 "exec",
 						 NULL);
 
-	if (terminal_exec == NULL)
+	if (!terminal_exec)
 		terminal_exec = g_strdup ("gnome-terminal");
 
 	g_shell_parse_argv (terminal_exec, NULL, &argv, NULL);
 
-	g_spawn_async (filename,
+	g_spawn_async (working_directory,
 		       argv,
 		       NULL,
 		       G_SPAWN_SEARCH_PATH,
@@ -93,26 +123,8 @@ open_terminal_callback (NautilusMenuItem *item,
 		       NULL);
 
 	g_free (argv);
-	g_free (uri);
 	g_free (terminal_exec);
-	g_free (filename);
-}
-
-static gboolean
-is_local (NautilusFileInfo *file_info)
-{
-	gchar    *uri_scheme;
-	gboolean  ret;
-
-	g_assert (file_info);
-
-	uri_scheme = nautilus_file_info_get_uri_scheme (file_info);
-	ret = (!strcmp (uri_scheme, "file") ||
-	       !strcmp (uri_scheme, "x-nautilus-desktop"));
-
-	g_free (uri_scheme);
-
-	return ret;
+	g_free (working_directory);
 }
 
 static GList *
@@ -121,13 +133,21 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 					     NautilusFileInfo	  *file_info)
 {
 	NautilusMenuItem *item;
+	gboolean          is_desktop;
+	TerminalFileInfo  terminal_file_info;
 
-	if (!is_local (file_info))
+	terminal_file_info = get_terminal_file_info (file_info);
+
+	if (!(terminal_file_info & FILE_INFO_IS_LOCAL))
 		return NULL;
 
 	item = nautilus_menu_item_new ("NautilusOpenTerminal::open_terminal",
-				       _("Open In _Terminal"),
-				       _("Open the currently open folder in a terminal"),
+				       terminal_file_info & FILE_INFO_IS_DESKTOP ?
+				        _("Open _Terminal") :
+					_("Open In _Terminal"),
+				       terminal_file_info & FILE_INFO_IS_DESKTOP ?
+				        _("Open a terminal") :
+				        _("Open the currently open folder in a terminal"),
 				       "gnome-terminal");
 	g_signal_connect (item, "activate",
 			  G_CALLBACK (open_terminal_callback),
@@ -142,11 +162,15 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 				       GList                *files)
 {
 	NautilusMenuItem *item;
+	TerminalFileInfo  terminal_file_info;
 
 	if (g_list_length (files) != 1 ||
-	    !nautilus_file_info_is_directory (files->data) ||
-	    !is_local (files->data))
+	    !nautilus_file_info_is_directory (files->data))
 		return NULL;
+
+	if (!(get_terminal_file_info (files->data) & FILE_INFO_IS_LOCAL))
+		return NULL;
+
 
 	item = nautilus_menu_item_new ("NautilusOpenTerminal::open_terminal",
 				       _("Open In _Terminal"),
