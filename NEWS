@@ -5,6 +5,7 @@ nautilus-open-terminal 0.2
 	* Use GnomeDesktopItem/startup-notification if gnome-terminal is used as terminal.
 	* Fix up menuitem creation code
 	* Plug leaks
+	* Updated translations: bg cs da de en_CA es fi pt_BR sk sr sr@Latn sv zh_CN.
 
 nautilus-open-terminal 0.1
 ==========================
