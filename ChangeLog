@@ -1,3 +1,14 @@
+2005-02-24  Dennis Cranston  <dennis_cranston@yahoo.com>
+	
+	* configure.in:  Add check for libgnome-desktop.  
+	Remove check for startup-notification.
+	
+	* src/Makefile.am:  Add libgnome-desktop. 
+	Remove startup-notification.
+		
+	* src/nautilus-open-terminal.c:  Use gnome-desktop-item api
+	to launch gnome-terminal.
+	
 2005-02-24  Raphael Higino  <raphaelh@cvs.gnome.org>
 
 	* configure.in: Added pt_BR to ALL_LINGUAS.

@@ -33,6 +33,7 @@
 #include <gtk/gtkicontheme.h>
 #include <gtk/gtkwidget.h>
 #include <gconf/gconf-client.h>
+#include <libgnome/gnome-desktop-item.h>
 
 #include <string.h> /* for strcmp */
 
@@ -70,12 +71,50 @@ get_terminal_file_info (NautilusFileInfo *file_info)
 	return ret;
 }
 
+char *
+lookup_in_data_dir (const char *basename,
+                    const char *data_dir)
+{
+	char *path;
+
+	path = g_build_filename (data_dir, basename, NULL);
+	if (!g_file_test (path, G_FILE_TEST_EXISTS)) {
+		g_free (path);
+		return NULL;
+	}
+
+	return path;
+}
+
+static char *
+lookup_in_data_dirs (const char *basename)
+{
+	const char * const *system_data_dirs;
+	const char          *user_data_dir;
+	char                *retval;
+	int                  i;
+
+	user_data_dir    = g_get_user_data_dir ();
+	system_data_dirs = g_get_system_data_dirs ();
+
+	if ((retval = lookup_in_data_dir (basename, user_data_dir)))
+		return retval;
+
+	for (i = 0; system_data_dirs[i]; i++)
+		if ((retval = lookup_in_data_dir (basename, system_data_dirs[i])))
+			return retval;
+
+	return NULL;
+}
+
 static void
 open_terminal_callback (NautilusMenuItem *item,
 			NautilusFileInfo *file_info)
 {
 	gchar **argv, *terminal_exec;
-	gchar *working_directory;
+	gchar *working_directory, *quoted_directory;
+	gchar *command, *dfile, *executable;
+	GnomeDesktopItem *ditem;
 	static GConfClient *client;
 
 	TerminalFileInfo terminal_file_info;
@@ -113,16 +152,45 @@ open_terminal_callback (NautilusMenuItem *item,
 
 	g_shell_parse_argv (terminal_exec, NULL, &argv, NULL);
 
-	g_spawn_async (working_directory,
-		       argv,
-		       NULL,
-		       G_SPAWN_SEARCH_PATH,
-		       NULL,
-		       NULL,
-		       NULL,
-		       NULL);
+	executable = g_path_get_basename (argv[0]);
+
+	if (strcmp (executable, "gnome-terminal") == 0)
+		dfile = lookup_in_data_dirs ("applications/gnome-terminal.desktop");
+	else
+		dfile = NULL;
+
+	if (dfile != NULL) {			   
+		ditem = gnome_desktop_item_new_from_file (dfile, 0, NULL);
+		quoted_directory = g_shell_quote (working_directory);
+				
+		command = g_strdup_printf ("%s --working-directory=%s", terminal_exec, quoted_directory);							  
+		gnome_desktop_item_set_string (ditem, "Exec", command);
+
+		gnome_desktop_item_set_launch_time (ditem, gtk_get_current_event_time ());
+
+		gnome_desktop_item_launch (ditem,
+		                           NULL,
+		                           GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE,
+		                           NULL);
+
+		gnome_desktop_item_unref (ditem);
+		g_free (command);
+		g_free (dfile);
+		g_free (quoted_directory);
+	}
+	else {	
+		g_spawn_async (working_directory,
+			       argv,
+			       NULL,
+			       G_SPAWN_SEARCH_PATH,
+			       NULL,
+			       NULL,
+			       NULL,
+			       NULL);
+	}
 
 	g_free (argv);
+	g_free (executable);
 	g_free (terminal_exec);
 	g_free (working_directory);
 }
