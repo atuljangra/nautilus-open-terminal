@@ -1,3 +1,7 @@
+2005-02-23  Francisco Javier F. Serrador  <serrador@cvs.gnome.org>
+
+	* configure.in: Added "es" to ALL_LINGUAS.
+
 2005-02-23  Christian Neumair  <chris@gnome-de.org>
 
 	* src/nautilus-open-terminal.c: Fix stupid bug where desktop wasn't
