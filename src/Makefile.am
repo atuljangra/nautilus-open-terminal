@@ -8,7 +8,6 @@ INCLUDES =						\
 	-Werror                                         \
 	$(DISABLE_DEPRECATED_CFLAGS)			\
 	$(NAUTILUS_CFLAGS)				\
-	$(GNOMEVFS_CFLAGS)				\
 	$(GCONF_CFLAGS)
 
 # FIXME: get this from the .pc file

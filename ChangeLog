@@ -1,5 +1,16 @@
 2005-02-22  Christian Neumair  <chris@gnome-de.org>
 
+	* .cvsignore:
+	* po/.cvsignore:
+	* src/.cvsignore: Added.
+
+	* src/Makefile.am:
+	* configure.in: Don't depend on GNOME-VFS, eel.
+	* src/*.c: Use uri->path converter from glib instead of relying on
+	GNOME-VFS. Other minor cleanups, include fixes.
+
+2005-02-22  Christian Neumair  <chris@gnome-de.org>
+
 	* *: Checked into CVS with slight code fixes.
 
 == 0.1 "Tarball Lost" Release ==

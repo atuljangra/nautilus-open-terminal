@@ -25,32 +25,26 @@
  #include <config.h>
 #endif
 
-#include <libnautilus-extension/nautilus-extension-types.h>
-#include <libnautilus-extension/nautilus-column-provider.h>
-
 #include "nautilus-open-terminal.h"
 
-#include <glib/gi18n-lib.h>
+#include <libintl.h>
 
-/* NautilusOpenTerminal provider.  This object handles things that are shared
- * across different version control systems. */
-
-#define NAUTILUS_TYPE_OPEN_TERMINAL  (nautilus_open_terminal_get_type ())
-#define NAUTILUS_OPEN_TERMINAL(o)    (G_TYPE_CHECK_INSTANCE_CAST ((o), NAUTILUS_TYPE_OPEN_TERMINAL, NautilusOpenTerminal))
+static GType type_list[1];
 
 void
-nautilus_module_initialize (GTypeModule  *module)
+nautilus_module_initialize (GTypeModule *module)
 {
 	g_print ("Initializing nautilus-open-terminal extension\n");
 
 	nautilus_open_terminal_register_type (module);
+	type_list[0] = NAUTILUS_TYPE_OPEN_TERMINAL;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 }
 
 void
-nautilus_module_shutdown   (void)
+nautilus_module_shutdown (void)
 {
 	g_print ("Shutting down nautilus-open-terminal extension\n");
 }
@@ -59,10 +53,6 @@ void
 nautilus_module_list_types (const GType **types,
 			    int          *num_types)
 {
-	static GType type_list[1];
-
-	type_list[0] = NAUTILUS_TYPE_OPEN_TERMINAL;
-
 	*types = type_list;
 	*num_types = G_N_ELEMENTS (type_list);
 }

@@ -27,30 +27,26 @@
 
 #include "nautilus-open-terminal.h"
 
-#include <libnautilus-extension/nautilus-extension-types.h>
-#include <libnautilus-extension/nautilus-info-provider.h>
 #include <libnautilus-extension/nautilus-menu-provider.h>
-#include <libnautilus-extension/nautilus-property-page-provider.h>
 
 #include <glib/gi18n-lib.h>
 #include <gtk/gtkicontheme.h>
 #include <gtk/gtkwidget.h>
 #include <gconf/gconf-client.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
 
 #include <string.h> /* for strcmp */
 
-static void nautilus_open_terminal_instance_init            (NautilusOpenTerminal               *cvs);
-static void nautilus_open_terminal_class_init               (NautilusOpenTerminalClass          *class);
+static void nautilus_open_terminal_instance_init (NautilusOpenTerminal      *cvs);
+static void nautilus_open_terminal_class_init    (NautilusOpenTerminalClass *class);
 
-static GObjectClass *parent_class;
+static GType terminal_type = 0;
 
 static void
 open_terminal_callback (NautilusMenuItem *item,
 			NautilusFileInfo *file_info)
 {
 	gchar **argv, *uri, *terminal_exec;
-	gchar *local_uri;
+	gchar *filename;
 	static GConfClient *client;
 	gboolean desktop_is_home_dir = FALSE;
 
@@ -60,22 +56,22 @@ open_terminal_callback (NautilusMenuItem *item,
 
 	uri = nautilus_file_info_get_uri (file_info);
 	if (uri == NULL)
-		local_uri = g_strdup (g_get_home_dir ());
+		filename = g_strdup (g_get_home_dir ());
 	else if (strcmp (uri, "x-nautilus-desktop:///") == 0) {
 		desktop_is_home_dir = gconf_client_get_bool (client,
 							     "/apps/nautilus/preferences/"
 							     "desktop_is_home_dir",
 							     NULL);
-		local_uri = desktop_is_home_dir ? g_strdup (g_get_home_dir ()) :
+		filename = desktop_is_home_dir ? g_strdup (g_get_home_dir ()) :
 						  g_build_filename (g_get_home_dir (),
 								    "Desktop",
 								    NULL);
 	}
 	else
-		local_uri = gnome_vfs_get_local_path_from_uri (uri);
+		filename = g_filename_from_uri (uri, NULL, NULL);
 
-	if (local_uri == NULL)
-		local_uri = g_strdup (g_get_home_dir ());
+	if (filename == NULL)
+		filename = g_strdup (g_get_home_dir ());
 
 	terminal_exec = gconf_client_get_string (client,
 						 "/desktop/gnome/applications/terminal/"
@@ -87,7 +83,7 @@ open_terminal_callback (NautilusMenuItem *item,
 
 	g_shell_parse_argv (terminal_exec, NULL, &argv, NULL);
 
-	g_spawn_async (local_uri,
+	g_spawn_async (filename,
 		       argv,
 		       NULL,
 		       G_SPAWN_SEARCH_PATH,
@@ -99,7 +95,7 @@ open_terminal_callback (NautilusMenuItem *item,
 	g_free (argv);
 	g_free (uri);
 	g_free (terminal_exec);
-	g_free (local_uri);
+	g_free (filename);
 }
 
 static gboolean
@@ -178,10 +174,7 @@ nautilus_open_terminal_instance_init (NautilusOpenTerminal *cvs)
 static void
 nautilus_open_terminal_class_init (NautilusOpenTerminalClass *class)
 {
-	parent_class = g_type_class_peek_parent (class);
 }
-
-static GType terminal_type = 0;
 
 GType
 nautilus_open_terminal_get_type (void) 
