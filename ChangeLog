@@ -1,4 +1,8 @@
-2005-03-05	Amanpreet Singh Alam <amanpreetalam@yahoo.com>
+2005-03-14  Josep Puigdemont  <josep@imatge-sintetica.com>
+
+	* configure.in: Added "ca" to ALL_LINGUAS.
+
+2005-03-05  Amanpreet Singh Alam  <amanpreetalam@yahoo.com>
 
 	* configure.in: Add "pa.po" to ALL_LINGUAS.
 
