@@ -1,0 +1,8 @@
+Makefile
+Makefile.in
+Makefile.in.in
+POTFILES
+nautilus-open-terminal.pot
+missing
+*.gmo
+messages.mo
