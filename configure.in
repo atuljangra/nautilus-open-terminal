@@ -1,0 +1,55 @@
+AC_INIT
+
+PACKAGE=nautilus-open-terminal
+VERSION=0.1
+
+AC_SUBST(PACKAGE)
+AC_SUBST(VERSION)
+
+AM_INIT_AUTOMAKE($PACKAGE, $VERSION)
+AM_CONFIG_HEADER(config.h)
+
+NAUTILUS_REQUIRED=2.6.0
+EEL_REQUIRED=2.6.0
+GLIB_REQUIRED=2.4.0
+
+AC_PROG_CC
+AM_PROG_LIBTOOL
+
+dnl Check for pkgconfig first
+AC_CHECK_PROG(HAVE_PKGCONFIG, pkg-config, yes, no)
+
+dnl Give error and exit if we don't have pkgconfig
+if test "x$HAVE_PKGCONFIG" = "xno"; then
+  AC_MSG_ERROR(you need to have pkgconfig installed !)
+fi
+
+PKG_CHECK_MODULES(NAUTILUS, libnautilus-extension >= $NAUTILUS_REQUIRED eel-2.0 >= $EEL_REQUIRED glib-2.0 >= $GLIB_REQUIRED)
+PKG_CHECK_MODULES(GNOMEVFS, gnome-vfs-2.0)
+PKG_CHECK_MODULES(GCONF, gconf-2.0)
+
+dnl make GNOME_CFLAGS and GNOME_LIBS available
+AC_SUBST(NAUTILUS_CFLAGS)
+AC_SUBST(NAUTILUS_LIBS)
+
+AC_SUBST(GNOMEVFS_CFLAGS)
+AC_SUBST(GNOMEVFS_LIBS)
+
+AC_SUBST(GCONF_CFLAGS)
+AC_SUBST(GCONF_LIBS)
+
+dnl intltool stuff
+AC_PROG_INTLTOOL(0.18)
+dnl AM_WITH_NLS
+GETTEXT_PACKAGE=nautilus-open-terminal
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext package])
+ALL_LINGUAS="de"
+AM_GLIB_GNU_GETTEXT
+
+AC_OUTPUT([
+  Makefile 
+  src/Makefile
+  po/Makefile.in 
+])
+
