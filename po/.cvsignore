@@ -1,8 +1,14 @@
+*.gmo
+*.mo
+*.pot
 Makefile
 Makefile.in
 Makefile.in.in
 POTFILES
-nautilus-open-terminal.pot
+cat-id-tbl.c
+messages
 missing
-*.gmo
-messages.mo
+notexist
+po2tbl.sed
+po2tbl.sed.in
+stamp-cat-id
