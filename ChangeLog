@@ -1,5 +1,10 @@
 2005-02-23  Christian Neumair  <chris@gnome-de.org>
 
+	* src/nautilus-open-terminal.c: Fix stupid bug where desktop wasn't
+	recognized.
+
+2005-02-23  Christian Neumair  <chris@gnome-de.org>
+
 	* src/Makefile.am: Fix library name.
 
 	* src/nautilus-open-terminal.c: Use new helper and bitfield to get

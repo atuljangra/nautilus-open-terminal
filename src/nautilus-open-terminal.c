@@ -142,10 +142,10 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 		return NULL;
 
 	item = nautilus_menu_item_new ("NautilusOpenTerminal::open_terminal",
-				       terminal_file_info & FILE_INFO_IS_DESKTOP ?
+				       (terminal_file_info & FILE_INFO_IS_DESKTOP) ?
 				        _("Open _Terminal") :
 					_("Open In _Terminal"),
-				       terminal_file_info & FILE_INFO_IS_DESKTOP ?
+				       (terminal_file_info & FILE_INFO_IS_DESKTOP) ?
 				        _("Open a terminal") :
 				        _("Open the currently open folder in a terminal"),
 				       "gnome-terminal");
