@@ -1,3 +1,13 @@
+nautilus-open-terminal 0.2
+==========================
+"Tus Problemas Crecen"
+
+	* Use GnomeDesktopItem/startup-notification if gnome-terminal is used as terminal.
+	* Fix up menuitem creation code
+	* Plug leaks
+
 nautilus-open-terminal 0.1
+==========================
+"Lost Tarball"
 
 	* Initial release.

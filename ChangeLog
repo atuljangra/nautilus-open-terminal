@@ -1,3 +1,12 @@
+2005-03-04  Christian Neumair  <chris@gnome-de.org>
+
+	* configure.in: Require gnome-desktop 2.9.91, since we depend on
+	gnome_desktop_item_set_launch_time.
+
+	* src/nautilus-open-terminal.c: Fix up menuitem creation.
+
+	* *: Release.
+
 2005-02-28  Alexander Shopov  <ash@contact.bg>
 
 	* configure.in: Added "bg" (Bulgarian) to ALL_LINGUAS
