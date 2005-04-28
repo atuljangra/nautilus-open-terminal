@@ -196,7 +196,8 @@ open_terminal_callback (NautilusMenuItem *item,
 }
 
 static NautilusMenuItem *
-open_terminal_menu_item_new (TerminalFileInfo terminal_file_info)
+open_terminal_menu_item_new (TerminalFileInfo terminal_file_info,
+			     gboolean         is_file_item)
 {
 	return nautilus_menu_item_new ("NautilusOpenTerminal::open_terminal",
 				       (terminal_file_info & FILE_INFO_IS_DESKTOP) ?
@@ -204,6 +205,8 @@ open_terminal_menu_item_new (TerminalFileInfo terminal_file_info)
 					_("Open In _Terminal"),
 				       (terminal_file_info & FILE_INFO_IS_DESKTOP) ?
 				        _("Open a terminal") :
+					is_file_item ?
+				        _("Open the currently selected folder in a terminal") :
 				        _("Open the currently open folder in a terminal"),
 				       "gnome-terminal");
 }
@@ -222,7 +225,7 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 	if (!(terminal_file_info & FILE_INFO_IS_LOCAL))
 		return NULL;
 
-	item = open_terminal_menu_item_new (terminal_file_info);
+	item = open_terminal_menu_item_new (terminal_file_info, FALSE);
 	g_signal_connect (item, "activate",
 			  G_CALLBACK (open_terminal_callback),
 			  file_info);
@@ -247,7 +250,7 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 	if (!(terminal_file_info & FILE_INFO_IS_LOCAL))
 		return NULL;
 
-	item = open_terminal_menu_item_new (terminal_file_info);
+	item = open_terminal_menu_item_new (terminal_file_info, TRUE);
 	g_signal_connect (item, "activate",
 			  G_CALLBACK (open_terminal_callback),
 			  files->data);

@@ -1,6 +1,13 @@
+2005-04-28  Gareth Owen  <gowen@gnome.org>
+
+	* configure.in: Added Italian (it) to ALL_LINGUAS.
+
+	* src/nautilus-open-terminal.c: Fix "Open in Terminal" menuitem
+	tooltip for currently open folder.
+
 2005-04-21  Gareth Owen  <gowen@gnome.org>
 
-	* configure.in: Added "en_GB" to ALL_LINGUAS
+	* configure.in: Added "en_GB" to ALL_LINGUAS.
 
 2005-04-01  Steve Murphy  <murf@e-tools.com>
 
