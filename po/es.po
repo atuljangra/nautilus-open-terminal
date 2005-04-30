@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-23 22:04+0100\n"
-"PO-Revision-Date: 2005-02-23 22:07+0100\n"
+"POT-Creation-Date: 2005-04-30 14:19+0200\n"
+"PO-Revision-Date: 2005-04-30 14:19+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,23 +17,25 @@ msgstr ""
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: ../src/nautilus-open-terminal.c:146
+#: ../src/nautilus-open-terminal.c:204
 msgid "Open _Terminal"
 msgstr "Abrir _terminal"
 
-#: ../src/nautilus-open-terminal.c:147 ../src/nautilus-open-terminal.c:176
+#: ../src/nautilus-open-terminal.c:205
 msgid "Open In _Terminal"
 msgstr "Abrir en un _terminal"
 
-#: ../src/nautilus-open-terminal.c:149
+#: ../src/nautilus-open-terminal.c:207
 msgid "Open a terminal"
 msgstr "Abrir un terminal"
 
-#: ../src/nautilus-open-terminal.c:150
+#: ../src/nautilus-open-terminal.c:209
+msgid "Open the currently selected folder in a terminal"
+msgstr "Abre la carpeta actualmente abierta en un terminal"
+
+#: ../src/nautilus-open-terminal.c:210
 msgid "Open the currently open folder in a terminal"
 msgstr "Abre la carpeta actualmente abierta en un terminal"
 
-#: ../src/nautilus-open-terminal.c:177
-msgid "Open the selected folder in a terminal"
-msgstr "Abre la carpeta seleccionada en un terminal"
-
+#~ msgid "Open the selected folder in a terminal"
+#~ msgstr "Abre la carpeta seleccionada en un terminal"
