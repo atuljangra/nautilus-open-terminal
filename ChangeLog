@@ -1,3 +1,7 @@
+2005-05-30  Christian Neumair  <chris@gnome-de.org>
+
+	* configure.in: Added French (fr) to ALL_LINGUAS.
+
 2005-05-09  Dennis Cranston  <dennis_cranston@yahoo.com>
 	
 	* configure.in:  Add check for libgnome-desktop 2.10.2.
