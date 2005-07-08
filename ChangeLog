@@ -45,6 +45,8 @@
 
 	* configure.in: Added "zh_TW" to ALL_LINGUAS.
 
+== 0.2 "Tus Problemas Crecen" Release ==
+
 2005-03-04  Christian Neumair  <chris@gnome-de.org>
 
 	* configure.in: Require gnome-desktop 2.9.91, since we depend on
