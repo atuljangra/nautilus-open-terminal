@@ -1,3 +1,32 @@
+nautilus-open-terminal 0.3
+==========================
+"Summertime"
+
+	* Fix menuitem tooltip
+	* Use new GnomeDesktopItem API for loading desktop file
+	* Added translations
+		ca	Gil Forcada			<gilforcada@guifi.net>
+			Josep Puigdemont		<josep.puigdemont@gmail.com>
+		en_CA	Adam Weinberger			<adamw@gnome.org>
+		en_GB	Gareth Owen			<gowen@gnome.org>
+		fr	Guillaume Desmottes		<cass@skynet.be>
+		gl	Ignacio Casal Quinteiro		<nacho.resa@gmail.com>
+		hu	Szabolcs Varga
+			Gabor Kelemen			<kelemeng@gnome.hu>
+		it	Daniele Medri			<daniele@medri.org>
+		ja	Takeshi AIHANA			<aihana@gnome.gr.jp>
+		nl	Reinout van Schouwen		<reinout@gmail.com>
+			Tino Meinen			<a.t.meinen@chello.nl>
+		pa	Amanpreet Singh Alam		<amanpreetalam@yahoo.com>
+		rw	Steve Murphy			<murf@e-tools.com>
+		zh_TW	Abel Cheung			<maddog@linuxhall.org>
+	* Updated translations
+		bg	Alexander Shopov		<ash@contact.bg>
+		cs	Miloslav Trmac			<mitr@volny.cz>
+		de	Christian Neumair		<chris@gnome-de.org>
+		es	Francisco Javier F. Serrador	<serrador@cvs.gnome.org>
+		sk	Marcel Telka			<marcel@telka.sk>
+
 nautilus-open-terminal 0.2
 ==========================
 "Tus Problemas Crecen"

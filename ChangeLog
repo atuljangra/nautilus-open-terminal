@@ -1,3 +1,7 @@
+2005-06-08  Christian Neumair  <chris@gnome-de.org>
+
+	* *: Release.
+
 2005-06-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* configure.in: Added 'gl' to ALL_LINGUAS.
