@@ -1,5 +1,15 @@
 2005-06-08  Christian Neumair  <chris@gnome-de.org>
 
+	* configure.in:
+	* src/nautilus-open-terminal.c:
+	Revert Dennis' last commit, since
+	gnome_desktop_item_new_from_basename is not part of the stable API.
+	* *: Release
+
+== 0.3 "Summertime" Release == 
+
+2005-06-08  Christian Neumair  <chris@gnome-de.org>
+
 	* *: Release.
 
 2005-06-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>

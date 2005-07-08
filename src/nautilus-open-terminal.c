@@ -71,13 +71,49 @@ get_terminal_file_info (NautilusFileInfo *file_info)
 	return ret;
 }
 
+char *
+lookup_in_data_dir (const char *basename,
+                    const char *data_dir)
+{
+	char *path;
+
+	path = g_build_filename (data_dir, basename, NULL);
+	if (!g_file_test (path, G_FILE_TEST_EXISTS)) {
+		g_free (path);
+		return NULL;
+	}
+
+	return path;
+}
+
+static char *
+lookup_in_data_dirs (const char *basename)
+{
+	const char * const *system_data_dirs;
+	const char          *user_data_dir;
+	char                *retval;
+	int                  i;
+
+	user_data_dir    = g_get_user_data_dir ();
+	system_data_dirs = g_get_system_data_dirs ();
+
+	if ((retval = lookup_in_data_dir (basename, user_data_dir)))
+		return retval;
+
+	for (i = 0; system_data_dirs[i]; i++)
+		if ((retval = lookup_in_data_dir (basename, system_data_dirs[i])))
+			return retval;
+
+	return NULL;
+}
+
 static void
 open_terminal_callback (NautilusMenuItem *item,
 			NautilusFileInfo *file_info)
 {
 	gchar **argv, *terminal_exec;
 	gchar *working_directory, *quoted_directory;
-	gchar *command, *executable;
+	gchar *command, *dfile, *executable;
 	GnomeDesktopItem *ditem;
 	static GConfClient *client;
 
@@ -118,8 +154,13 @@ open_terminal_callback (NautilusMenuItem *item,
 
 	executable = g_path_get_basename (argv[0]);
 
-	if ((strcmp (executable, "gnome-terminal") == 0) &&
-	    ((ditem = gnome_desktop_item_new_from_basename ("gnome-terminal.desktop", 0, NULL)))) {			   
+	if (strcmp (executable, "gnome-terminal") == 0)
+		dfile = lookup_in_data_dirs ("applications/gnome-terminal.desktop");
+	else
+		dfile = NULL;
+
+	if (dfile != NULL) {			   
+		ditem = gnome_desktop_item_new_from_file (dfile, 0, NULL);
 		quoted_directory = g_shell_quote (working_directory);
 				
 		command = g_strdup_printf ("%s --working-directory=%s", terminal_exec, quoted_directory);							  
@@ -134,6 +175,7 @@ open_terminal_callback (NautilusMenuItem *item,
 
 		gnome_desktop_item_unref (ditem);
 		g_free (command);
+		g_free (dfile);
 		g_free (quoted_directory);
 	}
 	else {	
