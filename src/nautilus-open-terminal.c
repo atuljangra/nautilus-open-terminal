@@ -219,8 +219,6 @@ open_terminal_callback (NautilusMenuItem *item,
 		dfile = NULL;
 	}
 
-	g_warning ("exec: %s", terminal_exec);
-
 	g_shell_parse_argv (terminal_exec, NULL, &argv, NULL);
 
 	if (dfile != NULL) {
