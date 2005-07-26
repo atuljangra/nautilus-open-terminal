@@ -1,5 +1,9 @@
 2005-07-26  Christian Neumair  <chris@gnome-de.org>
 
+	* configure.in: (ALL_LINGUAS): Add Polish (pl).
+
+2005-07-26  Christian Neumair  <chris@gnome-de.org>
+
 	* src/nautilus-open-terminal.c: Allow to open remote SFTP folders.
 	Based on excellent work of Guillaume Desmottes <cass@skynet.be>.
 	Also did some code cleanups and plugged one memleak.
