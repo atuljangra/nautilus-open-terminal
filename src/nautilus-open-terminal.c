@@ -34,20 +34,23 @@
 #include <gtk/gtkwidget.h>
 #include <gconf/gconf-client.h>
 #include <libgnome/gnome-desktop-item.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 
 #include <string.h> /* for strcmp */
+
+#define SSH_DEFAULT_PORT 22
 
 static void nautilus_open_terminal_instance_init (NautilusOpenTerminal      *cvs);
 static void nautilus_open_terminal_class_init    (NautilusOpenTerminalClass *class);
 
 static GType terminal_type = 0;
 
-typedef int TerminalFileInfo;
-
-enum {
-	FILE_INFO_IS_LOCAL   = 1 << 1,
-	FILE_INFO_IS_DESKTOP = 1 << 2
-};
+typedef enum {
+	FILE_INFO_LOCAL,
+	FILE_INFO_DESKTOP,
+	FILE_INFO_SFTP,
+	FILE_INFO_OTHER
+} TerminalFileInfo;
 
 static TerminalFileInfo
 get_terminal_file_info (NautilusFileInfo *file_info)
@@ -59,12 +62,15 @@ get_terminal_file_info (NautilusFileInfo *file_info)
 
 	uri_scheme = nautilus_file_info_get_uri_scheme (file_info);
 
-	if (!strcmp (uri_scheme, "file"))
-		ret = FILE_INFO_IS_LOCAL;
-	else if (!strcmp (uri_scheme, "x-nautilus-desktop"))
-		ret = FILE_INFO_IS_LOCAL | FILE_INFO_IS_DESKTOP;
-	else
-		ret = 0;
+	if (strcmp (uri_scheme, "file") == 0) {
+		ret = FILE_INFO_LOCAL;
+	} else if (strcmp (uri_scheme, "x-nautilus-desktop") == 0) {
+		ret = FILE_INFO_DESKTOP;
+	} else if (strcmp (uri_scheme, "sftp") == 0) {
+		ret = FILE_INFO_SFTP;
+	} else {
+		ret = FILE_INFO_OTHER;
+	}
 
 	g_free (uri_scheme);
 
@@ -97,48 +103,79 @@ lookup_in_data_dirs (const char *basename)
 	user_data_dir    = g_get_user_data_dir ();
 	system_data_dirs = g_get_system_data_dirs ();
 
-	if ((retval = lookup_in_data_dir (basename, user_data_dir)))
+	if ((retval = lookup_in_data_dir (basename, user_data_dir))) {
 		return retval;
+	}
 
-	for (i = 0; system_data_dirs[i]; i++)
+	for (i = 0; system_data_dirs[i]; i++) {
 		if ((retval = lookup_in_data_dir (basename, system_data_dirs[i])))
 			return retval;
+	}
 
 	return NULL;
+}
+
+static void
+append_sftp_info (char **terminal_exec,
+		  NautilusFileInfo *file_info)
+{
+	GnomeVFSURI *vfs_uri;
+	const char *host_name, *path, *user_name;
+	char *uri, *user_host, *cmd, *quoted_cmd, *unescaped_path;
+	guint host_port;
+
+	g_assert (terminal_exec != NULL);
+	g_assert (file_info != NULL);
+
+	uri = nautilus_file_info_get_uri (file_info);
+	vfs_uri = gnome_vfs_uri_new (uri);
+
+	host_name = gnome_vfs_uri_get_host_name (vfs_uri);
+	host_port = gnome_vfs_uri_get_host_port (vfs_uri);
+	user_name = gnome_vfs_uri_get_user_name (vfs_uri);
+	path = gnome_vfs_uri_get_path (vfs_uri);
+	/* FIXME to we have to consider the remote file encoding? */
+	unescaped_path = gnome_vfs_unescape_string (path, NULL);
+
+	if (host_port == 0) {
+		host_port = SSH_DEFAULT_PORT;
+	}
+
+	if (user_name != NULL) {
+		user_host = g_strdup_printf ("%s@%s", user_name, host_name);
+	} else {
+		user_host = g_strdup (host_name);
+	}
+
+	cmd = g_strdup_printf ("ssh %s -p %d -t \"cd %s && sh -l\"", user_host, host_port, unescaped_path);
+	quoted_cmd = g_shell_quote (cmd);
+	g_free (cmd);
+
+	*terminal_exec = g_realloc (*terminal_exec, strlen (*terminal_exec) + strlen (quoted_cmd) + 4 + 1);
+	strcpy (*terminal_exec + strlen (*terminal_exec), " -e ");
+	strcpy (*terminal_exec + strlen (*terminal_exec), quoted_cmd);
+
+	g_free (quoted_cmd);
+	g_free (user_host);
+	g_free (unescaped_path);
+	g_free (uri);
+	gnome_vfs_uri_unref (vfs_uri);
 }
 
 static void
 open_terminal_callback (NautilusMenuItem *item,
 			NautilusFileInfo *file_info)
 {
+	gchar *uri;
 	gchar **argv, *terminal_exec;
-	gchar *working_directory, *quoted_directory;
-	gchar *command, *dfile, *executable;
+	gchar *working_directory;
+	gchar *dfile;
 	GnomeDesktopItem *ditem;
 	static GConfClient *client;
 
 	TerminalFileInfo terminal_file_info;
 
 	g_print ("Open Terminal selected\n");
-
-	terminal_file_info = get_terminal_file_info (file_info);
-
-	g_assert (terminal_file_info & FILE_INFO_IS_LOCAL);
-
-	if (terminal_file_info & FILE_INFO_IS_DESKTOP)
-		working_directory = g_strdup (g_get_home_dir ());
-	else {
-		gchar *uri;
-
-		uri = nautilus_file_info_get_uri (file_info);
-
-		working_directory = uri ?
-			g_filename_from_uri (uri, NULL, NULL) :
-			g_strdup (g_get_home_dir ());
-
-		g_free (uri);
-	}
-
 
 	client = gconf_client_get_default ();
 
@@ -147,38 +184,59 @@ open_terminal_callback (NautilusMenuItem *item,
 						 "exec",
 						 NULL);
 
-	if (!terminal_exec)
+	if (terminal_exec == NULL) {
 		terminal_exec = g_strdup ("gnome-terminal");
+	}
+
+	switch (get_terminal_file_info (file_info)) {
+		case FILE_INFO_LOCAL:
+			uri = nautilus_file_info_get_uri (file_info);
+			if (uri != NULL) {
+				working_directory = g_filename_from_uri (uri, NULL, NULL);
+			} else {
+				working_directory = g_strdup (g_get_home_dir ());
+			}
+			g_free (uri);
+			break;
+
+		case FILE_INFO_DESKTOP:
+			working_directory = g_strdup (g_get_home_dir ());
+			break;
+
+		case FILE_INFO_SFTP:
+			working_directory = NULL;
+			append_sftp_info (&terminal_exec, file_info);
+			break;
+
+		case FILE_INFO_OTHER:
+		default:
+			g_assert_not_reached ();
+	}
+
+	if (g_str_has_prefix (terminal_exec, "gnome-terminal")) {
+		dfile = lookup_in_data_dirs ("applications/gnome-terminal.desktop");
+	} else {
+		dfile = NULL;
+	}
+
+	g_warning ("exec: %s", terminal_exec);
 
 	g_shell_parse_argv (terminal_exec, NULL, &argv, NULL);
 
-	executable = g_path_get_basename (argv[0]);
+	if (dfile != NULL) {
+		if (working_directory != NULL) {
+			chdir (working_directory);
+		}
 
-	if (strcmp (executable, "gnome-terminal") == 0)
-		dfile = lookup_in_data_dirs ("applications/gnome-terminal.desktop");
-	else
-		dfile = NULL;
-
-	if (dfile != NULL) {			   
 		ditem = gnome_desktop_item_new_from_file (dfile, 0, NULL);
-		quoted_directory = g_shell_quote (working_directory);
-				
-		command = g_strdup_printf ("%s --working-directory=%s", terminal_exec, quoted_directory);							  
-		gnome_desktop_item_set_string (ditem, "Exec", command);
 
+		gnome_desktop_item_set_string (ditem, "Exec", terminal_exec);
 		gnome_desktop_item_set_launch_time (ditem, gtk_get_current_event_time ());
-
-		gnome_desktop_item_launch (ditem,
-		                           NULL,
-		                           GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE,
-		                           NULL);
+		gnome_desktop_item_launch (ditem, NULL, GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE, NULL);
 
 		gnome_desktop_item_unref (ditem);
-		g_free (command);
 		g_free (dfile);
-		g_free (quoted_directory);
-	}
-	else {	
+	} else {	
 		g_spawn_async (working_directory,
 			       argv,
 			       NULL,
@@ -189,8 +247,7 @@ open_terminal_callback (NautilusMenuItem *item,
 			       NULL);
 	}
 
-	g_free (argv);
-	g_free (executable);
+	g_strfreev (argv);
 	g_free (terminal_exec);
 	g_free (working_directory);
 }
@@ -199,16 +256,32 @@ static NautilusMenuItem *
 open_terminal_menu_item_new (TerminalFileInfo terminal_file_info,
 			     gboolean         is_file_item)
 {
+	const char *name;
+	const char *tooltip;
+
+	switch (terminal_file_info) {
+		case FILE_INFO_LOCAL:
+		case FILE_INFO_SFTP:
+			name = _("Open In _Terminal");
+			if (is_file_item) {
+				tooltip = _("Open the currently selected folder in a terminal");
+			} else {
+				tooltip = _("Open the currently open folder in a terminal");
+			}
+			break;
+
+		case FILE_INFO_DESKTOP:
+			name = _("Open _Terminal");
+			tooltip = _("Open a terminal");
+			break;
+
+		case FILE_INFO_OTHER:
+		default:
+			g_assert_not_reached ();
+	}
+
 	return nautilus_menu_item_new ("NautilusOpenTerminal::open_terminal",
-				       (terminal_file_info & FILE_INFO_IS_DESKTOP) ?
-				        _("Open _Terminal") :
-					_("Open In _Terminal"),
-				       (terminal_file_info & FILE_INFO_IS_DESKTOP) ?
-				        _("Open a terminal") :
-					is_file_item ?
-				        _("Open the currently selected folder in a terminal") :
-				        _("Open the currently open folder in a terminal"),
-				       "gnome-terminal");
+				       name, tooltip, "gnome-terminal");
 }
 
 static GList *
@@ -217,20 +290,26 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 					     NautilusFileInfo	  *file_info)
 {
 	NautilusMenuItem *item;
-	gboolean          is_desktop;
 	TerminalFileInfo  terminal_file_info;
 
 	terminal_file_info = get_terminal_file_info (file_info);
+	switch (terminal_file_info) {
+		case FILE_INFO_LOCAL:
+		case FILE_INFO_DESKTOP:
+			item = open_terminal_menu_item_new (terminal_file_info, FALSE);
+			g_signal_connect (item, "activate",
+					  G_CALLBACK (open_terminal_callback),
+					  file_info);
 
-	if (!(terminal_file_info & FILE_INFO_IS_LOCAL))
-		return NULL;
+			return g_list_append (NULL, item);
 
-	item = open_terminal_menu_item_new (terminal_file_info, FALSE);
-	g_signal_connect (item, "activate",
-			  G_CALLBACK (open_terminal_callback),
-			  file_info);
+		case FILE_INFO_SFTP:
+		case FILE_INFO_OTHER:
+			return NULL;
 
-	return g_list_append (NULL, item);
+		default:
+			g_assert_not_reached ();
+	}
 }
 
 GList *
@@ -242,20 +321,28 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 	TerminalFileInfo  terminal_file_info;
 
 	if (g_list_length (files) != 1 ||
-	    !nautilus_file_info_is_directory (files->data))
+	    !nautilus_file_info_is_directory (files->data)) {
 		return NULL;
+	}
 
 	terminal_file_info = get_terminal_file_info (files->data);
+	switch (get_terminal_file_info (files->data)) {
+		case FILE_INFO_LOCAL:
+		case FILE_INFO_SFTP:
+			item = open_terminal_menu_item_new (terminal_file_info, TRUE);
+			g_signal_connect (item, "activate",
+					  G_CALLBACK (open_terminal_callback),
+					  files->data);
 
-	if (!(terminal_file_info & FILE_INFO_IS_LOCAL))
-		return NULL;
+			return g_list_append (NULL, item);
 
-	item = open_terminal_menu_item_new (terminal_file_info, TRUE);
-	g_signal_connect (item, "activate",
-			  G_CALLBACK (open_terminal_callback),
-			  files->data);
+		case FILE_INFO_DESKTOP:
+		case FILE_INFO_OTHER:
+			return NULL;
 
-	return g_list_append (NULL, item);
+		default:
+			g_assert_not_reached ();
+	}
 }
 
 static void

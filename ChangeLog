@@ -1,3 +1,12 @@
+2005-07-26  Christian Neumair  <chris@gnome-de.org>
+
+	* src/nautilus-open-terminal.c: Allow to open remote SFTP folders.
+	Based on excellent work of Guillaume Desmottes <cass@skynet.be>.
+	Also did some code cleanups and plugged one memleak.
+	* TODO: Updated.
+
+== 0.4 "Foo" Release == 
+
 2005-06-08  Christian Neumair  <chris@gnome-de.org>
 
 	* configure.in:
