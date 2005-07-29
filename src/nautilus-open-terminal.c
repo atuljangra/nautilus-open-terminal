@@ -230,7 +230,7 @@ open_terminal_callback (NautilusMenuItem *item,
 
 		gnome_desktop_item_set_string (ditem, "Exec", terminal_exec);
 		gnome_desktop_item_set_launch_time (ditem, gtk_get_current_event_time ());
-		gnome_desktop_item_launch (ditem, NULL, GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE, NULL);
+		gnome_desktop_item_launch (ditem, NULL, GNOME_DESKTOP_ITEM_LAUNCH_USE_CURRENT_DIR, NULL);
 
 		gnome_desktop_item_unref (ditem);
 		g_free (dfile);
