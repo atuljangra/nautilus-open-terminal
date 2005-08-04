@@ -45,7 +45,7 @@ dnl AM_WITH_NLS
 GETTEXT_PACKAGE=nautilus-open-terminal
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext package])
-ALL_LINGUAS="bg ca cs da de en_CA en_GB es fi fr gl hu it ja nl pa pt_BR rw sk sr sr@Latn sv zh_CN zh_TW"
+ALL_LINGUAS="bg ca cs da de en_CA en_GB es fi fr gl hu it ja nl pa pt_BR rw sk sr sr@Latn sv uk zh_CN zh_TW"
 AM_GLIB_GNU_GETTEXT
 
 AC_OUTPUT([
