@@ -1,0 +1,37 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Young-Ho Cha <ganadist@gmail.com>, 2005
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: $PACKAGE $VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-08-16 23:35+0900\n"
+"PO-Revision-Date: 2005-08-16 23:38+0900\n"
+"Last-Translator: Young-Ho Cha <ganadist at gmail dot com>\n"
+"Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# 굳이 Open _Terminal과 다르게 번역할 필요가 있을까요?
+#: ../src/nautilus-open-terminal.c:263
+msgid "Open In _Terminal"
+msgstr "터미널 열기(_T)"
+
+#: ../src/nautilus-open-terminal.c:265
+msgid "Open the currently selected folder in a terminal"
+msgstr "선택한 폴더에서 터미널을 엽니다"
+
+#: ../src/nautilus-open-terminal.c:267
+msgid "Open the currently open folder in a terminal"
+msgstr "열려있는 폴더에서 터미널을 엽니다"
+
+#: ../src/nautilus-open-terminal.c:272
+msgid "Open _Terminal"
+msgstr "터미널 열기(_T)"
+
+#: ../src/nautilus-open-terminal.c:273
+msgid "Open a terminal"
+msgstr "터미널을 엽니다"
