@@ -1,3 +1,7 @@
+2005-09-05  Pawan Chitrakar  <pchitrakar@gmail.com>
+
+	* configure.in: Added ne in ALL_LINGUAS
+
 2005-08-22  Changwoo Ryu  <cwryu@debian.org>
 
 	* configure.in: Added "ko" to ALL_LINGUAS.
