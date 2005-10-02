@@ -1,3 +1,12 @@
+== 0.5 "Ticky Tock" Release == 
+
+2005-10-02  Christian Neumair  <chris@gnome-de.org>
+
+	* src/nautilus-open-terminal.c:
+	(nautilus_open_terminal_get_background_items): Add SFTP support for
+	background context menu, remove g_print statement.
+	* *: Release
+
 2005-09-24  Žygimantas Beručka  <zygis@gnome.org>
 
 	* configure.in: Added "lt" to ALL_LINGUAS.

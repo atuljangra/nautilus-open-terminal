@@ -1,3 +1,21 @@
+nautilus-open-terminal 0.5
+==========================
+"Ticky Tock"
+
+	* Add SFTP support (Guillaume Desmottes <cass@skynet.be>)
+	* Cleanups, plug leak
+	* Added translations
+		he	Yuval Tanai
+		ko	Young-Ho Cha			<ganadist@gmail.com>
+		lt	Žygimantas Beručka		<zygis@gnome.org>
+		ne	Pawan Chitrakar			<pchitrakar@gmail.com>
+		pl	Michał Kastelik			<m.kastelik@wp.pl>
+		tr	Baris Cicek			<baris@teamforce.name.tr>
+		uk	Maxim Dziumanenko		<mvd@mylinux.ua>
+	* Updated translations
+		fi	Ilkka Tuohela			<hile@iki.fi>
+		vi	Clytie Siddall			<clytie@riverland.net.au>
+
 nautilus-open-terminal 0.4
 ==========================
 "Foo"

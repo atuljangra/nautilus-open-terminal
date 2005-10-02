@@ -175,8 +175,6 @@ open_terminal_callback (NautilusMenuItem *item,
 
 	TerminalFileInfo terminal_file_info;
 
-	g_print ("Open Terminal selected\n");
-
 	client = gconf_client_get_default ();
 
 	terminal_exec = gconf_client_get_string (client,
@@ -294,6 +292,7 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 	switch (terminal_file_info) {
 		case FILE_INFO_LOCAL:
 		case FILE_INFO_DESKTOP:
+		case FILE_INFO_SFTP:
 			item = open_terminal_menu_item_new (terminal_file_info, FALSE);
 			g_signal_connect (item, "activate",
 					  G_CALLBACK (open_terminal_callback),
@@ -301,7 +300,6 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 
 			return g_list_append (NULL, item);
 
-		case FILE_INFO_SFTP:
 		case FILE_INFO_OTHER:
 			return NULL;
 
