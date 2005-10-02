@@ -1,3 +1,7 @@
+2005-10-02  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Add Norwegian bokmål to ALL_LINGUAS.
+
 == 0.5 "Ticky Tock" Release == 
 
 2005-10-02  Christian Neumair  <chris@gnome-de.org>
