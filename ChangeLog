@@ -1,3 +1,7 @@
+2005-12-08  Christian Neumair  <chris@gnome-de.org>
+
+	* configure.in: (ALL_LINGUAS): Add Russian (ru).
+
 == 0.6 "Bar" Release ==
 
 	* configure.in: (ALL_LINGUAS): Add Polish (pl).
