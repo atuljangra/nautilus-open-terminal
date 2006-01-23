@@ -1,3 +1,8 @@
+2006-01-23  Stanislav Brabec  <sbrabec@suse.cz>
+
+	* nautilus-open-terminal.c: Added missing includes and removed
+	obsolete global terminal_file_info declaration.
+
 2006-01-02  Christian Neumair  <chris@gnome-de.org>
 
 	* MAINTAINERS: Add.

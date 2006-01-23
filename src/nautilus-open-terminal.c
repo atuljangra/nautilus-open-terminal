@@ -32,11 +32,13 @@
 #include <glib/gi18n-lib.h>
 #include <gtk/gtkicontheme.h>
 #include <gtk/gtkwidget.h>
+#include <gtk/gtkmain.h>
 #include <gconf/gconf-client.h>
 #include <libgnome/gnome-desktop-item.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
 #include <string.h> /* for strcmp */
+#include <unistd.h> /* for chdir */
 
 #define SSH_DEFAULT_PORT 22
 
@@ -172,8 +174,6 @@ open_terminal_callback (NautilusMenuItem *item,
 	gchar *dfile;
 	GnomeDesktopItem *ditem;
 	static GConfClient *client;
-
-	TerminalFileInfo terminal_file_info;
 
 	client = gconf_client_get_default ();
 
