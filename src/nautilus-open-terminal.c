@@ -168,11 +168,14 @@ static void
 open_terminal_callback (NautilusMenuItem *item,
 			NautilusFileInfo *file_info)
 {
+	gchar *display_str;
+	const gchar *old_display_str;
 	gchar *uri;
 	gchar **argv, *terminal_exec;
 	gchar *working_directory;
 	gchar *dfile;
 	GnomeDesktopItem *ditem;
+	GdkScreen *screen;
 	static GConfClient *client;
 
 	client = gconf_client_get_default ();
@@ -219,6 +222,15 @@ open_terminal_callback (NautilusMenuItem *item,
 
 	g_shell_parse_argv (terminal_exec, NULL, &argv, NULL);
 
+	display_str = NULL;
+	old_display_str = g_getenv ("DISPLAY");
+
+	screen = g_object_get_data (G_OBJECT (item), "NautilusOpenTerminal::screen");
+	if (screen != NULL) {
+		display_str = gdk_screen_make_display_name (screen);
+		g_setenv ("DISPLAY", display_str, TRUE);
+	}
+
 	if (dfile != NULL) {
 		if (working_directory != NULL) {
 			chdir (working_directory);
@@ -229,7 +241,6 @@ open_terminal_callback (NautilusMenuItem *item,
 		gnome_desktop_item_set_string (ditem, "Exec", terminal_exec);
 		gnome_desktop_item_set_launch_time (ditem, gtk_get_current_event_time ());
 		gnome_desktop_item_launch (ditem, NULL, GNOME_DESKTOP_ITEM_LAUNCH_USE_CURRENT_DIR, NULL);
-
 		gnome_desktop_item_unref (ditem);
 		g_free (dfile);
 	} else {	
@@ -243,15 +254,20 @@ open_terminal_callback (NautilusMenuItem *item,
 			       NULL);
 	}
 
+	g_setenv ("DISPLAY", old_display_str, TRUE);
+
 	g_strfreev (argv);
 	g_free (terminal_exec);
 	g_free (working_directory);
+	g_free (display_str);
 }
 
 static NautilusMenuItem *
-open_terminal_menu_item_new (TerminalFileInfo terminal_file_info,
-			     gboolean         is_file_item)
+open_terminal_menu_item_new (TerminalFileInfo  terminal_file_info,
+			     GdkScreen        *screen,
+			     gboolean          is_file_item)
 {
+	NautilusMenuItem *ret;
 	const char *name;
 	const char *tooltip;
 
@@ -276,8 +292,13 @@ open_terminal_menu_item_new (TerminalFileInfo terminal_file_info,
 			g_assert_not_reached ();
 	}
 
-	return nautilus_menu_item_new ("NautilusOpenTerminal::open_terminal",
-				       name, tooltip, "gnome-terminal");
+	ret = nautilus_menu_item_new ("NautilusOpenTerminal::open_terminal",
+				      name, tooltip, "gnome-terminal");
+	g_object_set_data (G_OBJECT (ret),
+			   "NautilusOpenTerminal::screen",
+			   screen);
+
+	return ret;
 }
 
 static GList *
@@ -293,7 +314,7 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 		case FILE_INFO_LOCAL:
 		case FILE_INFO_DESKTOP:
 		case FILE_INFO_SFTP:
-			item = open_terminal_menu_item_new (terminal_file_info, FALSE);
+			item = open_terminal_menu_item_new (terminal_file_info, gtk_widget_get_screen (window), FALSE);
 			g_signal_connect (item, "activate",
 					  G_CALLBACK (open_terminal_callback),
 					  file_info);
@@ -325,7 +346,7 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 	switch (get_terminal_file_info (files->data)) {
 		case FILE_INFO_LOCAL:
 		case FILE_INFO_SFTP:
-			item = open_terminal_menu_item_new (terminal_file_info, TRUE);
+			item = open_terminal_menu_item_new (terminal_file_info, gtk_widget_get_screen (window), TRUE);
 			g_signal_connect (item, "activate",
 					  G_CALLBACK (open_terminal_callback),
 					  files->data);

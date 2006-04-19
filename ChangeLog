@@ -1,3 +1,10 @@
+2006-04-19  Christian Neumair  <chris@gnome-de.org>
+
+	* src/open-terminal.c: (nautilus_open_terminal_get_background_items),
+	(nautilus_open_terminal_get_file_items), (open_terminal_menu_item_new), 
+	(open_terminal_callback):
+	setenv DISPLAY before spawning child process, restore it afterwards.
+
 2006-04-18  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Remove obsolete entry for no_NO
