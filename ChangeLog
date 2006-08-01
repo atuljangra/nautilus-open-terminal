@@ -1,3 +1,9 @@
+== 0.7 "Coffee" Release ==
+
+2006-08-01  Christian Neumair  <chris@gnome-de.org>
+
+	* *: Release.
+
 2006-08-01  Christian Neumair  <chris@gnome-de.org>
 
 	* configure.in: (ALL_LINGUAS): Really add "ru".
@@ -37,8 +43,8 @@
 2006-01-24  Clytie Siddall <clytie@riverland.net.au>
 
 	* configure.in	Added vi in ALL_LINGUAS line.
-	
-	2006-01-23  Stanislav Brabec  <sbrabec@suse.cz>
+
+2006-01-23  Stanislav Brabec  <sbrabec@suse.cz>
 
 	* nautilus-open-terminal.c: Added missing includes and removed
 	obsolete global terminal_file_info declaration.

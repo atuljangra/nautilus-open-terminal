@@ -1,3 +1,22 @@
+nautilus-open-terminal 0.7
+==========================
+"Coffee"
+
+	* Add missing include
+	* Remove unused declaration
+	* setenv DISPLAY before spawning child processes, unset it afterwards
+	* Added translations
+		eu	Inaki Larranaga			<dooteo@euskalgnu.org>
+		or	Gora Mohanty			<gmohanty@cvs.gnome.org>
+		ro	Mircea Mitu			<mmitu@bitdefender.com>
+		ru	Paul Chavard
+		th	Theppitak Karoonboonyanan	<thep@linux.thai.net>
+	* Updated translations
+		fr	Stéphane Raimbault		<stephane.raimbault@free.fr>
+		ja	Takeshi AIHANA			<aihana@gnome.gr.jp>
+		sv	Christian Rose			<menthos@menthos.com>
+		zh_CN	Funda Wang			<fundawang@linux.net.cn>
+
 nautilus-open-terminal 0.6
 ==========================
 "Bar"
