@@ -1,3 +1,7 @@
+2006-09-08  Pema Geyleg  <pgeyleg@gmail.com>
+
+	* configure.in: Added 'dz' (Dzongkha) to ALL_LINGUAS.
+
 == 0.7 "Coffee" Release ==
 
 2006-08-01  Christian Neumair  <chris@gnome-de.org>
