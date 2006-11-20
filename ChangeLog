@@ -1,3 +1,7 @@
+2006-11-20  Ankit Patel  <ankit644@yahoo.com>
+
+	* configure.in: Added 'gu' (Gujarati) to ALL_LINGUAS.
+
 2006-09-08  Pema Geyleg  <pgeyleg@gmail.com>
 
 	* configure.in: Added 'dz' (Dzongkha) to ALL_LINGUAS.
