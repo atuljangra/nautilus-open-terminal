@@ -1,3 +1,9 @@
+2006-12-14  Christian Neumair  <chris@gnome-de.org>
+
+	* src/nautilus-open-terminal.c: (get_terminal_file_info): Also handle
+	"ssh" URIs, and treat them like "sftp" URIs. GnomeVFS also handles
+	both. Thanks to Gaëtan Podevijn <herlock@lelibre.net>.
+
 2006-12-11  Ales Nyakhaychyk  <nab@mail.by>
 
 	* configure.in: Add 'be' to ALL_LINGUAS

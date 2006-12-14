@@ -68,7 +68,8 @@ get_terminal_file_info (NautilusFileInfo *file_info)
 		ret = FILE_INFO_LOCAL;
 	} else if (strcmp (uri_scheme, "x-nautilus-desktop") == 0) {
 		ret = FILE_INFO_DESKTOP;
-	} else if (strcmp (uri_scheme, "sftp") == 0) {
+	} else if (strcmp (uri_scheme, "sftp") == 0 ||
+		   strcmp (uri_scheme, "ssh") == 0) {
 		ret = FILE_INFO_SFTP;
 	} else {
 		ret = FILE_INFO_OTHER;
