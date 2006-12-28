@@ -1,3 +1,13 @@
+2006-12-28  Christian Neumair  <chris@gnome-de.org>
+
+	* configure.in: Require Nautilus 2.17.2.
+	* src/nautilus-open-terminal.c: Use
+	nautilus_file_info_get_activation_uri() instead of
+	nautilus_file_info_get_uri() and
+	nautilus_file_info_get_uri_scheme().
+	This allows to open terminals for volume/drive links
+	on the desktop and at the computer location.
+
 2006-12-14  Christian Neumair  <chris@gnome-de.org>
 
 	* src/nautilus-open-terminal.c: (get_terminal_file_info): Also handle

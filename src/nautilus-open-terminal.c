@@ -58,11 +58,14 @@ static TerminalFileInfo
 get_terminal_file_info (NautilusFileInfo *file_info)
 {
 	TerminalFileInfo  ret;
-	gchar            *uri_scheme;
+	char             *uri_scheme, *p;
 
 	g_assert (file_info);
 
-	uri_scheme = nautilus_file_info_get_uri_scheme (file_info);
+	uri_scheme = nautilus_file_info_get_activation_uri (file_info);
+	if (p = strchr (uri_scheme, ':')) {
+		*p = 0;
+	}
 
 	if (strcmp (uri_scheme, "file") == 0) {
 		ret = FILE_INFO_LOCAL;
@@ -130,8 +133,13 @@ append_sftp_info (char **terminal_exec,
 	g_assert (terminal_exec != NULL);
 	g_assert (file_info != NULL);
 
-	uri = nautilus_file_info_get_uri (file_info);
+	uri = nautilus_file_info_get_activation_uri (file_info);
+	g_assert (uri != NULL);
+	g_assert (strncmp (uri, "sftp", strlen ("sftp")) == 0 ||
+		  strncmp (uri, "ssh", strlen ("ssh")) == 0);
+
 	vfs_uri = gnome_vfs_uri_new (uri);
+	g_assert (vfs_uri != NULL);
 
 	host_name = gnome_vfs_uri_get_host_name (vfs_uri);
 	host_port = gnome_vfs_uri_get_host_port (vfs_uri);
@@ -192,7 +200,7 @@ open_terminal_callback (NautilusMenuItem *item,
 
 	switch (get_terminal_file_info (file_info)) {
 		case FILE_INFO_LOCAL:
-			uri = nautilus_file_info_get_uri (file_info);
+			uri = nautilus_file_info_get_activation_uri (file_info);
 			if (uri != NULL) {
 				working_directory = g_filename_from_uri (uri, NULL, NULL);
 			} else {
@@ -240,7 +248,9 @@ open_terminal_callback (NautilusMenuItem *item,
 		ditem = gnome_desktop_item_new_from_file (dfile, 0, NULL);
 
 		gnome_desktop_item_set_string (ditem, "Exec", terminal_exec);
-		gnome_desktop_item_set_launch_time (ditem, gtk_get_current_event_time ());
+		if (gtk_get_current_event_time () > 0) {
+			gnome_desktop_item_set_launch_time (ditem, gtk_get_current_event_time ());
+		}
 		gnome_desktop_item_launch (ditem, NULL, GNOME_DESKTOP_ITEM_LAUNCH_USE_CURRENT_DIR, NULL);
 		gnome_desktop_item_unref (ditem);
 		g_free (dfile);
@@ -339,7 +349,9 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 	TerminalFileInfo  terminal_file_info;
 
 	if (g_list_length (files) != 1 ||
-	    !nautilus_file_info_is_directory (files->data)) {
+	    (!nautilus_file_info_is_directory (files->data) &&
+	     !nautilus_file_info_has_volume (files->data) &&
+	     !nautilus_file_info_has_drive (files->data))) {
 		return NULL;
 	}
 
