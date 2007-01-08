@@ -37,8 +37,11 @@
 #include <libgnome/gnome-desktop-item.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
+#include <errno.h>
+#include <fcntl.h>
 #include <string.h> /* for strcmp */
 #include <unistd.h> /* for chdir */
+#include <sys/stat.h>
 
 #define SSH_DEFAULT_PORT 22
 
@@ -241,8 +244,32 @@ open_terminal_callback (NautilusMenuItem *item,
 	}
 
 	if (dfile != NULL) {
-		if (working_directory != NULL) {
-			chdir (working_directory);
+		int orig_cwd = -1;
+
+		do {
+			orig_cwd = open (".", O_RDONLY);
+		} while (orig_cwd == -1 && errno == EINTR);
+
+		if (orig_cwd == -1) {
+			g_message ("NautilusOpenTerminal: Failed to open current Nautilus working directory.");
+		} else if (working_directory != NULL) {
+
+			if (chdir (working_directory) == -1) {
+				int ret;
+
+				g_message ("NautilusOpenTerminal: Failed to change Nautilus working directory to \"%s\".",
+					   working_directory);
+
+				do {
+					ret = close (orig_cwd);
+				} while (ret == -1 && errno == EINTR);
+
+				if (ret == -1) {
+					g_message ("NautilusOpenTerminal: Failed to close() current Nautilus working directory.");
+				}
+
+				orig_cwd = -1;
+			}
 		}
 
 		ditem = gnome_desktop_item_new_from_file (dfile, 0, NULL);
@@ -254,6 +281,24 @@ open_terminal_callback (NautilusMenuItem *item,
 		gnome_desktop_item_launch (ditem, NULL, GNOME_DESKTOP_ITEM_LAUNCH_USE_CURRENT_DIR, NULL);
 		gnome_desktop_item_unref (ditem);
 		g_free (dfile);
+
+		if (orig_cwd != -1) {
+			int ret;
+
+			ret = fchdir (orig_cwd);
+			if (ret == -1) {
+				g_message ("NautilusOpenTerminal: Failed to change back Nautilus working directory to original location after changing it to \"%s\".",
+					   working_directory);
+			}
+
+			do {
+				ret = close (orig_cwd);
+			} while (ret == -1 && errno == EINTR);
+
+			if (ret == -1) {
+				g_message ("NautilusOpenTerminal: Failed to close Nautilus working directory.");
+			}
+		}
 	} else {	
 		g_spawn_async (working_directory,
 			       argv,
