@@ -7,6 +7,10 @@ test -z "$srcdir" && srcdir=.
 PKG_NAME="nautilus-open-terminal"
 REQUIRED_AUTOMAKE_VERSION=1.7
 
+(test -f $srcdir/ChangeLog) || {
+    echo -n "Dummy Makefile (to satisfy automake)" > $srcdir/ChangeLog
+}
+
 (test -f $srcdir/configure.in) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
     echo " top-level $PKG_NAME directory"
