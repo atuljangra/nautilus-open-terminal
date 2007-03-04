@@ -1,6 +1,37 @@
+nautilus-open-terminal 0.8
+==========================
+"Alive"
+
+	* Dedicated to Klaus Kreuzeder, an excellent Saxophonist. http://www.trick-music.de/klaus_kreuzeder.htm
+
+	* Depend on Nautilus 2.17.2
+	* Use activation URI of selected files for determining URI. This allows to use the extension for your Desktop bookmarks.
+	* Also deal with "ssh" URIs and treat them like "sftp" URIs.
+	* Use open() and cwd() to switch directries. Should fix troubles with blocked media ejection.
+
+	* Added translations
+		ar	Khaled Hosny			<khaledhosny@eglug.org>
+		bn_IN	Runa Bhattacharjee		<runabh@gmail.com>
+		be	Ihar Hrachyshka			<ihar.hrachyshka@gmail.com>
+		da	Peter Bach			<bach.peter@gmail.com>
+		dz	sonam pelden
+		et	Ivar Smolin			<okul@linux.ee>
+		gu	Ankit Patel			<ankit@redhat.com>
+		ka	Vladimer Sichinava		<vsichi@gnome.org>
+		ml	Ani Peter			<apeter@redhat.com>
+		sl	Matej Urbančič			<matej.urban@gmail.com>
+
+	* Updated translations
+		ca	Gil Forcada			<gilforcada@guifi.net>
+		en_GB	David Lodge			<dave@cirt.net>
+		ne	Mahesh subedi			<submanesh@hotmail.com>
+		nl	Wouter Bolsterlee		<uws+gnome@xs4all.nl>
+
 nautilus-open-terminal 0.7
 ==========================
 "Coffee"
+
+	* Dedicated to Burkhof, an excellent coffee producer. http://www.burkhof.com/
 
 	* Add missing include
 	* Remove unused declaration
@@ -21,6 +52,8 @@ nautilus-open-terminal 0.6
 ==========================
 "Bar"
 
+	* Dedicated to Foo's brother.
+
 	* Actually add Polish (pl) to ALL_LINGUAS.
 	* Added translations
 		nb	Kjartan Maraas			<kmaraas@gnome.org>
@@ -29,6 +62,8 @@ nautilus-open-terminal 0.6
 nautilus-open-terminal 0.5
 ==========================
 "Ticky Tock"
+
+	* Dedicated to Hans-Eckardt Wenzel and Woody Guthrie. http://www.woodyguthrie.org/merchandise/tickytock.htm
 
 	* Add SFTP support (Guillaume Desmottes <cass@skynet.be>)
 	* Cleanups, plug leak
@@ -48,11 +83,15 @@ nautilus-open-terminal 0.4
 ==========================
 "Foo"
 
+	* Dedicated to Bar's brother.
+
 	* Don't use new GnomeDesktopItem API for loading desktop file
 
 nautilus-open-terminal 0.3
 ==========================
 "Summertime"
+
+	* Dedicated to Janis Joplin and Jimi Hendrix for their excellent Woodstock performance.
 
 	* Fix menuitem tooltip
 	* Use new GnomeDesktopItem API for loading desktop file
@@ -82,6 +121,8 @@ nautilus-open-terminal 0.3
 nautilus-open-terminal 0.2
 ==========================
 "Tus Problemas Crecen"
+
+	* Dedicated to Boikot, uno de los mejores conjuntos de Punk en España.
 
 	* Use GnomeDesktopItem/startup-notification if gnome-terminal is used as terminal.
 	* Fix up menuitem creation code
