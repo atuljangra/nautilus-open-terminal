@@ -1,3 +1,9 @@
+2007-06-02  Leonardo Ferreira Fontenelle  <leonardof@svn.gnome.org>
+
+	* pt_BR.po: Updated Brazilian Portuguese translation by Og Maciel
+	<ogmaciel@ubuntu.com> and me, Leonardo Ferreira Fontenelle
+	<leo.fontenelle@gmail.com>. Closes bug #442772.
+
 2007-03-05  Stéphane Raimbault  <stephane.raimbault@gmail.com>
 
 	* fr.po: Fixed French translation.
