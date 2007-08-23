@@ -215,7 +215,8 @@ open_terminal_callback (NautilusMenuItem *item,
 						 "exec",
 						 NULL);
 
-	if (terminal_exec == NULL) {
+	if (terminal_exec == NULL || strlen (terminal_exec) == 0) {
+		g_free (terminal_exec);
 		terminal_exec = g_strdup ("gnome-terminal");
 	}
 
