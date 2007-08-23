@@ -5,9 +5,3 @@ General
 - Squash Out Possible Bugs
 - Clean Up Code
 - Figure Out Remote SFTP Filename Encoding (Possible At All?)
-
-Conceptual
-==========
-Decide whether right-clicking the desktop should bring up an "Open Terminal"
-or an "Open in Terminal" item, i.e. if it should simply launch the terminal
-or additionally set the desktop directory as working directory.

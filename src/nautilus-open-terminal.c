@@ -124,6 +124,24 @@ lookup_in_data_dirs (const char *basename)
 	return NULL;
 }
 
+static inline gboolean
+desktop_opens_home_dir (GConfClient *client)
+{
+	return gconf_client_get_bool (client, "/apps/nautilus-open-terminal/desktop_opens_home_dir", NULL);
+}
+
+static inline gboolean
+desktop_is_home_dir (GConfClient *client)
+{
+	return gconf_client_get_bool (client, "/apps/nautilus/preferences/desktop_is_home_dir", NULL);
+}
+
+#ifdef HAVE_GLIB_DESKTOP_DIR_API
+  #define get_desktop_dir() g_strdup (g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP))
+#else
+  #define get_desktop_dir() g_build_filename (g_get_home_dir (), "Desktop", NULL)
+#endif
+
 static void
 append_sftp_info (char **terminal_exec,
 		  NautilusFileInfo *file_info)
@@ -213,7 +231,11 @@ open_terminal_callback (NautilusMenuItem *item,
 			break;
 
 		case FILE_INFO_DESKTOP:
-			working_directory = g_strdup (g_get_home_dir ());
+			if (desktop_is_home_dir (client) || desktop_opens_home_dir (client)) {
+				working_directory = g_strdup (g_get_home_dir ());
+			} else {
+				working_directory = get_desktop_dir ();
+			}
 			break;
 
 		case FILE_INFO_SFTP:
@@ -339,8 +361,13 @@ open_terminal_menu_item_new (TerminalFileInfo  terminal_file_info,
 			break;
 
 		case FILE_INFO_DESKTOP:
-			name = _("Open _Terminal");
-			tooltip = _("Open a terminal");
+			if (desktop_opens_home_dir (gconf_client_get_default ())) {
+				name = _("Open _Terminal");
+				tooltip = _("Open a terminal");
+			} else {
+				name = _("Open In _Terminal");
+				tooltip = _("Open the currently open folder in a terminal");
+			}
 			break;
 
 		case FILE_INFO_OTHER:
@@ -401,7 +428,7 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 	}
 
 	terminal_file_info = get_terminal_file_info (files->data);
-	switch (get_terminal_file_info (files->data)) {
+	switch (terminal_file_info) {
 		case FILE_INFO_LOCAL:
 		case FILE_INFO_SFTP:
 			item = open_terminal_menu_item_new (terminal_file_info, gtk_widget_get_screen (window), TRUE);

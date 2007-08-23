@@ -29,6 +29,11 @@ PKG_CHECK_MODULES(NAUTILUS, libnautilus-extension >= $NAUTILUS_REQUIRED glib-2.0
 PKG_CHECK_MODULES(GCONF, gconf-2.0)
 PKG_CHECK_MODULES(GNOMEDESKTOP, gnome-desktop-2.0 >= $LIBGNOME_DESKTOP_REQUIRED)
 
+PKG_CHECK_MODULES(GLIB_RECENT, glib-2.0 >= 2.13.3,
+                  AC_DEFINE(HAVE_GLIB_DESKTOP_DIR_API, 1, [g_get_user_special_dir() support]),
+		  AC_MSG_NOTICE([not using g_get_user_special_dir()]))
+
+
 dnl make GNOME_CFLAGS and GNOME_LIBS available
 AC_SUBST(NAUTILUS_CFLAGS)
 AC_SUBST(NAUTILUS_LIBS)
@@ -38,6 +43,17 @@ AC_SUBST(GCONF_LIBS)
 
 AC_SUBST(GNOMEDESKTOP_CFLAGS)
 AC_SUBST(GNOMEDESKTOP_LIBS)
+
+dnl GConf
+
+AC_PATH_PROG(GCONFTOOL, gconftool-2, no)
+
+if test x"$GCONFTOOL" = xno; then
+  AC_MSG_ERROR([gconftool-2 executable not found in your path - should be installed with GConf])
+fi
+
+AM_GCONF_SOURCE_2
+
 
 dnl intltool stuff
 AC_PROG_INTLTOOL(0.18)

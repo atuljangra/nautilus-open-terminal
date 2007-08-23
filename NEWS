@@ -1,3 +1,14 @@
+nautilus-open-terminal 0.9
+==========================
+"Freelance Police"
+
+	* Dedicated to Telltale Games, creator of "Sam and Max - Season One", successor of the infamous
+	  "Sam and Max - Hit the Road" adventure.
+
+	* Add GConf key for deciding whether right-clicking the desktop opens home directory or desktop directory.
+	  Use g_get_user_special_dir() to determine the desktop directory, and falls back to ~/Desktop (#468955).
+
+
 nautilus-open-terminal 0.8
 ==========================
 "Alive"
