@@ -179,7 +179,7 @@ append_sftp_info (char **terminal_exec,
 		user_host = g_strdup (host_name);
 	}
 
-	cmd = g_strdup_printf ("ssh %s -p %d -t \"cd \'%s\' && sh -l\"", user_host, host_port, unescaped_path);
+	cmd = g_strdup_printf ("ssh %s -p %d -t \"cd \'%s\' && $SHELL -l\"", user_host, host_port, unescaped_path);
 	quoted_cmd = g_shell_quote (cmd);
 	g_free (cmd);
 
