@@ -1,3 +1,6 @@
+2007-10-27  Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+	* configure.in added Georgian "be@latin"
+
 2007-07-03  Vladimer Sichinava  <vsichi@gnome.org>
 	* configure.in added Georgian "ka"
 	* added ka.po Georgian translation by 
