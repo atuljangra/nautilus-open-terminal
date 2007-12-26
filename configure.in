@@ -19,6 +19,7 @@ AM_PROG_LIBTOOL
 
 dnl Check for pkgconfig first
 AC_CHECK_PROG(HAVE_PKGCONFIG, pkg-config, yes, no)
+AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
 
 dnl Give error and exit if we don't have pkgconfig
 if test "x$HAVE_PKGCONFIG" = "xno"; then
@@ -43,6 +44,10 @@ AC_SUBST(GCONF_LIBS)
 
 AC_SUBST(GNOMEDESKTOP_CFLAGS)
 AC_SUBST(GNOMEDESKTOP_LIBS)
+
+dnl Get nautilus extensions directory
+NAUTILUS_EXTENSION_DIR=`$PKG_CONFIG --variable=extensiondir libnautilus-extension`
+AC_SUBST(NAUTILUS_EXTENSION_DIR)
 
 dnl GConf
 
