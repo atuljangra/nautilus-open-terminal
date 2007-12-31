@@ -1,11 +1,9 @@
-# translation of oc.po to Occitan
+# Translation of oc.po to Occitan
 # Occitan translation for nautilus-open-terminal
 # Copyright (C) 2005, 2007, Free Software Foundation, Inc.
 # This file is distributed under the same licence as the nautilus-open-terminal package.
 #
-# Yannig MARCHEGAY (yannig@marchegay.org) - 2006-2007
-#
-# Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>, 2007.
+# Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>, 2006-2008
 msgid ""
 msgstr ""
 "Project-Id-Version: oc\n"
@@ -18,7 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: KBabel 1.11.4\n"
 
 #: ../src/nautilus-open-terminal.c:356 ../src/nautilus-open-terminal.c:369
 msgid "Open In _Terminal"
@@ -30,7 +27,7 @@ msgstr "Dobrir lo repertòri seleccionat dins un terminal"
 
 #: ../src/nautilus-open-terminal.c:360 ../src/nautilus-open-terminal.c:370
 msgid "Open the currently open folder in a terminal"
-msgstr "Dobrir lo repertòri dobert dins un terminal"
+msgstr "Dobrir lo repertòri dobèrt dins un terminal"
 
 #: ../src/nautilus-open-terminal.c:366
 msgid "Open _Terminal"
