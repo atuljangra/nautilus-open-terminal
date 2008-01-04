@@ -423,8 +423,8 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 
 	if (g_list_length (files) != 1 ||
 	    (!nautilus_file_info_is_directory (files->data) &&
-	     !nautilus_file_info_has_volume (files->data) &&
-	     !nautilus_file_info_has_drive (files->data))) {
+	     nautilus_file_info_get_file_type (files->data) != G_FILE_TYPE_SHORTCUT &&
+	     nautilus_file_info_get_file_type (files->data) != G_FILE_TYPE_MOUNTABLE)) {
 		return NULL;
 	}
 
