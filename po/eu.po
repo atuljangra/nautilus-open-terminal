@@ -1,39 +1,61 @@
-# translation of eu.po to Basque
+# translation of nautilus-open-terminal.HEAD.po to Basque
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Iñaki Larrañaga <dooteo@euskalgnu.org>, 2006.
 #
+# Iñaki Larrañaga <dooteo@euskalgnu.org>, 2006.
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: eu\n"
+"Project-Id-Version: nautilus-open-terminal.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-02 16:45+0100\n"
-"PO-Revision-Date: 2006-03-02 16:47+0100\n"
-"Last-Translator: Iñaki Larrañaga <dooteo@euskalgnu.org>\n"
+"POT-Creation-Date: 2008-02-14 16:17+0100\n"
+"PO-Revision-Date: 2008-02-13 17:38+0100\n"
+"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"\n"
 
-#: ../src/nautilus-open-terminal.c:261
+#: ../src/nautilus-open-terminal.c:356 ../src/nautilus-open-terminal.c:369
 msgid "Open In _Terminal"
 msgstr "Ireki _terminalean"
 
-#: ../src/nautilus-open-terminal.c:263
+#: ../src/nautilus-open-terminal.c:358
 msgid "Open the currently selected folder in a terminal"
 msgstr "Ireki unean hautatutako karpeta terminal batean"
 
-#: ../src/nautilus-open-terminal.c:265
+#: ../src/nautilus-open-terminal.c:360 ../src/nautilus-open-terminal.c:370
 msgid "Open the currently open folder in a terminal"
 msgstr "Ireki unean irekitako karpeta terminalean"
 
-#: ../src/nautilus-open-terminal.c:270
+#: ../src/nautilus-open-terminal.c:366
 msgid "Open _Terminal"
 msgstr "Ireki _terminala"
 
-#: ../src/nautilus-open-terminal.c:271
+#: ../src/nautilus-open-terminal.c:367
 msgid "Open a terminal"
 msgstr "Ireki terminal bat"
 
+#: ../nautilus-open-terminal.schemas.in.h:1
+msgid ""
+"If set to true, then opening a terminal on the desktop will open a terminal "
+"in the home directory. Otherwise, it will be opened in the desktop "
+"directory. Note that this key is irrelevant if the desktop directory is "
+"identical to the home directory."
+msgstr ""
+"TRUE (Egia) gisa ezartzen bada, mahaigainean terminal bat irekitzean "
+"erabiltzailearen direktorio nagusian irekiko da terminala. Bestela, "
+"erabiltzailearen mahaigaineko direktorioan irekiko da terminala. Jakin ezazu "
+"gako honek ez duela garrantzirik baldin eta mahaigaineko direktorioa "
+"erabiltzailearen direktorio nagusiaren berdina bada."
+
+#: ../nautilus-open-terminal.schemas.in.h:2
+msgid ""
+"Whether opening a terminal on the desktop opens a terminal in the home "
+"directory"
+msgstr ""
+"Mahaigainean terminal bat irekitzean erabiltzailearen direktorio nagusian "
+"terminala irekiko den ala ez adierazten du."
