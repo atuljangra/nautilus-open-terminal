@@ -399,6 +399,9 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 		case FILE_INFO_DESKTOP:
 		case FILE_INFO_SFTP:
 			item = open_terminal_menu_item_new (terminal_file_info, gtk_widget_get_screen (window), FALSE);
+			g_object_set_data_full (G_OBJECT (item), "file-info",
+						g_object_ref (file_info),
+						(GDestroyNotify) g_object_unref);
 			g_signal_connect (item, "activate",
 					  G_CALLBACK (open_terminal_callback),
 					  file_info);
@@ -433,6 +436,9 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 		case FILE_INFO_LOCAL:
 		case FILE_INFO_SFTP:
 			item = open_terminal_menu_item_new (terminal_file_info, gtk_widget_get_screen (window), TRUE);
+			g_object_set_data_full (G_OBJECT (item), "file-info",
+						g_object_ref (files->data),
+						(GDestroyNotify) g_object_unref);
 			g_signal_connect (item, "activate",
 					  G_CALLBACK (open_terminal_callback),
 					  files->data);
