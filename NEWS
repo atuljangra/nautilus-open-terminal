@@ -1,3 +1,14 @@
+nautilus-open-terminal 0.10
+===========================
+"... (nickname goes here)"
+
+NOTE: (unreleased, this NEWS is a work-in-progress)
+
+	* (dedication goes here)
+
+	* Use po/LINGUAS for internationalisation (Wouter Bolsterlee)
+
+
 nautilus-open-terminal 0.9
 ==========================
 "Freelance Police"
@@ -11,7 +22,7 @@ nautilus-open-terminal 0.9
 	* Add GConf key for deciding whether right-clicking the desktop opens home directory or desktop directory.
 	  Use g_get_user_special_dir() to determine the desktop directory, and falls back to ~/Desktop (#468955).
 	* Use remote $SHELL instead of /bin/sh for SFTP terminals. Thanks to Wouter Bolsterlee
-	  <wbolster@svn.gnome.org>.
+	  <wbolster@gnome.org>.
 	* Use Nautilus extension directory from libnautilus-extension.pc. Thanks to Brian Pepple
 	  <bpepple@fedoraproject.org>.
 
@@ -26,7 +37,7 @@ nautilus-open-terminal 0.9
 		pt	  André Neves				<drakferion@gmail.com>
 		ta	  தங்கம் அருண்				<thangam.arunx@gmail.com> 
 
-	Updated trannslations
+	Updated translations
 		be	  Ihar Hrachyshka			<ihar.hrachyshka@gmail.com>
 		ca	  Francesc Vilches			<francesc.vilches@gmail.com>
 		de	  Christian Neumair			<cneumair@gnome.org>
