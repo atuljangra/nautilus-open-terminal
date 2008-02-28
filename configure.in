@@ -1,3 +1,4 @@
+# Initialization
 AC_INIT
 
 PACKAGE=nautilus-open-terminal
@@ -9,22 +10,28 @@ AC_SUBST(VERSION)
 AM_INIT_AUTOMAKE($PACKAGE, $VERSION)
 AM_CONFIG_HEADER(config.h)
 
-NAUTILUS_REQUIRED=2.21.2
-EEL_REQUIRED=2.6.0
-LIBGNOME_DESKTOP_REQUIRED=2.9.91
-GLIB_REQUIRED=2.4.0
+
+# Used programs
 
 AC_PROG_CC
 AM_PROG_LIBTOOL
 
-dnl Check for pkgconfig first
+
+# Check for pkg-config
+
 AC_CHECK_PROG(HAVE_PKGCONFIG, pkg-config, yes, no)
 AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
-
-dnl Give error and exit if we don't have pkgconfig
 if test "x$HAVE_PKGCONFIG" = "xno"; then
-  AC_MSG_ERROR(you need to have pkgconfig installed !)
+	AC_MSG_ERROR(you need to have pkgconfig installed !)
 fi
+
+
+# Dependency checks
+
+NAUTILUS_REQUIRED=2.21.2
+EEL_REQUIRED=2.6.0
+LIBGNOME_DESKTOP_REQUIRED=2.9.91
+GLIB_REQUIRED=2.4.0
 
 PKG_CHECK_MODULES(NAUTILUS, libnautilus-extension >= $NAUTILUS_REQUIRED glib-2.0 >= $GLIB_REQUIRED)
 PKG_CHECK_MODULES(GCONF, gconf-2.0)
@@ -32,10 +39,11 @@ PKG_CHECK_MODULES(GNOMEDESKTOP, gnome-desktop-2.0 >= $LIBGNOME_DESKTOP_REQUIRED)
 
 PKG_CHECK_MODULES(GLIB_RECENT, glib-2.0 >= 2.13.3,
                   AC_DEFINE(HAVE_GLIB_DESKTOP_DIR_API, 1, [g_get_user_special_dir() support]),
-		  AC_MSG_NOTICE([not using g_get_user_special_dir()]))
+                  AC_MSG_NOTICE([not using g_get_user_special_dir()]))
 
 
-dnl make GNOME_CFLAGS and GNOME_LIBS available
+# Make dependency CFLAGS and LIBS available
+
 AC_SUBST(NAUTILUS_CFLAGS)
 AC_SUBST(NAUTILUS_LIBS)
 
@@ -45,31 +53,37 @@ AC_SUBST(GCONF_LIBS)
 AC_SUBST(GNOMEDESKTOP_CFLAGS)
 AC_SUBST(GNOMEDESKTOP_LIBS)
 
-dnl Get nautilus extensions directory
+
+# Get nautilus extensions directory
+
 NAUTILUS_EXTENSION_DIR=`$PKG_CONFIG --variable=extensiondir libnautilus-extension`
 AC_SUBST(NAUTILUS_EXTENSION_DIR)
 
-dnl GConf
+
+# GConf
 
 AC_PATH_PROG(GCONFTOOL, gconftool-2, no)
 
 if test x"$GCONFTOOL" = xno; then
-  AC_MSG_ERROR([gconftool-2 executable not found in your path - should be installed with GConf])
+	AC_MSG_ERROR([gconftool-2 executable not found in your path - should be installed with GConf])
 fi
 
 AM_GCONF_SOURCE_2
 
 
-dnl i18n
+# i18n
+
 GETTEXT_PACKAGE=nautilus-open-terminal
 AC_SUBST([GETTEXT_PACKAGE])
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], "$GETTEXT_PACKAGE", [Gettext package])
 AM_GLIB_GNU_GETTEXT
 IT_PROG_INTLTOOL([0.35.0])
 
-AC_OUTPUT([
-  Makefile 
-  src/Makefile
-  po/Makefile.in 
-])
 
+# output
+
+AC_OUTPUT([
+	Makefile 
+	src/Makefile
+	po/Makefile.in 
+])
