@@ -66,7 +66,7 @@ get_terminal_file_info (NautilusFileInfo *file_info)
 	g_assert (file_info);
 
 	uri_scheme = nautilus_file_info_get_activation_uri (file_info);
-	if (p = strchr (uri_scheme, ':')) {
+	if ((p = strchr (uri_scheme, ':'))) {
 		*p = 0;
 	}
 
