@@ -385,6 +385,15 @@ open_terminal_menu_item_new (TerminalFileInfo  terminal_file_info,
 	return ret;
 }
 
+static gboolean
+terminal_locked_down (void)
+{
+	return gconf_client_get_bool (gconf_client_get_default (),
+                                      "/desktop/gnome/lockdown/disable_command_line",
+                                      NULL);
+}
+
+
 static GList *
 nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 					     GtkWidget		  *window,
@@ -392,6 +401,10 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 {
 	NautilusMenuItem *item;
 	TerminalFileInfo  terminal_file_info;
+
+        if (terminal_locked_down ()) {
+            return NULL;
+        }
 
 	terminal_file_info = get_terminal_file_info (file_info);
 	switch (terminal_file_info) {
@@ -423,6 +436,10 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 {
 	NautilusMenuItem *item;
 	TerminalFileInfo  terminal_file_info;
+
+        if (terminal_locked_down ()) {
+            return NULL;
+        }
 
 	if (g_list_length (files) != 1 ||
 	    (!nautilus_file_info_is_directory (files->data) &&

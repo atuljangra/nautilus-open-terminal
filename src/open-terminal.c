@@ -27,6 +27,7 @@
 
 #include "nautilus-open-terminal.h"
 
+#include <gconf/gconf-client.h>
 #include <libintl.h>
 
 static GType type_list[1];
@@ -41,6 +42,11 @@ nautilus_module_initialize (GTypeModule *module)
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+
+        gconf_client_add_dir(gconf_client_get_default(), 
+                             "/desktop/gnome/lockdown",
+                             0,
+                             NULL);
 }
 
 void
