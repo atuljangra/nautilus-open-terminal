@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-open-terminal\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-11 23:06+0100\n"
+"POT-Creation-Date: 2008-03-09 18:58+0000\n"
 "PO-Revision-Date: 2006-09-11 23:05-0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: \n"
@@ -15,23 +15,42 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/nautilus-open-terminal.c:277
+#: ../src/nautilus-open-terminal.c:356 ../src/nautilus-open-terminal.c:369
 msgid "Open In _Terminal"
 msgstr "Open In _Terminal"
 
-#: ../src/nautilus-open-terminal.c:279
+#: ../src/nautilus-open-terminal.c:358
 msgid "Open the currently selected folder in a terminal"
 msgstr "Open the currently selected folder in a terminal"
 
-#: ../src/nautilus-open-terminal.c:281
+#: ../src/nautilus-open-terminal.c:360 ../src/nautilus-open-terminal.c:370
 msgid "Open the currently open folder in a terminal"
 msgstr "Open the currently open folder in a terminal"
 
-#: ../src/nautilus-open-terminal.c:286
+#: ../src/nautilus-open-terminal.c:366
 msgid "Open _Terminal"
 msgstr "Open _Terminal"
 
-#: ../src/nautilus-open-terminal.c:287
+#: ../src/nautilus-open-terminal.c:367
 msgid "Open a terminal"
 msgstr "Open a terminal"
 
+#: ../nautilus-open-terminal.schemas.in.h:1
+msgid ""
+"If set to true, then opening a terminal on the desktop will open a terminal "
+"in the home directory. Otherwise, it will be opened in the desktop "
+"directory. Note that this key is irrelevant if the desktop directory is "
+"identical to the home directory."
+msgstr ""
+"If set to true, then opening a terminal on the desktop will open a terminal "
+"in the home directory. Otherwise, it will be opened in the desktop "
+"directory. Note that this key is irrelevant if the desktop directory is "
+"identical to the home directory."
+
+#: ../nautilus-open-terminal.schemas.in.h:2
+msgid ""
+"Whether opening a terminal on the desktop opens a terminal in the home "
+"directory"
+msgstr ""
+"Whether opening a terminal on the desktop opens a terminal in the home "
+"directory"
