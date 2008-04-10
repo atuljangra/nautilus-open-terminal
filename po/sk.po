@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the nautilus-open-terminal package.
 # Marcel Telka <marcel@telka.sk>, 2005.
 #
-# $Id$
+# $Id: sk.po,v 1.2 2005/06/11 19:02:07 marcel Exp $
 #
 msgid ""
 msgstr ""
@@ -22,7 +22,7 @@ msgid "Open _Terminal"
 msgstr "Otvoriť _terminál"
 
 #: ../src/nautilus-open-terminal.c:163
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "Otvoriť v _terminále"
 
 #: ../src/nautilus-open-terminal.c:165

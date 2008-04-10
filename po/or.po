@@ -2,7 +2,7 @@
 # Copyright (C) 2006, Free Software Foundation, Inc.
 # This file is distributed under the same license as the nautilus-open-terminal package.
 # Gora Mohanty <gora_mohanty@yahoo.co.in>, 2006.
-# $Id$
+# $Id: or.po,v 1.1 2006/04/03 19:55:30 gmohanty Exp $
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-open-terminal.HEAD.\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../src/nautilus-open-terminal.c:261
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "ଟର୍ମିନାଲରେ ଖୋଲନ୍ତୁ (_T)"
 
 #: ../src/nautilus-open-terminal.c:263

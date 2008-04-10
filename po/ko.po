@@ -19,7 +19,7 @@ msgstr ""
 
 # 굳이 Open _Terminal과 다르게 번역할 필요가 있을까요?
 #: ../src/nautilus-open-terminal.c:355 ../src/nautilus-open-terminal.c:368
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "터미널 열기(_T)"
 
 #: ../src/nautilus-open-terminal.c:357

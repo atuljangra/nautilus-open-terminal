@@ -22,7 +22,7 @@ msgid "Open _Terminal"
 msgstr "ਟਰਮੀਨਲ ਖੋਲੋ(_T)"
 
 #: src/nautilus-open-terminal.c:204
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "ਟਰਮੀਨਲ ਵਿੱਚ ਖੋਲੋ(_T)"
 
 #: src/nautilus-open-terminal.c:206

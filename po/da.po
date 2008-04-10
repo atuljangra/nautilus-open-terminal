@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../src/nautilus-open-terminal.c:333
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "Åbn i t_erminal"
 
 #: ../src/nautilus-open-terminal.c:335

@@ -19,7 +19,7 @@ msgid "Open _Terminal"
 msgstr "開啟終端機(_T)"
 
 #: ../src/nautilus-open-terminal.c:204
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "在終端機中開啟(_T)"
 
 #: ../src/nautilus-open-terminal.c:206

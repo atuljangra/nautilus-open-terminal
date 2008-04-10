@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 
 #: ../src/nautilus-open-terminal.c:356 ../src/nautilus-open-terminal.c:369
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "_ტერმინალში გახსნა"
 
 #: ../src/nautilus-open-terminal.c:358

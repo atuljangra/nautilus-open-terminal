@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/nautilus-open-terminal.c:356 ../src/nautilus-open-terminal.c:369
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "In _terminalvenster openen"
 
 #: ../src/nautilus-open-terminal.c:358

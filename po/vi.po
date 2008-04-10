@@ -17,7 +17,7 @@ msgstr ""
 "X-Generator: LocFactoryEditor 1.2.2\n"
 
 #: ../src/nautilus-open-terminal.c:263
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "Mở trong thiết bị _cuối"
 
 #: ../src/nautilus-open-terminal.c:265

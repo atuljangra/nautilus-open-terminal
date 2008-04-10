@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 
 #: ../src/nautilus-open-terminal.c:277
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "افتح في ال_طرفيّة"
 
 #: ../src/nautilus-open-terminal.c:279

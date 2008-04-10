@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-SourceCharset: CHARSET\n"
 
 #: ../src/nautilus-open-terminal.c:261
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "ཊར་མི་ནཱལ་གྱི་ནང་ལུ་ཁ་ཕྱེ།(_T_"
 
 #: ../src/nautilus-open-terminal.c:263

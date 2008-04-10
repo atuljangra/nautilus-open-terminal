@@ -17,7 +17,7 @@ msgstr ""
 
 #: ../src/nautilus-open-terminal.c:355
 #: ../src/nautilus-open-terminal.c:368
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "Abrir num _terminal"
 
 #: ../src/nautilus-open-terminal.c:357

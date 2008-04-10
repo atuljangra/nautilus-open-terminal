@@ -2,7 +2,7 @@
 # Copyright (C) 2006 Free Software Foundation, Inc.
 # Mircea MITU <mmitu@bitdefender.com>, 2006.
 #
-# $Id$
+# $Id: ro.po,v 1.1 2006/03/12 21:12:36 mugurelu Exp $
 #
 msgid ""
 msgstr ""
@@ -22,7 +22,7 @@ msgid "Open _Terminal"
 msgstr "Deschide _terminal"
 
 #: src/nautilus-open-terminal.c:147 src/nautilus-open-terminal.c:176
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "Deschide în _terminal"
 
 #: src/nautilus-open-terminal.c:149

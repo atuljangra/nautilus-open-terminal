@@ -18,7 +18,7 @@ msgstr ""
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../src/nautilus-open-terminal.c:356 ../src/nautilus-open-terminal.c:369
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "Adčyni ŭ _terminale"
 
 #: ../src/nautilus-open-terminal.c:358

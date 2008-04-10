@@ -20,7 +20,7 @@ msgid "Open _Terminal"
 msgstr "Otvori _terminal"
 
 #: src/nautilus-open-terminal.c:215 src/nautilus-open-terminal.c:244
-msgid "Open In _Terminal"
+msgid "Open in _Terminal"
 msgstr "Otvori u _terminalu"
 
 #: src/nautilus-open-terminal.c:217
