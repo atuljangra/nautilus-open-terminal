@@ -17,7 +17,7 @@ msgstr ""
 
 #: ../src/nautilus-open-terminal.c:356 ../src/nautilus-open-terminal.c:369
 msgid "Open in _Terminal"
-msgstr "Open In _Terminal"
+msgstr "Open in _Terminal"
 
 #: ../src/nautilus-open-terminal.c:358
 msgid "Open the currently selected folder in a terminal"

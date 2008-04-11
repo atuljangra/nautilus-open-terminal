@@ -22,7 +22,7 @@ msgstr "Open _Terminal"
 
 #: ../src/nautilus-open-terminal.c:205
 msgid "Open in _Terminal"
-msgstr "Open In _Terminal"
+msgstr "Open in _Terminal"
 
 #: ../src/nautilus-open-terminal.c:207
 msgid "Open a terminal"
