@@ -15,5 +15,19 @@
          </long>
       </locale>
     </schema>
+    <schema>
+      <key>/schemas/apps/nautilus-open-terminal/display_mc_item</key>
+      <applyto>/apps/nautilus-open-terminal/display_mc_item</applyto>
+      <owner>nautilus-open-terminal</owner>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+         <short>Whether a Midnight Commander menu item should be displayed</short>
+         <long>
+          If set to true, and if the terminal file manager "Midnight Commander" is installed,
+	  then an "Open in Midnight Commander" menu item will be displayed in the context menu.
+         </long>
+      </locale>
+    </schema>
   </schemalist>  
 </gconfschemafile>
