@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-open-terminal 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-23 11:12+0200\n"
+"POT-Creation-Date: 2008-04-13 14:02+0200\n"
 "PO-Revision-Date: 2007-08-23 11:09+0200\n"
 "Last-Translator:  <>\n"
 "Language-Team: \n"
@@ -14,27 +14,65 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/nautilus-open-terminal.c:367 ../src/nautilus-open-terminal.c:380
+#: ../src/nautilus-open-terminal.c:444 ../src/nautilus-open-terminal.c:457
 msgid "Open in _Terminal"
 msgstr "Im _Terminal öffnen"
 
-#: ../src/nautilus-open-terminal.c:369
+#: ../src/nautilus-open-terminal.c:446
 msgid "Open the currently selected folder in a terminal"
 msgstr "Den momentan gewählten Ordner in einem Terminal öffnen."
 
-#: ../src/nautilus-open-terminal.c:371 ../src/nautilus-open-terminal.c:381
+#: ../src/nautilus-open-terminal.c:448 ../src/nautilus-open-terminal.c:458
 msgid "Open the currently open folder in a terminal"
 msgstr "Den momentan geöffneten Ordner in einem Terminal öffnen."
 
-#: ../src/nautilus-open-terminal.c:377
+#: ../src/nautilus-open-terminal.c:454
 msgid "Open _Terminal"
 msgstr "_Terminal öffnen"
 
-#: ../src/nautilus-open-terminal.c:378
+#: ../src/nautilus-open-terminal.c:455
 msgid "Open a terminal"
-msgstr "Ein _Terminal öffnen"
+msgstr "Ein Terminal öffnen"
+
+#: ../src/nautilus-open-terminal.c:489 ../src/nautilus-open-terminal.c:502
+msgid "Open in _Midnight Commander"
+msgstr "Im _Midnight Commander öffnen"
+
+#: ../src/nautilus-open-terminal.c:491
+msgid ""
+"Open the currently selected folder in the terminal file manager Midnight "
+"Commander"
+msgstr ""
+"Den momentan gewählten Ordner im Terminal-Dateimanager Midnight Commander "
+"öffnen."
+
+#: ../src/nautilus-open-terminal.c:493 ../src/nautilus-open-terminal.c:503
+msgid ""
+"Open the currently open folder in the terminal file manager Midnight "
+"Commander"
+msgstr ""
+"Den momentan gewöffneten Ordner im Terminal-Dateimanager Midnight Commander "
+"öffnen."
+
+#: ../src/nautilus-open-terminal.c:499
+msgid "Open _Midnight Commander"
+msgstr "_Midnight Commander öffnen"
+
+#: ../src/nautilus-open-terminal.c:500
+msgid "Open the terminal file manager Midnight Commander"
+msgstr "Den Terminal-Dateimanager Midnight Commander öffnen"
 
 #: ../nautilus-open-terminal.schemas.in.h:1
+msgid ""
+"If set to true, and if the terminal file manager \"Midnight Commander\" is "
+"installed, then an \"Open in Midnight Commander\" menu item will be "
+"displayed in the context menu."
+msgstr ""
+"Falls dieser Schlüssel wahr ist, und falls der Terminal-Dateimanager "
+"\"Midnight Commander\" installiert ist, wird ein \"Im Midnight Commander "
+"öffnen\"-Menüeintrag im Kontextmenu angezeigt."
+
+#: ../nautilus-open-terminal.schemas.in.h:2
 msgid ""
 "If set to true, then opening a terminal on the desktop will open a terminal "
 "in the home directory. Otherwise, it will be opened in the desktop "
@@ -47,7 +85,11 @@ msgstr ""
 "Schlüssel wird ignoriert, falls das Desktop- mit dem Heim-Verzeichnis "
 "übereinstimmt."
 
-#: ../nautilus-open-terminal.schemas.in.h:2
+#: ../nautilus-open-terminal.schemas.in.h:3
+msgid "Whether a Midnight Commander menu item should be displayed"
+msgstr "Ob ein Midnight Commander-Menüeintrag angezeigt werden soll"
+
+#: ../nautilus-open-terminal.schemas.in.h:4
 msgid ""
 "Whether opening a terminal on the desktop opens a terminal in the home "
 "directory"
