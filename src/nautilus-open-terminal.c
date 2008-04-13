@@ -51,9 +51,15 @@ static void nautilus_open_terminal_class_init    (NautilusOpenTerminalClass *cla
 static GType terminal_type = 0;
 
 typedef enum {
+	/* local files. Always open "conventionally", i.e. cd and spawn. */
 	FILE_INFO_LOCAL,
 	FILE_INFO_DESKTOP,
+	/* SFTP: Shell terminals are opened "remote" (i.e. with ssh client),
+	 * commands are executed like *_OTHER */
 	FILE_INFO_SFTP,
+	/* OTHER: Terminals and commands are opened by mapping the URI back
+	 * to ~/.gvfs, i.e. to the GVFS FUSE bridge
+	 */
 	FILE_INFO_OTHER
 } TerminalFileInfo;
 
@@ -124,16 +130,30 @@ lookup_in_data_dirs (const char *basename)
 	return NULL;
 }
 
+static GConfClient *gconf_client = NULL;
+
 static inline gboolean
-desktop_opens_home_dir (GConfClient *client)
+desktop_opens_home_dir (void)
 {
-	return gconf_client_get_bool (client, "/apps/nautilus-open-terminal/desktop_opens_home_dir", NULL);
+	return gconf_client_get_bool (gconf_client,
+				      "/apps/nautilus-open-terminal/desktop_opens_home_dir",
+				      NULL);
 }
 
 static inline gboolean
-desktop_is_home_dir (GConfClient *client)
+display_mc_item (void)
 {
-	return gconf_client_get_bool (client, "/apps/nautilus/preferences/desktop_is_home_dir", NULL);
+	return gconf_client_get_bool (gconf_client,
+				      "/apps/nautilus-open-terminal/display_mc_item",
+				      NULL);
+}
+
+static inline gboolean
+desktop_is_home_dir ()
+{
+	return gconf_client_get_bool (gconf_client,
+				      "/apps/nautilus/preferences/desktop_is_home_dir",
+				      NULL);
 }
 
 #ifdef HAVE_GLIB_DESKTOP_DIR_API
@@ -142,13 +162,28 @@ desktop_is_home_dir (GConfClient *client)
   #define get_desktop_dir() g_build_filename (g_get_home_dir (), "Desktop", NULL)
 #endif
 
+static inline void
+append_command_info (char **terminal_exec,
+		     const char *command)
+{
+	char *quoted_command;
+
+	quoted_command = g_shell_quote (command);
+
+	*terminal_exec = g_realloc (*terminal_exec, strlen (*terminal_exec) + strlen (quoted_command) + 4 + 1);
+	strcpy (*terminal_exec + strlen (*terminal_exec), " -e ");
+	strcpy (*terminal_exec + strlen (*terminal_exec), quoted_command);
+
+	g_free (quoted_command);
+}
+
 static void
 append_sftp_info (char **terminal_exec,
 		  NautilusFileInfo *file_info)
 {
 	GnomeVFSURI *vfs_uri;
 	const char *host_name, *path, *user_name;
-	char *uri, *user_host, *cmd, *quoted_cmd, *unescaped_path;
+	char *cmd, *uri, *user_host, *unescaped_path;
 	guint host_port;
 
 	g_assert (terminal_exec != NULL);
@@ -180,23 +215,32 @@ append_sftp_info (char **terminal_exec,
 	}
 
 	cmd = g_strdup_printf ("ssh %s -p %d -t \"cd \'%s\' && $SHELL -l\"", user_host, host_port, unescaped_path);
-	quoted_cmd = g_shell_quote (cmd);
+	append_command_info (terminal_exec, cmd);
 	g_free (cmd);
 
-	*terminal_exec = g_realloc (*terminal_exec, strlen (*terminal_exec) + strlen (quoted_cmd) + 4 + 1);
-	strcpy (*terminal_exec + strlen (*terminal_exec), " -e ");
-	strcpy (*terminal_exec + strlen (*terminal_exec), quoted_cmd);
-
-	g_free (quoted_cmd);
 	g_free (user_host);
 	g_free (unescaped_path);
 	g_free (uri);
 	gnome_vfs_uri_unref (vfs_uri);
 }
 
+static inline char *
+get_gvfs_path_for_uri (const char *uri)
+{
+	GFile *file;
+	char *path;
+
+	file = g_file_new_for_uri (uri);
+	path = g_file_get_path (file);
+	g_object_unref (file);
+
+	return path;
+}
+
 static void
-open_terminal_callback (NautilusMenuItem *item,
-			NautilusFileInfo *file_info)
+open_terminal (NautilusMenuItem *item,
+	       NautilusFileInfo *file_info,
+	       const char *command)
 {
 	gchar *display_str;
 	const gchar *old_display_str;
@@ -206,11 +250,8 @@ open_terminal_callback (NautilusMenuItem *item,
 	gchar *dfile;
 	GnomeDesktopItem *ditem;
 	GdkScreen *screen;
-	static GConfClient *client;
 
-	client = gconf_client_get_default ();
-
-	terminal_exec = gconf_client_get_string (client,
+	terminal_exec = gconf_client_get_string (gconf_client,
 						 "/desktop/gnome/applications/terminal/"
 						 "exec",
 						 NULL);
@@ -229,22 +270,51 @@ open_terminal_callback (NautilusMenuItem *item,
 				working_directory = g_strdup (g_get_home_dir ());
 			}
 			g_free (uri);
+
+			if (command != NULL) {
+				append_command_info (&terminal_exec, command);
+			}
+
 			break;
 
 		case FILE_INFO_DESKTOP:
-			if (desktop_is_home_dir (client) || desktop_opens_home_dir (client)) {
+			if (desktop_is_home_dir () || desktop_opens_home_dir ()) {
 				working_directory = g_strdup (g_get_home_dir ());
 			} else {
 				working_directory = get_desktop_dir ();
 			}
+
+			if (command != NULL) {
+				append_command_info (&terminal_exec, command);
+			}
 			break;
 
 		case FILE_INFO_SFTP:
-			working_directory = NULL;
-			append_sftp_info (&terminal_exec, file_info);
+			if (command == NULL) {
+				/* open remote shell in remote terminal */
+				working_directory = NULL;
+				append_sftp_info (&terminal_exec, file_info);
+			} else {
+				/* this will map back sftp://... to ~/.gvfs.
+				 * we could also translate the URI to a FISH
+				 * URI, but we use our the GVFS FUSE code.
+				 */
+				uri = nautilus_file_info_get_activation_uri (file_info);
+				working_directory = get_gvfs_path_for_uri (uri);
+				g_free (uri);
+				append_command_info (&terminal_exec, command);
+			}
 			break;
 
 		case FILE_INFO_OTHER:
+			uri = nautilus_file_info_get_activation_uri (file_info);
+			working_directory = get_gvfs_path_for_uri (uri);
+			g_free (uri);
+			if (command != NULL) {
+				append_command_info (&terminal_exec, command);
+			}
+			break;
+
 		default:
 			g_assert_not_reached ();
 	}
@@ -341,6 +411,23 @@ open_terminal_callback (NautilusMenuItem *item,
 	g_free (display_str);
 }
 
+static void
+open_terminal_callback (NautilusMenuItem *item,
+			NautilusFileInfo *file_info)
+{
+	open_terminal (item, file_info, NULL);
+}
+
+static void
+open_mc_callback (NautilusMenuItem *item,
+		  NautilusFileInfo *file_info)
+{
+	GFile *file;
+	char *uri, *working_directory;
+
+	open_terminal (item, file_info, "mc");
+}
+
 static NautilusMenuItem *
 open_terminal_menu_item_new (TerminalFileInfo  terminal_file_info,
 			     GdkScreen        *screen,
@@ -353,6 +440,7 @@ open_terminal_menu_item_new (TerminalFileInfo  terminal_file_info,
 	switch (terminal_file_info) {
 		case FILE_INFO_LOCAL:
 		case FILE_INFO_SFTP:
+		case FILE_INFO_OTHER:
 			name = _("Open in _Terminal");
 			if (is_file_item) {
 				tooltip = _("Open the currently selected folder in a terminal");
@@ -362,7 +450,7 @@ open_terminal_menu_item_new (TerminalFileInfo  terminal_file_info,
 			break;
 
 		case FILE_INFO_DESKTOP:
-			if (desktop_opens_home_dir (gconf_client_get_default ())) {
+			if (desktop_opens_home_dir ()) {
 				name = _("Open _Terminal");
 				tooltip = _("Open a terminal");
 			} else {
@@ -371,7 +459,6 @@ open_terminal_menu_item_new (TerminalFileInfo  terminal_file_info,
 			}
 			break;
 
-		case FILE_INFO_OTHER:
 		default:
 			g_assert_not_reached ();
 	}
@@ -385,10 +472,55 @@ open_terminal_menu_item_new (TerminalFileInfo  terminal_file_info,
 	return ret;
 }
 
+
+static NautilusMenuItem *
+open_mc_menu_item_new (TerminalFileInfo  terminal_file_info,
+		       GdkScreen        *screen,
+		       gboolean          is_file_item)
+{
+	NautilusMenuItem *ret;
+	const char *name;
+	const char *tooltip;
+
+	switch (terminal_file_info) {
+		case FILE_INFO_LOCAL:
+		case FILE_INFO_SFTP:
+		case FILE_INFO_OTHER:
+			name = _("Open in _Midnight Commander");
+			if (is_file_item) {
+				tooltip = _("Open the currently selected folder in the terminal file manager Midnight Commander");
+			} else {
+				tooltip = _("Open the currently open folder in the terminal file manager Midnight Commander");
+			}
+			break;
+
+		case FILE_INFO_DESKTOP:
+			if (desktop_opens_home_dir ()) {
+				name = _("Open _Midnight Commander");
+				tooltip = _("Open the terminal file manager Midnight Commander");
+			} else {
+				name = _("Open in _Midnight Commander");
+				tooltip = _("Open the currently open folder in the terminal file manager Midnight Commander");
+			}
+			break;
+
+		default:
+			g_assert_not_reached ();
+	}
+
+	ret = nautilus_menu_item_new ("NautilusOpenTerminal::open_mc",
+				      name, tooltip, NULL);
+	g_object_set_data (G_OBJECT (ret),
+			   "NautilusOpenTerminal::screen",
+			   screen);
+
+	return ret;
+}
+
 static gboolean
 terminal_locked_down (void)
 {
-	return gconf_client_get_bool (gconf_client_get_default (),
+	return gconf_client_get_bool (gconf_client,
                                       "/desktop/gnome/lockdown/disable_command_line",
                                       NULL);
 }
@@ -399,6 +531,7 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 					     GtkWidget		  *window,
 					     NautilusFileInfo	  *file_info)
 {
+	GList *items;
 	NautilusMenuItem *item;
 	TerminalFileInfo  terminal_file_info;
 
@@ -406,27 +539,32 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
             return NULL;
         }
 
+	items = NULL;
+
 	terminal_file_info = get_terminal_file_info (file_info);
-	switch (terminal_file_info) {
-		case FILE_INFO_LOCAL:
-		case FILE_INFO_DESKTOP:
-		case FILE_INFO_SFTP:
-			item = open_terminal_menu_item_new (terminal_file_info, gtk_widget_get_screen (window), FALSE);
-			g_object_set_data_full (G_OBJECT (item), "file-info",
-						g_object_ref (file_info),
-						(GDestroyNotify) g_object_unref);
-			g_signal_connect (item, "activate",
-					  G_CALLBACK (open_terminal_callback),
-					  file_info);
+	item = open_terminal_menu_item_new (terminal_file_info, gtk_widget_get_screen (window), FALSE);
+	g_object_set_data_full (G_OBJECT (item), "file-info",
+				g_object_ref (file_info),
+				(GDestroyNotify) g_object_unref);
+	g_signal_connect (item, "activate",
+			  G_CALLBACK (open_terminal_callback),
+			  file_info);
+	items = g_list_append (items, item);
 
-			return g_list_append (NULL, item);
 
-		case FILE_INFO_OTHER:
-			return NULL;
-
-		default:
-			g_assert_not_reached ();
+	if (display_mc_item () &&
+	    g_find_program_in_path ("mc")) {
+		item = open_mc_menu_item_new (terminal_file_info, gtk_widget_get_screen (window), FALSE);
+		g_object_set_data_full (G_OBJECT (item), "file-info",
+					g_object_ref (file_info),
+					(GDestroyNotify) g_object_unref);
+		g_signal_connect (item, "activate",
+				  G_CALLBACK (open_mc_callback),
+				  file_info);
+		items = g_list_append (items, item);
 	}
+
+	return items;
 }
 
 GList *
@@ -434,6 +572,7 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 				       GtkWidget            *window,
 				       GList                *files)
 {
+	GList *items;
 	NautilusMenuItem *item;
 	TerminalFileInfo  terminal_file_info;
 
@@ -448,10 +587,13 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 		return NULL;
 	}
 
+	items = NULL;
+
 	terminal_file_info = get_terminal_file_info (files->data);
 	switch (terminal_file_info) {
 		case FILE_INFO_LOCAL:
 		case FILE_INFO_SFTP:
+		case FILE_INFO_OTHER:
 			item = open_terminal_menu_item_new (terminal_file_info, gtk_widget_get_screen (window), TRUE);
 			g_object_set_data_full (G_OBJECT (item), "file-info",
 						g_object_ref (files->data),
@@ -459,16 +601,29 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 			g_signal_connect (item, "activate",
 					  G_CALLBACK (open_terminal_callback),
 					  files->data);
+			items = g_list_append (items, item);
 
-			return g_list_append (NULL, item);
+			if (display_mc_item () &&
+			    g_find_program_in_path ("mc")) {
+				item = open_mc_menu_item_new (terminal_file_info, gtk_widget_get_screen (window), FALSE);
+				g_object_set_data_full (G_OBJECT (item), "file-info",
+							g_object_ref (files->data),
+							(GDestroyNotify) g_object_unref);
+				g_signal_connect (item, "activate",
+						  G_CALLBACK (open_mc_callback),
+						  files->data);
+				items = g_list_append (items, item);
+			}
+			break;
 
 		case FILE_INFO_DESKTOP:
-		case FILE_INFO_OTHER:
-			return NULL;
+			break;
 
 		default:
 			g_assert_not_reached ();
 	}
+
+	return items;
 }
 
 static void
@@ -486,6 +641,18 @@ nautilus_open_terminal_instance_init (NautilusOpenTerminal *cvs)
 static void
 nautilus_open_terminal_class_init (NautilusOpenTerminalClass *class)
 {
+	g_assert (gconf_client == NULL);
+	gconf_client = gconf_client_get_default ();
+	g_object_add_weak_pointer (G_OBJECT (gconf_client),
+				   (gpointer *) &gconf_client);
+}
+
+static void
+nautilus_open_terminal_class_finalize (NautilusOpenTerminalClass *class)
+{
+	g_assert (gconf_client != NULL);
+	g_object_unref (gconf_client);
+	g_assert (gconf_client == NULL);
 }
 
 GType
@@ -502,7 +669,7 @@ nautilus_open_terminal_register_type (GTypeModule *module)
 		(GBaseInitFunc) NULL,
 		(GBaseFinalizeFunc) NULL,
 		(GClassInitFunc) nautilus_open_terminal_class_init,
-		NULL, 
+		(GClassFinalizeFunc) nautilus_open_terminal_class_finalize,
 		NULL,
 		sizeof (NautilusOpenTerminal),
 		0,
