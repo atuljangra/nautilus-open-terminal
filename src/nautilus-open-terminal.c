@@ -643,8 +643,6 @@ nautilus_open_terminal_class_init (NautilusOpenTerminalClass *class)
 {
 	g_assert (gconf_client == NULL);
 	gconf_client = gconf_client_get_default ();
-	g_object_add_weak_pointer (G_OBJECT (gconf_client),
-				   (gpointer *) &gconf_client);
 }
 
 static void
@@ -652,7 +650,7 @@ nautilus_open_terminal_class_finalize (NautilusOpenTerminalClass *class)
 {
 	g_assert (gconf_client != NULL);
 	g_object_unref (gconf_client);
-	g_assert (gconf_client == NULL);
+	gconf_client = NULL;
 }
 
 GType
