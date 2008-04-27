@@ -1,52 +1,91 @@
 # translation of nautilus-open-terminal.HEAD.po to Hungarian
 # This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) 2005, 2007, Free Software Foundation, Inc.
+# Copyright (C) 2005, 2007, 2008, Free Software Foundation, Inc.
 #
 # Szabolcs Varga <shirokuma@shirokuma.hu>, 2005.
-# Gabor Kelemen <kelemeng@gnome.hu>, 2005, 2007.
+# Gabor Kelemen <kelemeng@gnome.hu>, 2005, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-open-terminal.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-23 11:30+0100\n"
-"PO-Revision-Date: 2007-10-31 23:48+0100\n"
+"POT-Creation-Date: 2008-04-13 13:10+0100\n"
+"PO-Revision-Date: 2008-04-27 15:44+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
-"Language-Team: Hungarian <gnome@gnome.hu>\n"
+"Language-Team: Hungarian <gnome@fsf.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: ../src/nautilus-open-terminal.c:355 ../src/nautilus-open-terminal.c:368
+#: ../src/nautilus-open-terminal.c:444 ../src/nautilus-open-terminal.c:457
 msgid "Open in _Terminal"
 msgstr "Megnyitás _terminálban"
 
-#: ../src/nautilus-open-terminal.c:357
+#: ../src/nautilus-open-terminal.c:446
 msgid "Open the currently selected folder in a terminal"
 msgstr "A jelenleg kijelölt mappa megnyitása egy terminálban"
 
-#: ../src/nautilus-open-terminal.c:359 ../src/nautilus-open-terminal.c:369
+#: ../src/nautilus-open-terminal.c:448 ../src/nautilus-open-terminal.c:458
 msgid "Open the currently open folder in a terminal"
 msgstr "A jelenleg nyitott mappa megnyitása egy terminálban"
 
-#: ../src/nautilus-open-terminal.c:365
+#: ../src/nautilus-open-terminal.c:454
 msgid "Open _Terminal"
 msgstr "_Terminál megnyitása"
 
-#: ../src/nautilus-open-terminal.c:366
+#: ../src/nautilus-open-terminal.c:455
 msgid "Open a terminal"
 msgstr "Terminál megnyitása"
 
+#: ../src/nautilus-open-terminal.c:489 ../src/nautilus-open-terminal.c:502
+msgid "Open in _Midnight Commander"
+msgstr "Megnyitás a Midnight _Commanderben"
+
+#: ../src/nautilus-open-terminal.c:491
+msgid ""
+"Open the currently selected folder in the terminal file manager Midnight "
+"Commander"
+msgstr "A jelenleg kijelölt mappa megnyitása a Midnight Commander karakteres fájlkezelőben"
+
+#: ../src/nautilus-open-terminal.c:493 ../src/nautilus-open-terminal.c:503
+msgid ""
+"Open the currently open folder in the terminal file manager Midnight "
+"Commander"
+msgstr "A jelenleg nyitott mappa megnyitása a Midnight Commander karakteres fájlkezelőben"
+
+#: ../src/nautilus-open-terminal.c:499
+msgid "Open _Midnight Commander"
+msgstr "_Midnight Commander megnyitása"
+
+#: ../src/nautilus-open-terminal.c:500
+msgid "Open the terminal file manager Midnight Commander"
+msgstr "A Midnight Commander karakteres fájlkezelő megnyitása"
+
 #: ../nautilus-open-terminal.schemas.in.h:1
+msgid ""
+"If set to true, and if the terminal file manager \"Midnight Commander\" is "
+"installed, then an \"Open in Midnight Commander\" menu item will be "
+"displayed in the context menu."
+msgstr "Ha ez igazra van állítva és a „Midnight Commander” karakteres fájlkezelő telepítve van, akkor a helyi menübe bekerül egy „Megnyitás a Midnight Commanderben” menüpont."
+
+#: ../nautilus-open-terminal.schemas.in.h:2
 msgid ""
 "If set to true, then opening a terminal on the desktop will open a terminal "
 "in the home directory. Otherwise, it will be opened in the desktop "
 "directory. Note that this key is irrelevant if the desktop directory is "
 "identical to the home directory."
-msgstr "Ha ez igaz, akkor egy terminál megnyitása az asztalon a saját könyvtárában nyit meg egy terminált. Ellenkező esetben a munkaasztal mappájában nyílik meg. A kulcsnak nincs jelentősége, ha a munkaasztal könyvtára a saját könyvtár."
+msgstr ""
+"Ha ez igaz, akkor egy terminál megnyitása az asztalon a saját könyvtárában "
+"nyit meg egy terminált. Ellenkező esetben a munkaasztal mappájában nyílik "
+"meg. A kulcsnak nincs jelentősége, ha a munkaasztal könyvtára a saját "
+"könyvtár."
 
-#: ../nautilus-open-terminal.schemas.in.h:2
+#: ../nautilus-open-terminal.schemas.in.h:3
+msgid "Whether a Midnight Commander menu item should be displayed"
+msgstr "Megjelenjen-e a Midnight Commander menüelem"
+
+#: ../nautilus-open-terminal.schemas.in.h:4
 msgid ""
 "Whether opening a terminal on the desktop opens a terminal in the home "
 "directory"
