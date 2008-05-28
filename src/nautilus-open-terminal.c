@@ -30,6 +30,7 @@
 #include <libnautilus-extension/nautilus-menu-provider.h>
 
 #include <glib/gi18n-lib.h>
+#include <gio/gio.h>
 #include <gtk/gtkicontheme.h>
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkmain.h>
@@ -63,26 +64,13 @@ typedef enum {
 	FILE_INFO_OTHER
 } TerminalFileInfo;
 
-static char *
-get_uri_scheme (const char *uri)
-{
-	const char *p;
-	char *scheme = NULL;
-
-	if ((uri != NULL) && (p = strchr (uri, ':'))) {
-		scheme = g_strndup (uri, p - uri);
-	}
-
-	return scheme;
-}
-
 static TerminalFileInfo
 get_terminal_file_info (const char *uri)
 {
 	TerminalFileInfo ret;
 	char *uri_scheme;
 
-	uri_scheme = get_uri_scheme (uri);
+	uri_scheme = g_uri_parse_scheme (uri);
 
 	if (uri_scheme == NULL) {
 		ret = FILE_INFO_OTHER;
@@ -165,12 +153,6 @@ desktop_is_home_dir ()
 				      "/apps/nautilus/preferences/desktop_is_home_dir",
 				      NULL);
 }
-
-#ifdef HAVE_GLIB_DESKTOP_DIR_API
-  #define get_desktop_dir() g_strdup (g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP))
-#else
-  #define get_desktop_dir() g_build_filename (g_get_home_dir (), "Desktop", NULL)
-#endif
 
 static inline void
 append_command_info (char **terminal_exec,
@@ -287,7 +269,7 @@ open_terminal (NautilusMenuItem *item,
 			if (desktop_is_home_dir () || desktop_opens_home_dir ()) {
 				working_directory = g_strdup (g_get_home_dir ());
 			} else {
-				working_directory = get_desktop_dir ();
+				working_directory =  g_strdup (g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP));
 			}
 
 			if (command != NULL) {

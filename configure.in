@@ -29,17 +29,16 @@ fi
 # Dependency checks
 
 NAUTILUS_REQUIRED=2.21.2
-EEL_REQUIRED=2.6.0
 LIBGNOME_DESKTOP_REQUIRED=2.9.91
-GLIB_REQUIRED=2.4.0
+GLIB_REQUIRED=2.16.0
 
-PKG_CHECK_MODULES(NAUTILUS, libnautilus-extension >= $NAUTILUS_REQUIRED glib-2.0 >= $GLIB_REQUIRED)
+PKG_CHECK_MODULES(NAUTILUS, [
+	libnautilus-extension >= $NAUTILUS_REQUIRED
+	glib-2.0 >= $GLIB_REQUIRED
+	gio-2.0
+])
 PKG_CHECK_MODULES(GCONF, gconf-2.0)
 PKG_CHECK_MODULES(GNOMEDESKTOP, gnome-desktop-2.0 >= $LIBGNOME_DESKTOP_REQUIRED)
-
-PKG_CHECK_MODULES(GLIB_RECENT, glib-2.0 >= 2.13.3,
-                  AC_DEFINE(HAVE_GLIB_DESKTOP_DIR_API, 1, [g_get_user_special_dir() support]),
-                  AC_MSG_NOTICE([not using g_get_user_special_dir()]))
 
 
 # Make dependency CFLAGS and LIBS available
