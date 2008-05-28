@@ -63,20 +63,30 @@ typedef enum {
 	FILE_INFO_OTHER
 } TerminalFileInfo;
 
-static TerminalFileInfo
-get_terminal_file_info (NautilusFileInfo *file_info)
+static char *
+get_uri_scheme (const char *uri)
 {
-	TerminalFileInfo  ret;
-	char             *uri_scheme, *p;
+	const char *p;
+	char *scheme = NULL;
 
-	g_assert (file_info);
-
-	uri_scheme = nautilus_file_info_get_activation_uri (file_info);
-	if ((p = strchr (uri_scheme, ':'))) {
-		*p = 0;
+	if ((uri != NULL) && (p = strchr (uri, ':'))) {
+		scheme = g_strndup (uri, p - uri);
 	}
 
-	if (strcmp (uri_scheme, "file") == 0) {
+	return scheme;
+}
+
+static TerminalFileInfo
+get_terminal_file_info (const char *uri)
+{
+	TerminalFileInfo ret;
+	char *uri_scheme;
+
+	uri_scheme = get_uri_scheme (uri);
+
+	if (uri_scheme == NULL) {
+		ret = FILE_INFO_OTHER;
+	} else if (strcmp (uri_scheme, "file") == 0) {
 		ret = FILE_INFO_LOCAL;
 	} else if (strcmp (uri_scheme, "x-nautilus-desktop") == 0) {
 		ret = FILE_INFO_DESKTOP;
@@ -179,17 +189,14 @@ append_command_info (char **terminal_exec,
 
 static void
 append_sftp_info (char **terminal_exec,
-		  NautilusFileInfo *file_info)
+		  const char *uri)
 {
 	GnomeVFSURI *vfs_uri;
 	const char *host_name, *path, *user_name;
-	char *cmd, *uri, *user_host, *unescaped_path;
+	char *cmd, *user_host, *unescaped_path;
 	guint host_port;
 
 	g_assert (terminal_exec != NULL);
-	g_assert (file_info != NULL);
-
-	uri = nautilus_file_info_get_activation_uri (file_info);
 	g_assert (uri != NULL);
 	g_assert (strncmp (uri, "sftp", strlen ("sftp")) == 0 ||
 		  strncmp (uri, "ssh", strlen ("ssh")) == 0);
@@ -220,7 +227,6 @@ append_sftp_info (char **terminal_exec,
 
 	g_free (user_host);
 	g_free (unescaped_path);
-	g_free (uri);
 	gnome_vfs_uri_unref (vfs_uri);
 }
 
@@ -261,15 +267,15 @@ open_terminal (NautilusMenuItem *item,
 		terminal_exec = g_strdup ("gnome-terminal");
 	}
 
-	switch (get_terminal_file_info (file_info)) {
+	uri = nautilus_file_info_get_activation_uri (file_info);
+
+	switch (get_terminal_file_info (uri)) {
 		case FILE_INFO_LOCAL:
-			uri = nautilus_file_info_get_activation_uri (file_info);
 			if (uri != NULL) {
 				working_directory = g_filename_from_uri (uri, NULL, NULL);
 			} else {
 				working_directory = g_strdup (g_get_home_dir ());
 			}
-			g_free (uri);
 
 			if (command != NULL) {
 				append_command_info (&terminal_exec, command);
@@ -293,23 +299,19 @@ open_terminal (NautilusMenuItem *item,
 			if (command == NULL) {
 				/* open remote shell in remote terminal */
 				working_directory = NULL;
-				append_sftp_info (&terminal_exec, file_info);
+				append_sftp_info (&terminal_exec, uri);
 			} else {
 				/* this will map back sftp://... to ~/.gvfs.
 				 * we could also translate the URI to a FISH
 				 * URI, but we use our the GVFS FUSE code.
 				 */
-				uri = nautilus_file_info_get_activation_uri (file_info);
 				working_directory = get_gvfs_path_for_uri (uri);
-				g_free (uri);
 				append_command_info (&terminal_exec, command);
 			}
 			break;
 
 		case FILE_INFO_OTHER:
-			uri = nautilus_file_info_get_activation_uri (file_info);
 			working_directory = get_gvfs_path_for_uri (uri);
-			g_free (uri);
 			if (command != NULL) {
 				append_command_info (&terminal_exec, command);
 			}
@@ -318,6 +320,8 @@ open_terminal (NautilusMenuItem *item,
 		default:
 			g_assert_not_reached ();
 	}
+
+	g_free (uri);
 
 	if (g_str_has_prefix (terminal_exec, "gnome-terminal")) {
 		dfile = lookup_in_data_dirs ("applications/gnome-terminal.desktop");
@@ -472,7 +476,6 @@ open_terminal_menu_item_new (TerminalFileInfo  terminal_file_info,
 	return ret;
 }
 
-
 static NautilusMenuItem *
 open_mc_menu_item_new (TerminalFileInfo  terminal_file_info,
 		       GdkScreen        *screen,
@@ -525,12 +528,12 @@ terminal_locked_down (void)
                                       NULL);
 }
 
-
 static GList *
 nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 					     GtkWidget		  *window,
 					     NautilusFileInfo	  *file_info)
 {
+	gchar *uri;
 	GList *items;
 	NautilusMenuItem *item;
 	TerminalFileInfo  terminal_file_info;
@@ -541,7 +544,10 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 
 	items = NULL;
 
-	terminal_file_info = get_terminal_file_info (file_info);
+	uri = nautilus_file_info_get_activation_uri (file_info);
+	terminal_file_info = get_terminal_file_info (uri);
+	g_free (uri);
+
 	item = open_terminal_menu_item_new (terminal_file_info, gtk_widget_get_screen (window), FALSE);
 	g_object_set_data_full (G_OBJECT (item), "file-info",
 				g_object_ref (file_info),
@@ -550,7 +556,6 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 			  G_CALLBACK (open_terminal_callback),
 			  file_info);
 	items = g_list_append (items, item);
-
 
 	if (display_mc_item () &&
 	    g_find_program_in_path ("mc")) {
@@ -572,6 +577,7 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 				       GtkWidget            *window,
 				       GList                *files)
 {
+	gchar *uri;
 	GList *items;
 	NautilusMenuItem *item;
 	TerminalFileInfo  terminal_file_info;
@@ -589,7 +595,10 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 
 	items = NULL;
 
-	terminal_file_info = get_terminal_file_info (files->data);
+	uri = nautilus_file_info_get_activation_uri (files->data);
+	terminal_file_info = get_terminal_file_info (uri);
+	g_free (uri);
+
 	switch (terminal_file_info) {
 		case FILE_INFO_LOCAL:
 		case FILE_INFO_SFTP:
