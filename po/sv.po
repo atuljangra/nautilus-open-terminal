@@ -1,14 +1,14 @@
 # Swedish messages for nautilus-open-terminal.
-# Copyright (C) 2005, 2006, 2007 Free Software Foundation, Inc.
+# Copyright (C) 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
 # Christian Rose <menthos@menthos.com>, 2005, 2006.
-# Daniel Nylander <po@danielnylander.se>, 2007.
+# Daniel Nylander <po@danielnylander.se>, 2007, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-open-terminal\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-24 01:31+0200\n"
-"PO-Revision-Date: 2007-08-24 01:33+0100\n"
+"POT-Creation-Date: 2008-06-16 23:01+0200\n"
+"PO-Revision-Date: 2008-06-16 23:03+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -16,33 +16,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/nautilus-open-terminal.c:356
-#: ../src/nautilus-open-terminal.c:369
+#: ../src/nautilus-open-terminal.c:430
+#: ../src/nautilus-open-terminal.c:443
 msgid "Open in _Terminal"
 msgstr "Öppna i _terminalfönster"
 
-#: ../src/nautilus-open-terminal.c:358
+#: ../src/nautilus-open-terminal.c:432
 msgid "Open the currently selected folder in a terminal"
 msgstr "Öppna den för tillfället markerade mappen i ett terminalfönster"
 
-#: ../src/nautilus-open-terminal.c:360
-#: ../src/nautilus-open-terminal.c:370
+#: ../src/nautilus-open-terminal.c:434
+#: ../src/nautilus-open-terminal.c:444
 msgid "Open the currently open folder in a terminal"
 msgstr "Öppna den för tillfället öppna mappen i ett terminalfönster"
 
-#: ../src/nautilus-open-terminal.c:366
+#: ../src/nautilus-open-terminal.c:440
 msgid "Open _Terminal"
 msgstr "Öppna _terminalfönster"
 
-#: ../src/nautilus-open-terminal.c:367
+#: ../src/nautilus-open-terminal.c:441
 msgid "Open a terminal"
 msgstr "Öppna ett terminalfönster"
 
+#: ../src/nautilus-open-terminal.c:474
+#: ../src/nautilus-open-terminal.c:487
+msgid "Open in _Midnight Commander"
+msgstr "Öppna i _Midnight Commander"
+
+#: ../src/nautilus-open-terminal.c:476
+msgid "Open the currently selected folder in the terminal file manager Midnight Commander"
+msgstr "Öppna den för tillfället markerade mappen i terminalfilhanteraren Midnight Commander"
+
+#: ../src/nautilus-open-terminal.c:478
+#: ../src/nautilus-open-terminal.c:488
+msgid "Open the currently open folder in the terminal file manager Midnight Commander"
+msgstr "Öppna den för tillfället öppna mappen i terminalfilhanteraren Midnight Commander"
+
+#: ../src/nautilus-open-terminal.c:484
+msgid "Open _Midnight Commander"
+msgstr "Öppna _Midnight Commander"
+
+#: ../src/nautilus-open-terminal.c:485
+msgid "Open the terminal file manager Midnight Commander"
+msgstr "Öppna terminalfilhanteraren Midnight Commander"
+
 #: ../nautilus-open-terminal.schemas.in.h:1
+msgid "If set to true, and if the terminal file manager \"Midnight Commander\" is installed, then an \"Open in Midnight Commander\" menu item will be displayed in the context menu."
+msgstr "Om inställd till sant, och om terminalfilhanteraren \"Midnight Commander\" är installerad, kommer ett menyobjekt för \"Öppna i Midnight Commander\" att visas i sammanhangsmenyn."
+
+#: ../nautilus-open-terminal.schemas.in.h:2
 msgid "If set to true, then opening a terminal on the desktop will open a terminal in the home directory. Otherwise, it will be opened in the desktop directory. Note that this key is irrelevant if the desktop directory is identical to the home directory."
 msgstr "Om inställd till sant kommer öppnandet av ett terminalfönster på skrivbordet att öppna en terminal i hemkatalogen. Om inte kommer det att öppnas i skrivbordskatalogen. Observera att den här nyckeln är irrelevant om skrivbordskatalogen är identisk med hemkatalogen."
 
-#: ../nautilus-open-terminal.schemas.in.h:2
+#: ../nautilus-open-terminal.schemas.in.h:3
+msgid "Whether a Midnight Commander menu item should be displayed"
+msgstr "Huruvida ett menyobjekt för Midnight Commander ska visas"
+
+#: ../nautilus-open-terminal.schemas.in.h:4
 msgid "Whether opening a terminal on the desktop opens a terminal in the home directory"
 msgstr "Huruvida öppnandet av terminalfönster på skrivbordet öppnar en terminal i hemkatalogen"
 
