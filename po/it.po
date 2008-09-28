@@ -1,37 +1,100 @@
 # Italian translation for nautilus-open-terminal
-# Copyright (C) 2005 Daniele Medri and the GNOME Foundation
+# Copyright (C) 2005 the GNOME Foundation
 # This file is distributed under the same licence as the nautilus-open-terminal package.
-# Adam Weinberger <adamw@gnome.org>, 2005.
+# Daniele Medri <daniele@medri.org>, 2005.
+# Gianvito Cavasoli <janvitus@ubuntu-it.org>, 2008.
 # 
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: nautilus-open-terminal\n"
+"Project-Id-Version: nautilus-open-terminal 0.9.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-28 21:03+0200\n"
-"PO-Revision-Date: 2005-04-28 19:30+0200\n"
-"Last-Translator: Daniele Medri <daniele@medri.org>\n"
-"Language-Team: Italian <it@li.org>\n"
+"POT-Creation-Date: 2008-09-28 21:02+0200\n"
+"PO-Revision-Date: 2008-09-20 18:41+0200\n"
+"Last-Translator: Gianvito Cavasoli <janvitus@ubuntu-it.org>\n"
+"Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/nautilus-open-terminal.c:204
-msgid "Open _Terminal"
-msgstr "Apri _terminale"
-
-#: ../src/nautilus-open-terminal.c:205
+#: ../src/nautilus-open-terminal.c:430 ../src/nautilus-open-terminal.c:443
 msgid "Open in _Terminal"
 msgstr "Apri nel _terminale"
 
-#: ../src/nautilus-open-terminal.c:207
-msgid "Open a terminal"
-msgstr "Apri un terminale"
-
-#: ../src/nautilus-open-terminal.c:209
+#: ../src/nautilus-open-terminal.c:432
 msgid "Open the currently selected folder in a terminal"
-msgstr "Apri la cartella selezionata in un terminale"
+msgstr "Apri l'attuale cartella selezionata in un terminale"
 
-#: ../src/nautilus-open-terminal.c:210
+#: ../src/nautilus-open-terminal.c:434 ../src/nautilus-open-terminal.c:444
 msgid "Open the currently open folder in a terminal"
 msgstr "Apri l'attuale cartella aperta in un terminale"
+
+#: ../src/nautilus-open-terminal.c:440
+msgid "Open _Terminal"
+msgstr "Apri _terminale"
+
+#: ../src/nautilus-open-terminal.c:441
+msgid "Open a terminal"
+msgstr "Apre un terminale"
+
+#: ../src/nautilus-open-terminal.c:474 ../src/nautilus-open-terminal.c:487
+msgid "Open in _Midnight Commander"
+msgstr "Apri con _Midnight Commander"
+
+#: ../src/nautilus-open-terminal.c:476
+msgid ""
+"Open the currently selected folder in the terminal file manager Midnight "
+"Commander"
+msgstr ""
+"Apri l'attuale cartella selezionata nel terminale del file manager Midnight "
+"Commander"
+
+#: ../src/nautilus-open-terminal.c:478 ../src/nautilus-open-terminal.c:488
+msgid ""
+"Open the currently open folder in the terminal file manager Midnight "
+"Commander"
+msgstr ""
+"Apri l'attuale cartella aperta nel terminale del file manager Midnight "
+"Commander"
+
+#: ../src/nautilus-open-terminal.c:484
+msgid "Open _Midnight Commander"
+msgstr "Apri _Midnight Commander"
+
+#: ../src/nautilus-open-terminal.c:485
+msgid "Open the terminal file manager Midnight Commander"
+msgstr "Apre il terminale del file manager Midnight Commander"
+
+#: ../nautilus-open-terminal.schemas.in.h:1
+msgid ""
+"If set to true, and if the terminal file manager \"Midnight Commander\" is "
+"installed, then an \"Open in Midnight Commander\" menu item will be "
+"displayed in the context menu."
+msgstr ""
+"Se impostato a vero, e il terminale del file manager \"Midnight Commander\" "
+"è installato, apparirà una voce nel menù contestuale \"Apri con Midnight "
+"Commander\"."
+
+#: ../nautilus-open-terminal.schemas.in.h:2
+msgid ""
+"If set to true, then opening a terminal on the desktop will open a terminal "
+"in the home directory. Otherwise, it will be opened in the desktop "
+"directory. Note that this key is irrelevant if the desktop directory is "
+"identical to the home directory."
+msgstr ""
+"Se impostato a vero, aprendo un terminale sulla scrivania si aprirà la "
+"directory home. In caso contrario, si aprirà la directory della scrivania. "
+"Nota che questa voce è irrilevante se la directory della scrivania è "
+"equivalente a quella della home."
+
+#: ../nautilus-open-terminal.schemas.in.h:3
+msgid "Whether a Midnight Commander menu item should be displayed"
+msgstr "Se una voce nel menù di Midnight Commander viene visualizzata"
+
+#: ../nautilus-open-terminal.schemas.in.h:4
+msgid ""
+"Whether opening a terminal on the desktop opens a terminal in the home "
+"directory"
+msgstr ""
+"Se aprendo un terminale sulla scrivania si apre un terminale della directory "
+"home"
