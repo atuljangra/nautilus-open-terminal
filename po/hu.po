@@ -77,8 +77,8 @@ msgid ""
 "identical to the home directory."
 msgstr ""
 "Ha ez igaz, akkor egy terminál megnyitása az asztalon a saját könyvtárában "
-"nyit meg egy terminált. Ellenkező esetben a munkaasztal mappájában nyílik "
-"meg. A kulcsnak nincs jelentősége, ha a munkaasztal könyvtára a saját "
+"nyit meg egy terminált. Ellenkező esetben az asztal mappájában nyílik "
+"meg. A kulcsnak nincs jelentősége, ha az asztal könyvtára a saját "
 "könyvtár."
 
 #: ../nautilus-open-terminal.schemas.in.h:3
