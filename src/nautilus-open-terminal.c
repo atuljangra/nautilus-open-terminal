@@ -295,7 +295,7 @@ open_terminal_menu_item_new (NautilusFileInfo *file_info,
 
 			case FILE_INFO_LOCAL:
 			case FILE_INFO_OTHER:
-				name = _("Open in _Terminal");
+				name = _("Open in T_erminal");
 
 				if (is_file_item) {
 					tooltip = _("Open the currently selected folder in a terminal");
@@ -306,10 +306,10 @@ open_terminal_menu_item_new (NautilusFileInfo *file_info,
 
 			case FILE_INFO_DESKTOP:
 				if (desktop_opens_home_dir ()) {
-					name = _("Open _Terminal");
+					name = _("Open T_erminal");
 					tooltip = _("Open a terminal");
 				} else {
-					name = _("Open in _Terminal");
+					name = _("Open in T_erminal");
 					tooltip = _("Open the currently open folder in a terminal");
 				}
 				break;
