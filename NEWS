@@ -1,13 +1,52 @@
 nautilus-open-terminal 0.10
 ===========================
-"... (nickname goes here)"
+"Columbo Likes the Nightlife"
 
-NOTE: (unreleased, this NEWS is a work-in-progress)
+	[ NOT YET RELEASED ]
 
-	* (dedication goes here)
+	* Dedicated to Peter Falk, who - due to his recent illness - is probably never going to delight us with
+	  another Columbo episode
 
+	Features
+
+	* Respect terminal lockdown (JP Rosevear)
+
+	Fixes
+
+	* Do not run terminal commands ourselves, but use eel_gnome_open_terminal_on_screen().
+	* Never cwd() to the destination directory, but call cd inside the terminal. Fixes issues where
+	  media was prevented from unmounting.
+	* Do not weak-ref GConf client. Fixes crashes and assertion failures on Nautilus shutdown.
+	* Change "Open in Terminal" accelerator to "e", for not conflicting with "New Tab"
+	  (launchpad #304647, Marius Scurtescu)
+	* Lower-case "in" of "Open in Terminal"
+	* Compiler fixes in get_terminal_file_info() (JP Rosevear)
+
+	Build
+
+	* Depend on eel, gio, gnome-vfs and recent glib (Paolo Borelli, Mike Auty)
 	* Use po/LINGUAS for internationalisation (Wouter Bolsterlee)
 
+	Added translations
+		mr	  Sandeep Shedmake		<sandeep.shedmake@gmail.com>
+
+	Updated translations
+		ar	  Khaled Hosny			<khaledhosny@eglug.org>
+		be@latin  Ihar Hrachyshka		<ihar.hrachyshka@gmail.com>
+		cs	  Kamil Paral			<ripper42@gmail.com>
+		en_GB	  Philip Withnall		<pwithnall@svn.gnome.org>
+		et	  Mattias Põldaru		<mahfiaz@gmail.com>
+		eu	  Iñaki Larrañaga Murgoitio	<dooteo@euskalgnu.org>
+		he	  Yair Hershkovitz		<yairhr@gmail.com>
+		hu	  Gabor Kelemen			<kelemeng@gnome.hu>
+		it	  Gianvito Cavasoli		<janvitus@ubuntu-it.org>
+		ja	  Takeshi AIHANA		<aihana@gnome.gr.jp>
+		lt	  Gintautas Miliauskas		<gintas@akl.lt>
+		nl	  Wouter Bolsterlee		<wbolster@gnome.org>
+		oc	  Yannig Marchegay (Kokoyaya)	<yannig@marchegay.org>
+		pl	  Tomasz Dominikowski		<tdominikowski@aviary.pl>
+		th	  Manatsawin Hanmongkolchai	<manatsawin@gmail.com>
+		sl	  Matej Urbančič		<matej.urban@gmail.com>
 
 nautilus-open-terminal 0.9
 ==========================
