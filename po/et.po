@@ -11,72 +11,83 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-open-terminal HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-07 15:23+0100\n"
-"PO-Revision-Date: 2009-02-18 18:50+0300\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=nautilus-open-terminal&component=general\n"
+"POT-Creation-Date: 2009-03-09 12:43+0000\n"
+"PO-Revision-Date: 2009-04-10 00:09+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/nautilus-open-terminal.c:430
-#: ../src/nautilus-open-terminal.c:443
-msgid "Open in _Terminal"
-msgstr "Ava _Terminalis"
+#| msgid "Open in _Terminal"
+msgid "Open in _Remote Terminal"
+msgstr "Ava _kaugterminalis"
 
-#: ../src/nautilus-open-terminal.c:432
+#| msgid "Open in _Terminal"
+msgid "Open in _Local Terminal"
+msgstr "Ava _kohalikus terminalis"
+
 msgid "Open the currently selected folder in a terminal"
 msgstr "Hetkel valitud kausta avamine terminalis"
 
-#: ../src/nautilus-open-terminal.c:434
-#: ../src/nautilus-open-terminal.c:444
 msgid "Open the currently open folder in a terminal"
 msgstr "Hetkel avatud kausta avamine terminalis"
 
-#: ../src/nautilus-open-terminal.c:440
-msgid "Open _Terminal"
-msgstr "Ava _Terminal"
+#| msgid "Open in _Terminal"
+msgid "Open in T_erminal"
+msgstr "Ava _terminalis"
 
-#: ../src/nautilus-open-terminal.c:441
+#| msgid "Open _Terminal"
+msgid "Open T_erminal"
+msgstr "Ava _terminal"
+
 msgid "Open a terminal"
 msgstr "Terminali avamine"
 
-#: ../src/nautilus-open-terminal.c:474
-#: ../src/nautilus-open-terminal.c:487
 msgid "Open in _Midnight Commander"
 msgstr "Ava _Midnight Commanderis"
 
-#: ../src/nautilus-open-terminal.c:476
-msgid "Open the currently selected folder in the terminal file manager Midnight Commander"
-msgstr "Hetkel valitud kausta avamine terminali failihalduris Midnight Commander"
+msgid ""
+"Open the currently selected folder in the terminal file manager Midnight "
+"Commander"
+msgstr ""
+"Praegu valitud kausta avamine terminali failihalduris Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:478
-#: ../src/nautilus-open-terminal.c:488
-msgid "Open the currently open folder in the terminal file manager Midnight Commander"
-msgstr "Hetkel avatud kausta avamine terminali failihalduris Midnight Commander"
+msgid ""
+"Open the currently open folder in the terminal file manager Midnight "
+"Commander"
+msgstr "Avatud kausta avamine terminali failihalduris Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:484
 msgid "Open _Midnight Commander"
 msgstr "Ava _Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:485
 msgid "Open the terminal file manager Midnight Commander"
-msgstr "Ava terminali failihaldur Midnight Commander"
+msgstr "Terminali failihalduri Midnight Commander avamine"
 
-#: ../nautilus-open-terminal.schemas.in.h:1
-msgid "If set to true, and if the terminal file manager \"Midnight Commander\" is installed, then an \"Open in Midnight Commander\" menu item will be displayed in the context menu."
-msgstr "Kui märgitud, ja kui terminali failihaldur \"Midnight Commander\" on paigaldatud, näidatakse hüpikmenüüs kirjet \"Ava Midnight Commanderis\"."
+msgid ""
+"If set to true, and if the terminal file manager \"Midnight Commander\" is "
+"installed, then an \"Open in Midnight Commander\" menu item will be "
+"displayed in the context menu."
+msgstr ""
+"Kui märgitud ja kui terminali failihaldur \"Midnight Commander\" on "
+"paigaldatud, näidatakse hüpikmenüüs kirjet \"Ava Midnight Commanderis\"."
 
-#: ../nautilus-open-terminal.schemas.in.h:2
-msgid "If set to true, then opening a terminal on the desktop will open a terminal in the home directory. Otherwise, it will be opened in the desktop directory. Note that this key is irrelevant if the desktop directory is identical to the home directory."
-msgstr "Kui tõene, siis töölaual terminali avamine avab selle kodukataloogis. Muul juhul avatakse see töölaua kataloogis. See valik on tähendusetu, kui töölaud ja kodukataloogi kattuvad."
+msgid ""
+"If set to true, then opening a terminal on the desktop will open a terminal "
+"in the home directory. Otherwise, it will be opened in the desktop "
+"directory. Note that this key is irrelevant if the desktop directory is "
+"identical to the home directory."
+msgstr ""
+"Kui tõene, siis töölaual terminali avamine avab selle kodukataloogis. Muul "
+"juhul avatakse see töölaua kataloogis. See valik on tähendusetu, kui töölaud "
+"ja kodukataloogi kattuvad."
 
-#: ../nautilus-open-terminal.schemas.in.h:3
 msgid "Whether a Midnight Commander menu item should be displayed"
-msgstr "Midnight Commanderi menüükirjet näidatakse"
+msgstr "Kas Midnight Commanderi menüükirjet näidatakse"
 
-#: ../nautilus-open-terminal.schemas.in.h:4
-msgid "Whether opening a terminal on the desktop opens a terminal in the home directory"
-msgstr "Terminali avamine töölaual avab terminali kodukataloogis"
-
+msgid ""
+"Whether opening a terminal on the desktop opens a terminal in the home "
+"directory"
+msgstr "Kui terminal avada töölaual, avab see kodukataloogis"
