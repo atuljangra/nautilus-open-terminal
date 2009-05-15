@@ -2,8 +2,6 @@ nautilus-open-terminal 0.10
 ===========================
 "Columbo Likes the Nightlife"
 
-	[ NOT YET RELEASED ]
-
 	* Dedicated to Peter Falk, who - due to his recent illness - is probably never going to delight us with
 	  another Columbo episode
 
@@ -33,6 +31,7 @@ nautilus-open-terminal 0.10
 	Updated translations
 		ar	  Khaled Hosny			<khaledhosny@eglug.org>
 		be@latin  Ihar Hrachyshka		<ihar.hrachyshka@gmail.com>
+		ca	  David Planella		<david.planella@gmail.com>
 		cs	  Kamil Paral			<ripper42@gmail.com>
 		en_GB	  Philip Withnall		<pwithnall@svn.gnome.org>
 		et	  Mattias Põldaru		<mahfiaz@gmail.com>
