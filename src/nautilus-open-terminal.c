@@ -26,6 +26,7 @@
 #endif
 
 #include "nautilus-open-terminal.h"
+#include "eel-gnome-extensions.h"
 
 #include <libnautilus-extension/nautilus-menu-provider.h>
 
@@ -33,9 +34,9 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <gconf/gconf.h>
+#include <gconf/gconf-client.h>
 #include <libgnome/gnome-desktop-item.h>
 #include <libgnomevfs/gnome-vfs.h>
-#include <eel/eel.h>
 
 #include <errno.h>
 #include <fcntl.h>
@@ -252,7 +253,7 @@ open_terminal (NautilusMenuItem *item,
 
 	terminal_command = get_terminal_command_for_file_info (file_info, command_to_run, remote_terminal);
 	if (terminal_command != NULL) {
-		eel_gnome_open_terminal_on_screen (terminal_command, screen);
+		_not_eel_gnome_open_terminal_on_screen (terminal_command, screen);
 	}
 	g_free (terminal_command);
 }

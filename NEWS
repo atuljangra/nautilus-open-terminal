@@ -1,6 +1,14 @@
 nautilus-open-terminal 0.11
 ===========================
-[ NOT YET RELEASED ]
+"Hullabaloo"
+
+	* Dedicated to Muse, the best live band ever.
+
+	Fixes / Build
+
+	* Do not depend on eel anymore, because it is linked statically into Nautilus. Instead, import the required
+	eel terminal launch helpers.
+	* Explicitly depend on gconf.
 
 nautilus-open-terminal 0.10
 ===========================
