@@ -1,6 +1,13 @@
 nautilus-open-terminal 0.12
 ===========================
-[ NOT YET RELEASED ]
+"El Pueblo Unido"
+
+	* Dedicated to Frederic Rzewski, and his excellent variations on the theme "El Pueblo Unido".
+
+	Fixes
+
+	* Remote SSH terminal: Work correctly with non-standard SSH ports manually defined in ~/.ssh/config.
+	  Thanks to Julien Valroff <julien@kirya.net>.
 
 nautilus-open-terminal 0.11
 ===========================

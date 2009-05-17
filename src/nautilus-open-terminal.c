@@ -44,8 +44,6 @@
 #include <unistd.h> /* for chdir */
 #include <sys/stat.h>
 
-#define SSH_DEFAULT_PORT 22
-
 static void nautilus_open_terminal_instance_init (NautilusOpenTerminal      *cvs);
 static void nautilus_open_terminal_class_init    (NautilusOpenTerminalClass *class);
 
@@ -123,6 +121,7 @@ get_remote_ssh_command (const char *uri,
 	GnomeVFSURI *vfs_uri;
 	const char *host_name, *path, *user_name;
 	char *command, *user_host, *unescaped_path;
+	char *port_str;
 	guint host_port;
 
 	g_assert (uri != NULL);
@@ -141,8 +140,11 @@ get_remote_ssh_command (const char *uri,
 	/* FIXME to we have to consider the remote file encoding? */
 	unescaped_path = gnome_vfs_unescape_string (path, NULL);
 
-	if (host_port == 0) {
-		host_port = SSH_DEFAULT_PORT;
+	port_str = NULL;
+	if (host_port != 0) {
+		port_str = g_strdup_printf (" -p %d", host_port);
+	} else {
+		port_str = g_strdup ("");
 	}
 
 	if (user_name != NULL) {
@@ -152,13 +154,14 @@ get_remote_ssh_command (const char *uri,
 	}
 
 	if (command_to_run != NULL) {
-		command = g_strdup_printf ("ssh %s -p %d -t \"cd \'%s\' && %s\"", user_host, host_port, unescaped_path, command_to_run);
+		command = g_strdup_printf ("ssh %s%s -t \"cd \'%s\' && %s\"", user_host, port_str, unescaped_path, command_to_run);
 	} else {
-		command = g_strdup_printf ("ssh %s -p %d -t \"cd \'%s\' && $SHELL -l\"", user_host, host_port, unescaped_path);
+		command = g_strdup_printf ("ssh %s%s -t \"cd \'%s\' && $SHELL -l\"", user_host, port_str, unescaped_path);
 	}
 
 	g_free (user_host);
 	g_free (unescaped_path);
+	g_free (port_str);
 	gnome_vfs_uri_unref (vfs_uri);
 
 	return command;
