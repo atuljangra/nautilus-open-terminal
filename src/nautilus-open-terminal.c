@@ -451,6 +451,25 @@ terminal_locked_down (void)
                                       NULL);
 }
 
+/* used to determine for remote URIs whether GVFS is capable of mapping them to ~/.gvfs */
+static gboolean
+uri_has_local_path (const char *uri)
+{
+	GFile *file;
+	char *path;
+	gboolean ret;
+
+	file = g_file_new_for_uri (uri);
+	path = g_file_get_path (file);
+
+	ret = (path != NULL);
+
+	g_free (path);
+	g_object_unref (file);
+
+	return ret;
+}
+
 static GList *
 nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 					     GtkWidget		  *window,
@@ -469,23 +488,25 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 
 	uri = nautilus_file_info_get_activation_uri (file_info);
 	terminal_file_info = get_terminal_file_info (uri);
-	g_free (uri);
 
 	item = open_terminal_menu_item_new (file_info, terminal_file_info, gtk_widget_get_screen (window),
 					    NULL, terminal_file_info == FILE_INFO_SFTP, FALSE);
 	items = g_list_append (items, item);
 
-	if (terminal_file_info == FILE_INFO_SFTP) {
+	if (terminal_file_info == FILE_INFO_SFTP && uri_has_local_path (uri)) {
 		item = open_terminal_menu_item_new (file_info, terminal_file_info, gtk_widget_get_screen (window),
 						    NULL, FALSE, FALSE);
 		items = g_list_append (items, item);
 	}
 
 	if (display_mc_item () &&
-	    g_find_program_in_path ("mc")) {
+	    g_find_program_in_path ("mc") &&
+	    uri_has_local_path (uri)) {
 		item = open_terminal_menu_item_new (file_info, terminal_file_info, gtk_widget_get_screen (window), "mc", FALSE, FALSE);
 		items = g_list_append (items, item);
 	}
+
+	g_free (uri);
 
 	return items;
 }
@@ -515,7 +536,6 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 
 	uri = nautilus_file_info_get_activation_uri (files->data);
 	terminal_file_info = get_terminal_file_info (uri);
-	g_free (uri);
 
 	switch (terminal_file_info) {
 		case FILE_INFO_LOCAL:
@@ -525,13 +545,15 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 							    NULL, terminal_file_info == FILE_INFO_SFTP, TRUE);
 			items = g_list_append (items, item);
 
-			if (terminal_file_info == FILE_INFO_SFTP) {
+			if (terminal_file_info == FILE_INFO_SFTP &&
+			    uri_has_local_path (uri)) {
 				item = open_terminal_menu_item_new (files->data, terminal_file_info, gtk_widget_get_screen (window), NULL, FALSE, TRUE);
 				items = g_list_append (items, item);
 			}
 
 			if (display_mc_item () &&
-			    g_find_program_in_path ("mc")) {
+			    g_find_program_in_path ("mc") &&
+			     uri_has_local_path (uri)) {
 				item = open_terminal_menu_item_new (files->data, terminal_file_info, gtk_widget_get_screen (window), "mc", TRUE, FALSE);
 				items = g_list_append (items, item);
 			}
@@ -543,6 +565,8 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 		default:
 			g_assert_not_reached ();
 	}
+
+	g_free (uri);
 
 	return items;
 }
