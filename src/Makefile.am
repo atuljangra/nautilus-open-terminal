@@ -9,7 +9,6 @@ INCLUDES =						\
 	$(DISABLE_DEPRECATED_CFLAGS)			\
 	$(NAUTILUS_CFLAGS)				\
 	$(GCONF_CFLAGS)					\
-	$(GNOMEVFS_CFLAGS)				\
 	$(GNOMEDESKTOP_CFLAGS)
 
 nautilus_extensiondir=$(NAUTILUS_EXTENSION_DIR)
@@ -25,4 +24,4 @@ libnautilus_open_terminal_la_SOURCES = \
 	open-terminal.c
 
 libnautilus_open_terminal_la_LDFLAGS = -module -avoid-version
-libnautilus_open_terminal_la_LIBADD  = $(NAUTILUS_LIBS) $(GNOMEVFS_LIBS) $(GCONF_LIBS) $(GNOMEDESKTOP_LIBS)
+libnautilus_open_terminal_la_LIBADD  = $(NAUTILUS_LIBS) $(GCONF_LIBS) $(GNOMEDESKTOP_LIBS)
