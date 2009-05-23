@@ -30,13 +30,13 @@
 
 #include <libnautilus-extension/nautilus-menu-provider.h>
 
+#include <glib.h>
 #include <glib/gi18n-lib.h>
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <gconf/gconf.h>
 #include <gconf/gconf-client.h>
 #include <libgnome/gnome-desktop-item.h>
-#include <libgnomevfs/gnome-vfs.h>
 
 #include <errno.h>
 #include <fcntl.h>
@@ -114,31 +114,85 @@ desktop_is_home_dir ()
 				      NULL);
 }
 
+/* a very simple URI parsing routine from Launchpad #333462, until GLib supports URI parsing (GNOME #489862) */
+#define SFTP_PREFIX "sftp://"
+static void
+parse_sftp_uri (GFile *file,
+		char **user,
+		char **host,
+		unsigned int *port,
+		char **path)
+{
+	char *tmp, *save;
+	char *uri;
+	char *u, *h, *s, *p;
+	char *h_end;
+
+	uri = g_file_get_uri (file);
+	g_assert (uri != NULL);
+	save = uri;
+
+	*path = NULL;
+	*user = NULL;
+	*host = NULL;
+	*port = 0;
+
+	/* skip intial 'sftp:// prefix */
+	g_assert (!strncmp (uri, SFTP_PREFIX, strlen (SFTP_PREFIX)));
+	uri += strlen (SFTP_PREFIX);
+
+	/* cut out the path */
+	tmp = strchr (uri, '/');
+	if (tmp != NULL) {
+		*path = g_uri_unescape_string (tmp, "/");
+		*tmp = '\0';
+	}
+
+	/* read the username - it ends with @ */
+	tmp = strchr (uri, '@');
+	if (tmp != NULL) {
+		*tmp++ = '\0';
+
+		*user = strdup (uri);
+		if (strchr (*user, ':') != NULL) {
+			/* chop the password */
+			*(strchr (*user, ':')) = '\0'; 
+		}
+
+		uri = tmp;
+	}
+
+	/* now read the port, starts with : */
+	tmp = strchr (uri, ':');
+	if (tmp != NULL) {
+		*tmp++ = '\0';
+		*port = atoi (tmp);  /*FIXME: getservbyname*/
+	}
+
+	/* what is left is the host */
+	*host = strdup (uri);
+	g_free (save);
+}
+
 static char *
 get_remote_ssh_command (const char *uri,
 			const char *command_to_run)
 {
-	GnomeVFSURI *vfs_uri;
-	const char *host_name, *path, *user_name;
+	GFile *file;
+
+	char *host_name, *path, *user_name;
 	char *command, *user_host, *unescaped_path;
 	char *port_str;
 	guint host_port;
 
 	g_assert (uri != NULL);
-	g_assert (strncmp (uri, "sftp", strlen ("sftp")) == 0 ||
-		  strncmp (uri, "ssh", strlen ("ssh")) == 0);
 
-	gnome_vfs_init ();
+	file = g_file_new_for_uri (uri);
+	parse_sftp_uri (file, &user_name, &host_name, &host_port, &path);
+	g_object_unref (file);
 
-	vfs_uri = gnome_vfs_uri_new (uri);
-	g_assert (vfs_uri != NULL);
-
-	host_name = gnome_vfs_uri_get_host_name (vfs_uri);
-	host_port = gnome_vfs_uri_get_host_port (vfs_uri);
-	user_name = gnome_vfs_uri_get_user_name (vfs_uri);
-	path = gnome_vfs_uri_get_path (vfs_uri);
 	/* FIXME to we have to consider the remote file encoding? */
-	unescaped_path = gnome_vfs_unescape_string (path, NULL);
+	unescaped_path = g_uri_unescape_string (path, NULL);
 
 	port_str = NULL;
 	if (host_port != 0) {
@@ -159,10 +213,13 @@ get_remote_ssh_command (const char *uri,
 		command = g_strdup_printf ("ssh %s%s -t \"cd \'%s\' && $SHELL -l\"", user_host, port_str, unescaped_path);
 	}
 
+	g_free (user_name);
+	g_free (host_name);
+	g_free (path);
+
 	g_free (user_host);
 	g_free (unescaped_path);
 	g_free (port_str);
-	gnome_vfs_uri_unref (vfs_uri);
 
 	return command;
 }
