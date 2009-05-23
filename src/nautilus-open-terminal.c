@@ -206,7 +206,6 @@ get_terminal_command_for_file_info (NautilusFileInfo *file_info,
 			} else {
 				path = g_strdup (g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP));
 			}
-			g_free (path);
 			break;
 
 		case FILE_INFO_SFTP:
