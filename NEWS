@@ -1,3 +1,21 @@
+nautilus-open-terminal 0.13
+===========================
+"Land of the Dead"
+
+	* Dedicated to Grim Fandango, one of the most excellent computer games ever produced.
+	  http://www.youtube.com/watch?v=3kVZ1sJZ9lo
+
+	Features
+
+	* Only offer to open a local terminal for remote locations if path back-mapping to ~/.gvfs is possible,
+	  i.e. if GVFS was compiled with FUSE support.
+
+	Fixes / Build
+
+	* Fix double-free when opening terminal on the desktop. Thanks to Arthur Taylor <theycallhimart@gmail.com>.
+	* Use custom SFTP URI parser, and get rid of GnomeVFS dependency, Launchpad #333462. Thanks to Maxim Levitsky
+	  and others.
+
 nautilus-open-terminal 0.12
 ===========================
 "El Pueblo Unido"
