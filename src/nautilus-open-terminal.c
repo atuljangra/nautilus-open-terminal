@@ -182,6 +182,9 @@ get_remote_ssh_command (const char *uri,
 
 	char *host_name, *path, *user_name;
 	char *command, *user_host, *unescaped_path;
+	char *quoted_path;
+	char *remote_command;
+	char *quoted_remote_command;
 	char *port_str;
 	guint host_port;
 
@@ -193,6 +196,7 @@ get_remote_ssh_command (const char *uri,
 
 	/* FIXME to we have to consider the remote file encoding? */
 	unescaped_path = g_uri_unescape_string (path, NULL);
+	quoted_path = g_shell_quote (unescaped_path);
 
 	port_str = NULL;
 	if (host_port != 0) {
@@ -208,18 +212,26 @@ get_remote_ssh_command (const char *uri,
 	}
 
 	if (command_to_run != NULL) {
-		command = g_strdup_printf ("ssh %s%s -t \"cd \'%s\' && %s\"", user_host, port_str, unescaped_path, command_to_run);
+		remote_command = g_strdup_printf ("cd %s && %s", quoted_path, command_to_run);
 	} else {
-		command = g_strdup_printf ("ssh %s%s -t \"cd \'%s\' && $SHELL -l\"", user_host, port_str, unescaped_path);
+		remote_command = g_strdup_printf ("cd %s && $SHELL -l", quoted_path);
 	}
 
-	g_free (user_name);
-	g_free (host_name);
-	g_free (path);
+	quoted_remote_command = g_shell_quote (remote_command);
 
+	command = g_strdup_printf ("ssh %s -t %s", user_host, quoted_remote_command);
+
+	g_free (user_name);
 	g_free (user_host);
-	g_free (unescaped_path);
+	g_free (host_name);
 	g_free (port_str);
+
+	g_free (path);
+	g_free (unescaped_path);
+	g_free (quoted_path);
+
+	g_free (remote_command);
+	g_free (quoted_remote_command);
 
 	return command;
 }
@@ -242,7 +254,7 @@ get_terminal_command_for_file_info (NautilusFileInfo *file_info,
 				    const char *command_to_run,
 				    gboolean remote_terminal)
 {
-	char *uri, *path;
+	char *uri, *path, *quoted_path;
 	char *command;
 
 	uri = nautilus_file_info_get_activation_uri (file_info);
@@ -284,11 +296,15 @@ get_terminal_command_for_file_info (NautilusFileInfo *file_info,
 	}
 
 	if (command == NULL && path != NULL) {
+		quoted_path = g_shell_quote (path);
+
 		if (command_to_run != NULL) {
-			command = g_strdup_printf ("cd '%s' && %s", path, command_to_run);
+			command = g_strdup_printf ("cd %s && %s", quoted_path, command_to_run);
 		} else {
-			command = g_strdup_printf ("cd '%s' && $SHELL -l", path);
+			command = g_strdup_printf ("cd %s && $SHELL -l", quoted_path);
 		}
+
+		g_free (quoted_path);
 	}
 
 	g_free (path);
