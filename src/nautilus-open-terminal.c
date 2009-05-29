@@ -40,6 +40,7 @@
 
 #include <errno.h>
 #include <fcntl.h>
+#include <stdlib.h> /* for atoi */
 #include <string.h> /* for strcmp */
 #include <unistd.h> /* for chdir */
 #include <sys/stat.h>
@@ -125,8 +126,6 @@ parse_sftp_uri (GFile *file,
 {
 	char *tmp, *save;
 	char *uri;
-	char *u, *h, *s, *p;
-	char *h_end;
 
 	uri = g_file_get_uri (file);
 	g_assert (uri != NULL);
