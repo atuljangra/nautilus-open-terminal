@@ -24,21 +24,17 @@
    Authors: Darin Adler <darin@eazel.com>
 */
 
-#ifndef EEL_GNOME_EXTENSIONS_H
-#define EEL_GNOME_EXTENSIONS_H
+#ifndef _NOT_EEL_GNOME_EXTENSIONS_H
+#define _NOT_EEL_GNOME_EXTENSIONS_H
 
 #include <gtk/gtk.h>
 
-/* icon selection callback function. */
-typedef void (* EelIconSelectionFunction) (const char *icon_path, gpointer callback_data);
-
-
 /* Return a command string containing the path to a terminal on this system. */
-char *        eel_gnome_make_terminal_command                         (const char               *command);
+char *        _not_eel_gnome_make_terminal_command                         (const char               *command);
 
 /* Open up a new terminal, optionally passing in a command to execute */
-void          eel_gnome_open_terminal                                 (const char               *command);
-void          eel_gnome_open_terminal_on_screen                       (const char               *command,
-								       GdkScreen                *screen);
+void          _not_eel_gnome_open_terminal                                 (const char               *command);
+void          _not_eel_gnome_open_terminal_on_screen                       (const char               *command,
+									    GdkScreen                *screen);
 								 
-#endif /* EEL_GNOME_EXTENSIONS_H */
+#endif /* _NOT_EEL_GNOME_EXTENSIONS_H */

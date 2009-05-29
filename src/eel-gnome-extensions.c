@@ -192,5 +192,5 @@ _not_eel_gnome_open_terminal_on_screen (const char *command,
 void
 _not_eel_gnome_open_terminal (const char *command)
 {
-	eel_gnome_open_terminal_on_screen (command, NULL);
+	_not_eel_gnome_open_terminal_on_screen (command, NULL);
 }
