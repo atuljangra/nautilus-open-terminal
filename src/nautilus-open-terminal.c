@@ -504,9 +504,11 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 	uri = nautilus_file_info_get_activation_uri (file_info);
 	terminal_file_info = get_terminal_file_info (uri);
 
-	item = open_terminal_menu_item_new (file_info, terminal_file_info, gtk_widget_get_screen (window),
-					    NULL, terminal_file_info == FILE_INFO_SFTP, FALSE);
-	items = g_list_append (items, item);
+	if (terminal_file_info == FILE_INFO_SFTP || uri_has_local_path (uri)) {
+		item = open_terminal_menu_item_new (file_info, terminal_file_info, gtk_widget_get_screen (window),
+						    NULL, terminal_file_info == FILE_INFO_SFTP, FALSE);
+		items = g_list_append (items, item);
+	}
 
 	if (terminal_file_info == FILE_INFO_SFTP && uri_has_local_path (uri)) {
 		item = open_terminal_menu_item_new (file_info, terminal_file_info, gtk_widget_get_screen (window),
@@ -556,9 +558,11 @@ nautilus_open_terminal_get_file_items (NautilusMenuProvider *provider,
 		case FILE_INFO_LOCAL:
 		case FILE_INFO_SFTP:
 		case FILE_INFO_OTHER:
-			item = open_terminal_menu_item_new (files->data, terminal_file_info, gtk_widget_get_screen (window),
-							    NULL, terminal_file_info == FILE_INFO_SFTP, TRUE);
-			items = g_list_append (items, item);
+			if (terminal_file_info == FILE_INFO_SFTP || uri_has_local_path (uri)) {
+				item = open_terminal_menu_item_new (files->data, terminal_file_info, gtk_widget_get_screen (window),
+								    NULL, terminal_file_info == FILE_INFO_SFTP, TRUE);
+				items = g_list_append (items, item);
+			}
 
 			if (terminal_file_info == FILE_INFO_SFTP &&
 			    uri_has_local_path (uri)) {
