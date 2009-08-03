@@ -7,6 +7,8 @@ nautilus-open-terminal 0.15
 
 	Fixes
 	* Properly append terminal items for desktop and remote non-SSH locations which can be mapped back to ~/.gvfs.
+	* Fffer Midnight Commander item for the desktop, if it is identical to the home directory or n-o-t is configured
+	to open the home directory.
 
 nautilus-open-terminal 0.14
 ===========================
