@@ -1,3 +1,32 @@
+nautilus-open-terminal 0.14
+===========================
+"Buffalo '66"
+
+	* Dedicated to an excellent flick I just saw partiatlly on TV
+	http://www.imdb.com/title/tt0118789/
+
+	Fixes
+	* Use exec() to replace the helper sh shell with the actual $SHELL. This should fix the close warning message
+	  people encounter. Requires mainstream testing, since it might cause issues with some shells.
+	* Only add "Open in Local Terminal" item for remote locations if ~/.gvfs back-mapping is actually available.
+	* Properly escape remote SSH paths with g_shell_quote() instead of just nesting "" and '' quotes.
+	  Fixes #583120.
+
+	Build
+	* Various Include fixes.
+	* Actually get rid of eel dependency.
+
+	Added translations
+		Assamese	Amitakhya Phukan	<aphukan@fedoraproject.org>
+		Kannada		Shankar Prasad		<svenkate@redhat.com>
+		Telugu		krishnababu k		<kkrothap@redhat.com>
+
+	Updated translations
+		Bengali India	Runa Bhattacharjee	<runab@redhat.com>
+		Gujarati	Sweta Kothari		<swkothar@redhat.com>
+		Marathi		Sandeep Shedmake	<sshedmak@redhat.com>
+		Tamil		I. Felix		<ifelix@redhat.com>
+
 nautilus-open-terminal 0.13
 ===========================
 "Land of the Dead"
