@@ -1,3 +1,13 @@
+nautilus-open-terminal 0.15
+===========================
+"Dark Night of the Soul"
+
+	* Dedicated to the Danger Mouse & Sparklehouse & David Lynch CD production
+	  "Dark Night of the Soul".
+
+	Fixes
+	* Properly append terminal items for desktop and remote non-SSH locations which can be mapped back to ~/.gvfs.
+
 nautilus-open-terminal 0.14
 ===========================
 "Buffalo '66"
