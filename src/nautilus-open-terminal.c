@@ -524,9 +524,9 @@ nautilus_open_terminal_get_background_items (NautilusMenuProvider *provider,
 
 	if (display_mc_item () &&
 	    g_find_program_in_path ("mc") &&
-	    (terminal_file_info == FILE_INFO_DESKTOP &&
-	     (desktop_is_home_dir () || desktop_opens_home_dir ())) ||
-	    uri_has_local_path (uri)) {
+	    ((terminal_file_info == FILE_INFO_DESKTOP &&
+	      (desktop_is_home_dir () || desktop_opens_home_dir ())) ||
+	     uri_has_local_path (uri))) {
 		item = open_terminal_menu_item_new (file_info, terminal_file_info, gtk_widget_get_screen (window), "mc", FALSE, FALSE);
 		items = g_list_append (items, item);
 	}
