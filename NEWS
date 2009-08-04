@@ -1,3 +1,15 @@
+nautilus-open-terminal 0.16
+===========================
+"Sgt. Pepper’s Lonely Hearts Club Band"
+o
+	* Dedicated to the first concept album in pop history
+	http://en.wikipedia.org/wiki/Sgt._Pepper%27s_Lonely_Hearts_Club_Band
+
+	Fixes
+	* Do not always show Midnight Commander item for directories with
+	  local back-mapping, which was the case due to a wrong logical
+	  expression. Thanks to Evangelos Foutras <foutrelis@gmail.com>.
+
 nautilus-open-terminal 0.15
 ===========================
 "Dark Night of the Soul"
