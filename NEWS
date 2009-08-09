@@ -1,3 +1,13 @@
+nautilus-open-terminal 0.17
+===========================
+"Ringsgwandl"
+
+	* Dedicated to Ringsgwandl, the Bavarian King of Pop:
+	http://www.ringsgwandl.com
+
+	Fixes
+	* Remote SSH terminal: Work correctly with non-standard SSH ports.
+
 nautilus-open-terminal 0.16
 ===========================
 "Sgt. Pepper’s Lonely Hearts Club Band"
