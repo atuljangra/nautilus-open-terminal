@@ -218,7 +218,7 @@ get_remote_ssh_command (const char *uri,
 
 	quoted_remote_command = g_shell_quote (remote_command);
 
-	command = g_strdup_printf ("ssh %s -t %s", user_host, quoted_remote_command);
+	command = g_strdup_printf ("ssh %s%s -t %s", user_host, port_str, quoted_remote_command);
 
 	g_free (user_name);
 	g_free (user_host);
