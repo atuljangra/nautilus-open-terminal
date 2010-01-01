@@ -213,7 +213,8 @@ get_remote_ssh_command (const char *uri,
 	if (command_to_run != NULL) {
 		remote_command = g_strdup_printf ("cd %s && exec %s", quoted_path, command_to_run);
 	} else {
-		remote_command = g_strdup_printf ("cd %s && exec $SHELL -l", quoted_path);
+		/* login shell */
+		remote_command = g_strdup_printf ("cd %s && exec $SHELL -", quoted_path);
 	}
 
 	quoted_remote_command = g_shell_quote (remote_command);
@@ -300,7 +301,8 @@ get_terminal_command_for_file_info (NautilusFileInfo *file_info,
 		if (command_to_run != NULL) {
 			command = g_strdup_printf ("cd %s && exec %s", quoted_path, command_to_run);
 		} else {
-			command = g_strdup_printf ("cd %s && exec $SHELL -l", quoted_path);
+			/* interactive shell */
+			command = g_strdup_printf ("cd %s && exec $SHELL", quoted_path);
 		}
 
 		g_free (quoted_path);
