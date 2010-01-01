@@ -1,3 +1,23 @@
+nautilus-open-terminal 0.18
+===========================
+"Calexico"
+
+	* Dedicated to the roots rock band Calexico from Tuscon, Arizona.
+
+	Fixes
+	* Remote SSH terminal: Open login shell with - instead of -l parameter.
+	* Local terminal: Open interactive shell, i.e. drop -l parameter.
+	(both #602141)
+
+	Updated translations
+		Arabic			Khaled Hosny		<khaledhosny@eglug.org>
+		British English		Philip Withnall		<philip@tecnocode.co.uk>
+		Galician		Fran Diéguez		<fran.dieguez@glug.es>
+		Japanese		Takeshi AIHANA		<takeshi.aihana@gmail.com>
+		Lithuanian		Gintautas Miliauskas	<gintautas@miliauskas.lt>
+		Polish			Tomasz Dominikowski	<dominikowski@gmail.com>
+		Romanian		Adi Roiban		<adi@roiban.ro>
+
 nautilus-open-terminal 0.17
 ===========================
 "Ringsgwandl"
