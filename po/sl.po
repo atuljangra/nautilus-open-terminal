@@ -1,16 +1,18 @@
+# Slovenian translation for nautilus-open-terminal.
+# Copyright (C) 2009 nautilus-open-terminal COPYRIGHT HOLDER
 # This file is distributed under the same license as the nautilus-open-terminal package.
 #
 # Matjaž Horvat <m@owca.info>, 2006.
-# Matej Urbančič <mateju@svn.gnome.org>, 2007 - 2008.
+# Matej Urbančič <mateju@svn.gnome.org>, 2007 - 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-open-terminal\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-13 13:10+0100\n"
-"PO-Revision-Date: 2008-09-29 10:04+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=nautilus-open-terminal&component=general\n"
+"POT-Creation-Date: 2010-01-04 16:00+0000\n"
+"PO-Revision-Date: 2010-01-06 12:16+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
-"Language-Team: Slovenian <sl@li.org>\n"
+"Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,47 +21,57 @@ msgstr ""
 "X-Poedit-Country: Slovenia\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../src/nautilus-open-terminal.c:444
-#: ../src/nautilus-open-terminal.c:457
-msgid "Open in _Terminal"
-msgstr "Odpri v _terminalu"
+#: ../src/nautilus-open-terminal.c:361
+msgid "Open in _Remote Terminal"
+msgstr "Odpri v _oddaljenem terminalu"
 
-#: ../src/nautilus-open-terminal.c:446
+#: ../src/nautilus-open-terminal.c:363
+msgid "Open in _Local Terminal"
+msgstr "Odpri v _krajevnem terminalu"
+
+#: ../src/nautilus-open-terminal.c:367
+#: ../src/nautilus-open-terminal.c:378
 msgid "Open the currently selected folder in a terminal"
 msgstr "Odpri trenutno izbrano mapo v terminalu"
 
-#: ../src/nautilus-open-terminal.c:448
-#: ../src/nautilus-open-terminal.c:458
+#: ../src/nautilus-open-terminal.c:369
+#: ../src/nautilus-open-terminal.c:380
+#: ../src/nautilus-open-terminal.c:390
 msgid "Open the currently open folder in a terminal"
 msgstr "Odpri trenutno odprto mapo v terminalu"
 
-#: ../src/nautilus-open-terminal.c:454
-msgid "Open _Terminal"
+#: ../src/nautilus-open-terminal.c:375
+#: ../src/nautilus-open-terminal.c:389
+msgid "Open in T_erminal"
+msgstr "Odpri _v terminalu"
+
+#: ../src/nautilus-open-terminal.c:386
+msgid "Open T_erminal"
 msgstr "Odpri _terminal"
 
-#: ../src/nautilus-open-terminal.c:455
+#: ../src/nautilus-open-terminal.c:387
 msgid "Open a terminal"
 msgstr "Odpri okno terminala"
 
-#: ../src/nautilus-open-terminal.c:489
-#: ../src/nautilus-open-terminal.c:502
+#: ../src/nautilus-open-terminal.c:402
+#: ../src/nautilus-open-terminal.c:415
 msgid "Open in _Midnight Commander"
 msgstr "Odpri s programom _Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:491
+#: ../src/nautilus-open-terminal.c:404
 msgid "Open the currently selected folder in the terminal file manager Midnight Commander"
 msgstr "Odpri trenutno izbrano mapo v terminalu s programom Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:493
-#: ../src/nautilus-open-terminal.c:503
+#: ../src/nautilus-open-terminal.c:406
+#: ../src/nautilus-open-terminal.c:416
 msgid "Open the currently open folder in the terminal file manager Midnight Commander"
 msgstr "Odpri trenutno odprto mapo v terminalu s programom Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:499
+#: ../src/nautilus-open-terminal.c:412
 msgid "Open _Midnight Commander"
 msgstr "Odpri program _Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:500
+#: ../src/nautilus-open-terminal.c:413
 msgid "Open the terminal file manager Midnight Commander"
 msgstr "V terminalu odpri program Midnight Commander"
 
@@ -69,11 +81,11 @@ msgstr "Izbrana možnost omogoča, da se nameščeni program \"Midnight Commande
 
 #: ../nautilus-open-terminal.schemas.in.h:2
 msgid "If set to true, then opening a terminal on the desktop will open a terminal in the home directory. Otherwise, it will be opened in the desktop directory. Note that this key is irrelevant if the desktop directory is identical to the home directory."
-msgstr "Izbrana možnost omogoča, da se pri odpiranju terminala na namizju, ta odpre v domači mapi uporabnika. Druga možnost je, da se terminal odpre v mapi namizja. Nastavitev je nepotrebna, če je mapa namizja enaka domači mapi."
+msgstr "Izbrana možnost omogoča, da se pri odpiranju terminala na namizju, ta odpre v domači mapi uporabnika. Druga možnost je, da se terminal odpre v mapi namizja. Nastavitev je mogoče izpustiti, kadar je mapa namizja enaka domači mapi."
 
 #: ../nautilus-open-terminal.schemas.in.h:3
 msgid "Whether a Midnight Commander menu item should be displayed"
-msgstr "Ali naj bo prikazana povezava na program Midnight Commander med predmeti menija"
+msgstr "Ali naj se pokaže povezava do programa Midnight Commander med predmeti menija"
 
 #: ../nautilus-open-terminal.schemas.in.h:4
 msgid "Whether opening a terminal on the desktop opens a terminal in the home directory"
