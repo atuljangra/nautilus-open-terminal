@@ -11,7 +11,7 @@
   <maintainer>
     <foaf:Person>
       <foaf:name>Owen Taylor</foaf:name>
-      <foaf:mbox rdf:resource="otaylor@redhat.com" />
+      <foaf:mbox rdf:resource="mailto:otaylor@redhat.com" />
       <gnome:userid>otaylor</gnome:userid>
     </foaf:Person>
   </maintainer>
