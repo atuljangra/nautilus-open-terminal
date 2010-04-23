@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: nautilus-open-terminal\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=nautilus-open-terminal&component=general\n"
 "POT-Creation-Date: 2010-01-04 16:00+0000\n"
-"PO-Revision-Date: 2010-01-06 12:16+0100\n"
+"PO-Revision-Date: 2010-04-23 20:46+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -90,4 +90,3 @@ msgstr "Ali naj se pokaže povezava do programa Midnight Commander med predmeti 
 #: ../nautilus-open-terminal.schemas.in.h:4
 msgid "Whether opening a terminal on the desktop opens a terminal in the home directory"
 msgstr "Ali odpiranje terminala na namizju, odpre terminal v domači mapi uporabnika."
-
