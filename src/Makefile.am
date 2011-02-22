@@ -6,7 +6,7 @@ INCLUDES =						\
 	-I$(top_builddir)				\
 	$(WARN_CFLAGS)                                  \
 	-Werror                                         \
-	$(DISABLE_DEPRECATED_CFLAGS)			\
+	$(DISABLE_DEPRECATED)				\
 	$(NAUTILUS_CFLAGS)				\
 	$(GCONF_CFLAGS)					\
 	$(GNOMEDESKTOP_CFLAGS)
