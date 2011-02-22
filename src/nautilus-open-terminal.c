@@ -36,7 +36,6 @@
 #include <gtk/gtk.h>
 #include <gconf/gconf.h>
 #include <gconf/gconf-client.h>
-#include <libgnome/gnome-desktop-item.h>
 
 #include <errno.h>
 #include <fcntl.h>

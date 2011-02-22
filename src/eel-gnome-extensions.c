@@ -33,7 +33,7 @@
 #include <fcntl.h>
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
-#include <libgnome/gnome-desktop-utils.h>
+#include <libgnome-desktop/gnome-desktop-utils.h>
 #include <limits.h>
 #include <signal.h>
 #include <stdio.h>
