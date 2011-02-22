@@ -1,3 +1,14 @@
+nautilus-open-terminal 0.19
+===========================
+"Isla de Encanta"
+
+	* Dedicated to the garage rock bad Pixies from Boston, Massachusetts
+
+	Fixes
+	* Depend on gnome-desktop-3.0, for use with newer nautilus
+	* Use new GDK 3.0 API to launch the terminal
+	* Make sure to pull in the right DISABLE_DEPRECATED cflags
+
 nautilus-open-terminal 0.18
 ===========================
 "Calexico"
