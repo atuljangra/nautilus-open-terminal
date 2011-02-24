@@ -1,71 +1,72 @@
 # Norwegian bokmål translation of nautilus-open-terminal.
 # Copyright (C) 2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the nautilus-open-terminal package.
-# Kjartan Maraas <kmaraas@gnome.org>, 2005-2008.
+# Kjartan Maraas <kmaraas@gnome.org>, 2005-2011.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: nautilus-open-terminal 0.8.x\n"
+"Project-Id-Version: nautilus-open-terminal 0.20\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-08 20:10+0100\n"
-"PO-Revision-Date: 2010-02-08 20:11+0100\n"
+"POT-Creation-Date: 2011-02-24 10:38+0100\n"
+"PO-Revision-Date: 2011-02-24 10:39+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/nautilus-open-terminal.c:361
+#: ../src/nautilus-open-terminal.c:360
 msgid "Open in _Remote Terminal"
 msgstr "Åpne i ekste_rn terminal"
 
-#: ../src/nautilus-open-terminal.c:363
+#: ../src/nautilus-open-terminal.c:362
 msgid "Open in _Local Terminal"
 msgstr "Åpne i _lokal terminal"
 
-#: ../src/nautilus-open-terminal.c:367 ../src/nautilus-open-terminal.c:378
+#: ../src/nautilus-open-terminal.c:366 ../src/nautilus-open-terminal.c:377
 msgid "Open the currently selected folder in a terminal"
 msgstr "Åpne valgt mappe i et terminalvindu"
 
-#: ../src/nautilus-open-terminal.c:369 ../src/nautilus-open-terminal.c:380
-#: ../src/nautilus-open-terminal.c:390
+#: ../src/nautilus-open-terminal.c:368 ../src/nautilus-open-terminal.c:379
+#: ../src/nautilus-open-terminal.c:389
 msgid "Open the currently open folder in a terminal"
 msgstr "Åpne denne mappen i et terminalvindu"
 
-#: ../src/nautilus-open-terminal.c:375 ../src/nautilus-open-terminal.c:389
+#: ../src/nautilus-open-terminal.c:374 ../src/nautilus-open-terminal.c:388
 msgid "Open in T_erminal"
 msgstr "Åpne i t_erminal"
 
-#: ../src/nautilus-open-terminal.c:386
+#: ../src/nautilus-open-terminal.c:385
 msgid "Open T_erminal"
 msgstr "Åpne t_erminal"
 
-#: ../src/nautilus-open-terminal.c:387
+#: ../src/nautilus-open-terminal.c:386
 msgid "Open a terminal"
 msgstr "Åpne et terminalvindu"
 
-#: ../src/nautilus-open-terminal.c:402 ../src/nautilus-open-terminal.c:415
+#: ../src/nautilus-open-terminal.c:401 ../src/nautilus-open-terminal.c:414
 msgid "Open in _Midnight Commander"
 msgstr "Åpne i _Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:404
+#: ../src/nautilus-open-terminal.c:403
 msgid ""
 "Open the currently selected folder in the terminal file manager Midnight "
 "Commander"
 msgstr ""
 "Åpne valgt mappe i et filhåndtereren Midnight Commander i et terminalvindu"
 
-#: ../src/nautilus-open-terminal.c:406 ../src/nautilus-open-terminal.c:416
+#: ../src/nautilus-open-terminal.c:405 ../src/nautilus-open-terminal.c:415
 msgid ""
 "Open the currently open folder in the terminal file manager Midnight "
 "Commander"
 msgstr "Åpne denne mappen i et terminalfilhåndtereren Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:412
+#: ../src/nautilus-open-terminal.c:411
 msgid "Open _Midnight Commander"
 msgstr "Åpne _Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:413
+#: ../src/nautilus-open-terminal.c:412
 msgid "Open the terminal file manager Midnight Commander"
 msgstr "Åpne terminalfilhåndtereren Midnight Commander"
 
