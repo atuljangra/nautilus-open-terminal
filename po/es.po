@@ -5,28 +5,28 @@
 #
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2005.
 # Jorge González <jorgegonz@svn.gnome.org>, 2007, 200, 2009.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-open-terminal.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=nautilus-open-terminal&component=general\n"
-"POT-Creation-Date: 2009-03-09 12:43+0000\n"
-"PO-Revision-Date: 2009-03-18 19:15+0100\n"
-"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"POT-Creation-Date: 2009-04-17 15:38+0000\n"
+"PO-Revision-Date: 2011-09-15 16:42+0200\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/nautilus-open-terminal.c:284
-#| msgid "Open in _Terminal"
 msgid "Open in _Remote Terminal"
 msgstr "Abrir en un terminal _remoto"
 
 #: ../src/nautilus-open-terminal.c:286
-#| msgid "Open in _Terminal"
 msgid "Open in _Local Terminal"
 msgstr "Abrir en un terminal _local"
 
@@ -40,12 +40,10 @@ msgid "Open the currently open folder in a terminal"
 msgstr "Abre la carpeta actualmente abierta en un terminal"
 
 #: ../src/nautilus-open-terminal.c:298 ../src/nautilus-open-terminal.c:312
-#| msgid "Open in _Terminal"
 msgid "Open in T_erminal"
 msgstr "Abrir en un _terminal"
 
 #: ../src/nautilus-open-terminal.c:309
-#| msgid "Open _Terminal"
 msgid "Open T_erminal"
 msgstr "Abrir _terminal"
 
@@ -98,10 +96,10 @@ msgid ""
 "directory. Note that this key is irrelevant if the desktop directory is "
 "identical to the home directory."
 msgstr ""
-"Si está a «true» al abrir un terminal en el escritorio se abrirá en el "
-"directorio personal. De otra manera se abrirá en el directorio del "
-"escritorio. Note que esta clave es irrelevante si el directorio del "
-"escritorio es idéntico al directorio personal."
+"Si está a «true» al abrir un terminal en el escritorio se abrirá en la "
+"carpeta personal. De otra manera se abrirá en la carpeta del escritorio. "
+"Note que esta clave es irrelevante si la carpeta del escritorio es idéntico "
+"a la carpeta personal."
 
 #: ../nautilus-open-terminal.schemas.in.h:3
 msgid "Whether a Midnight Commander menu item should be displayed"
@@ -113,5 +111,5 @@ msgid ""
 "Whether opening a terminal on the desktop opens a terminal in the home "
 "directory"
 msgstr ""
-"Indica si al abrir un terminal en el escritorio se abre el terminal en el "
-"directorio personal"
+"Indica si al abrir un terminal en el escritorio se abre el terminal en la "
+"carpeta personal"
