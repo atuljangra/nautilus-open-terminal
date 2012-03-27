@@ -15,10 +15,4 @@
       <gnome:userid>otaylor</gnome:userid>
     </foaf:Person>
   </maintainer>
-  <maintainer>
-    <foaf:Person>
-      <foaf:name>Behdad Esfahbod</foaf:name>
-      <gnome:userid>behdad</gnome:userid>
-    </foaf:Person>
-  </maintainer>
 </Project>
