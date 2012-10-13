@@ -1,21 +1,20 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Rūdofls Mazurs <rudolfs.mazurs@gmail.com>, 2011.
+# Rūdofls Mazurs <rudolfs.mazurs@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
-"cgi?product=nautilus-open-terminal&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-09-15 14:46+0000\n"
-"PO-Revision-Date: 2011-09-29 13:16+0300\n"
-"Last-Translator: Rūdofls Mazurs <rudolfs.mazurs@gmail.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-10-14 01:56+0300\n"
+"PO-Revision-Date: 2012-10-14 01:57+0300\n"
+"Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
+"Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: lv\n"
-"X-Generator: Lokalize 1.2\n"
+"X-Generator: Lokalize 1.4\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
@@ -56,14 +55,14 @@ msgstr "Atvērt ar _Midnight Commander"
 msgid ""
 "Open the currently selected folder in the terminal file manager Midnight "
 "Commander"
-msgstr "Atvērt izvēlēto mapi termināļa failu pārvaldniekā Midnight Commander"
+msgstr "Atvērt izvēlēto mapi termināļa datņu pārvaldniekā Midnight Commander"
 
 #: ../src/nautilus-open-terminal.c:405 ../src/nautilus-open-terminal.c:415
 msgid ""
 "Open the currently open folder in the terminal file manager Midnight "
 "Commander"
 msgstr ""
-"Atvērt pašlaik atvērto mapi termināļa failu pārvaldniekā Midnight Commander"
+"Atvērt pašlaik atvērto mapi termināļa datņu pārvaldniekā Midnight Commander"
 
 #: ../src/nautilus-open-terminal.c:411
 msgid "Open _Midnight Commander"
@@ -71,17 +70,13 @@ msgstr "Atvērt _Midnight Commander"
 
 #: ../src/nautilus-open-terminal.c:412
 msgid "Open the terminal file manager Midnight Commander"
-msgstr "Atvērt termināļa failu pārvaldniekā Midnight Commander"
+msgstr "Atvērt termināļa datņu pārvaldniekā Midnight Commander"
 
 #: ../nautilus-open-terminal.schemas.in.h:1
 msgid ""
-"If set to true, and if the terminal file manager \"Midnight Commander\" is "
-"installed, then an \"Open in Midnight Commander\" menu item will be "
-"displayed in the context menu."
-msgstr ""
-"Ja ir iestatīts \"patiess\", un, ja termināļa failu pārvaldnieks \"Midnight "
-"Commander\" ir uzinstalēts, tad konteksta izvēlnē tiks attēlota komanda "
-"\"Atvērt ar Midnight Commander\"."
+"Whether opening a terminal on the desktop opens a terminal in the home "
+"directory"
+msgstr "Vai termināļa atvēršana uz darbvirsmas atver termināli mājas mapē"
 
 #: ../nautilus-open-terminal.schemas.in.h:2
 msgid ""
@@ -90,10 +85,10 @@ msgid ""
 "directory. Note that this key is irrelevant if the desktop directory is "
 "identical to the home directory."
 msgstr ""
-"Ja ir iestatīts \"patiess\", tad, atverot termināli uz darbvirsmas, tiks "
-"atvērts terminālis mājas mapē. Citādi, tas tiks atvērts darbvirsmas "
-"mapē. Ņemiet vērā, ka šī atslēga ir nesvarīga, ja darbvirsmas mape ir "
-"identiska mājas mapei."
+"Ja ir iestatīts “patiess”, tad, atverot termināli uz darbvirsmas, tiks "
+"atvērts terminālis mājas mapē. Citādi, tas tiks atvērts darbvirsmas mapē. "
+"Ņemiet vērā, ka šī atslēga ir nesvarīga, ja darbvirsmas mape ir identiska "
+"mājas mapei."
 
 #: ../nautilus-open-terminal.schemas.in.h:3
 msgid "Whether a Midnight Commander menu item should be displayed"
@@ -101,7 +96,11 @@ msgstr "Vai izvēlnē rādīt Midnight Commander komandu "
 
 #: ../nautilus-open-terminal.schemas.in.h:4
 msgid ""
-"Whether opening a terminal on the desktop opens a terminal in the home "
-"directory"
-msgstr "Vai termināļa atvēršana uz darbvirsmas atver termināli mājas mapē"
+"If set to true, and if the terminal file manager \"Midnight Commander\" is "
+"installed, then an \"Open in Midnight Commander\" menu item will be "
+"displayed in the context menu."
+msgstr ""
+"Ja ir iestatīts “patiess”, un, ja termināļa datņu pārvaldnieks “Midnight "
+"Commander” ir uzinstalēts, tad konteksta izvēlnē tiks attēlota komanda "
+"“Atvērt ar Midnight Commander”."
 
