@@ -8,78 +8,77 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-open-terminal.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-25 19:03+0200\n"
-"PO-Revision-Date: 2009-11-25 19:01+0300\n"
-"Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
+"POT-Creation-Date: 2013-01-12 13:41+0200\n"
+"PO-Revision-Date: 2012-09-20 20:13-0000\n"
+"Last-Translator: HeSoKa <hesoka05@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: Virtaal 0.5.0-rc1\n"
 "X-Poedit-Language: Arabic\n"
 
-#: ../src/nautilus-open-terminal.c:359
+#: ../src/nautilus-open-terminal.c:360
 msgid "Open in _Remote Terminal"
 msgstr "افتح في طرفيّة ب_عيدة"
 
-#: ../src/nautilus-open-terminal.c:361
+#: ../src/nautilus-open-terminal.c:362
 msgid "Open in _Local Terminal"
 msgstr "افتح في طرفيّة م_حلية"
 
-#: ../src/nautilus-open-terminal.c:365 ../src/nautilus-open-terminal.c:376
+#: ../src/nautilus-open-terminal.c:366 ../src/nautilus-open-terminal.c:377
 msgid "Open the currently selected folder in a terminal"
 msgstr "افتح المجلد المحدّد حاليا في طرفيّة"
 
-#: ../src/nautilus-open-terminal.c:367 ../src/nautilus-open-terminal.c:378
-#: ../src/nautilus-open-terminal.c:388
+#: ../src/nautilus-open-terminal.c:368 ../src/nautilus-open-terminal.c:379
+#: ../src/nautilus-open-terminal.c:389
 msgid "Open the currently open folder in a terminal"
 msgstr "افتح المجلد المفتوح حاليا في طرفية"
 
-#: ../src/nautilus-open-terminal.c:373 ../src/nautilus-open-terminal.c:387
+#: ../src/nautilus-open-terminal.c:374 ../src/nautilus-open-terminal.c:388
 msgid "Open in T_erminal"
 msgstr "افتح في ال_طرفيّة"
 
-#: ../src/nautilus-open-terminal.c:384
+#: ../src/nautilus-open-terminal.c:385
 msgid "Open T_erminal"
 msgstr "افتح ال_طرفيّة"
 
-#: ../src/nautilus-open-terminal.c:385
+#: ../src/nautilus-open-terminal.c:386
 msgid "Open a terminal"
 msgstr "افتح _طرفيّة"
 
-#: ../src/nautilus-open-terminal.c:400 ../src/nautilus-open-terminal.c:413
+#: ../src/nautilus-open-terminal.c:401 ../src/nautilus-open-terminal.c:414
 msgid "Open in _Midnight Commander"
 msgstr "افتح في _Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:402
+#: ../src/nautilus-open-terminal.c:403
 msgid ""
 "Open the currently selected folder in the terminal file manager Midnight "
 "Commander"
 msgstr "افتح المجلد المحدّد حاليا في مدير ملفات سطر الأوامر Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:404 ../src/nautilus-open-terminal.c:414
+#: ../src/nautilus-open-terminal.c:405 ../src/nautilus-open-terminal.c:415
 msgid ""
 "Open the currently open folder in the terminal file manager Midnight "
 "Commander"
 msgstr "افتح المجلد المفتوح حاليا في مدير ملفات سطر الأوامر Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:410
+#: ../src/nautilus-open-terminal.c:411
 msgid "Open _Midnight Commander"
 msgstr "افتح _Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:411
+#: ../src/nautilus-open-terminal.c:412
 msgid "Open the terminal file manager Midnight Commander"
 msgstr "افتح مدير ملفات سطر الأوامر Midnight Commander"
 
 #: ../nautilus-open-terminal.schemas.in.h:1
 msgid ""
-"If set to true, and if the terminal file manager \"Midnight Commander\" is "
-"installed, then an \"Open in Midnight Commander\" menu item will be "
-"displayed in the context menu."
-msgstr ""
+"Whether opening a terminal on the desktop opens a terminal in the home "
+"directory"
+msgstr "سواء تم فتح الطرفية على سطح المكتب إفتح الطرفية في الدليل الرئيسي"
 
 #: ../nautilus-open-terminal.schemas.in.h:2
 msgid ""
@@ -88,13 +87,20 @@ msgid ""
 "directory. Note that this key is irrelevant if the desktop directory is "
 "identical to the home directory."
 msgstr ""
+"إذا عيّن إلى true، ثم تم فتح الطرفية على سطح المكتب سيفتح الطرفية في الدليل "
+"الرئيسي. خلاف ذلك، سيتم فتحها في دليل سطح المكتب. لاحظ أن هذا المفتاح لا يهم "
+"إذا كان دليل سطح المكتب مماثل إلى الدليل الرئيسي."
 
 #: ../nautilus-open-terminal.schemas.in.h:3
 msgid "Whether a Midnight Commander menu item should be displayed"
-msgstr ""
+msgstr "وما إذا كان ينبغي عرض قائمة البند  Midnight Commander"
 
 #: ../nautilus-open-terminal.schemas.in.h:4
 msgid ""
-"Whether opening a terminal on the desktop opens a terminal in the home "
-"directory"
+"If set to true, and if the terminal file manager \"Midnight Commander\" is "
+"installed, then an \"Open in Midnight Commander\" menu item will be "
+"displayed in the context menu."
 msgstr ""
+"إذا عيّن إلى true، وإذا كانت إدارة ملفات الطرفية \"Midnight Commander \" "
+"مثبتة، بعد ذلك \"فتح في Midnight Commander \" سيتم عرض عنصر القائمة في قائمة "
+"السياق."
