@@ -1,3 +1,26 @@
+nautilus-open-terminal 0.20
+===========================
+"Volbeat"
+
+	* Dedicated to the rock band Volbeat from Copenhagen, Denmark, and their
+	  song "Still Counting".
+
+	Fixes
+	* Port from libgnome-desktop's terminal launching functionality to GIO.
+
+	Updated translations
+		Arabic			ArabicHeSoKa		<hesoka05@gmail.com>
+		Belarusian		Ihar Hrachyshka		<ihar.hrachyshka@gmail.com>
+		Brumese			Thura Hlaing		<trhura@gmail.com>
+		Japanese		Jiro Matsuzawa		<jmatsuzawa@src.gnome.org>
+		Latvian			Rudolfs Mazurs		<rudolfs.mazurs@gmail.com>
+		Norwegian bokmål	Kjartan Maraas		<kmaraas@gnome.org>
+		Persian			Mahyar Moghimi		<mahyar.moqimi@gmail.com>
+		Serbian			Miloš Popović		<mpopovic@src.gnome.org>
+		Spanish			Daniel Mustieles	<daniel.mustieles@gmail.com>
+		Traditional Chinese	Pin-Hsien Li		<pspeter9931@gmail.com>
+		Vietnamese		Lê Trường An		<truongan@linuxmail.org>
+
 nautilus-open-terminal 0.19
 ===========================
 "Isla de Encanta"
