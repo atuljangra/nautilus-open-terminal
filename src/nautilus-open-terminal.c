@@ -26,7 +26,6 @@
 #endif
 
 #include "nautilus-open-terminal.h"
-#include "eel-gnome-extensions.h"
 
 #include <libnautilus-extension/nautilus-menu-provider.h>
 
@@ -313,6 +312,48 @@ get_terminal_command_for_file_info (NautilusFileInfo *file_info,
 	return command;
 }
 
+static char *
+make_shell_command (const char *command)
+{
+	char *quoted, *shell_command;
+
+	quoted = g_shell_quote (command);
+	shell_command = g_strconcat ("/bin/sh -c ", quoted, NULL);
+	g_free (quoted);
+	return shell_command;
+}
+
+static void
+open_terminal_on_screen (const char *command,
+			 GdkScreen  *screen)
+{
+	GAppInfo *app;
+	GdkAppLaunchContext *ctx;
+	GdkDisplay *display;
+	GError *error = NULL;
+	char *command_line;
+
+	command_line = make_shell_command (command);
+	app = g_app_info_create_from_commandline (command_line, NULL, G_APP_INFO_CREATE_NEEDS_TERMINAL, &error);
+	g_free (command_line);
+
+	if (app != NULL) {
+		display = gdk_screen_get_display (screen);
+		ctx = gdk_display_get_app_launch_context (display);
+		gdk_app_launch_context_set_screen (ctx, screen);
+
+		g_app_info_launch (app, NULL, G_APP_LAUNCH_CONTEXT (ctx), &error);
+
+		g_object_unref (app);
+		g_object_unref (ctx);
+	}
+
+	if (error != NULL) {
+		g_message ("Could not start application on terminal: %s", error->message);
+		g_error_free (error);
+	}
+}
+
 
 static void
 open_terminal (NautilusMenuItem *item,
@@ -328,7 +369,7 @@ open_terminal (NautilusMenuItem *item,
 
 	terminal_command = get_terminal_command_for_file_info (file_info, command_to_run, remote_terminal);
 	if (terminal_command != NULL) {
-		_not_eel_gnome_open_terminal_on_screen (terminal_command, screen);
+		open_terminal_on_screen (terminal_command, screen);
 	}
 	g_free (terminal_command);
 }
