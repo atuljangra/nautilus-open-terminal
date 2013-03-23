@@ -1,67 +1,86 @@
 # Finnish translations for nautilus-open-terminal package.
 # Copyright (C) 2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the package.
+#
 # Tommi Vainikainen <Tommi.Vainikainen@iki.fi>, 2005.
 # Ilkka Tuohela <hile@iki.fi>, 2005.
-#
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-open-terminal\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-23 07:59+0300\n"
-"PO-Revision-Date: 2008-04-23 07:56+0300\n"
-"Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=nautilus-open-terminal&component=general\n"
+"POT-Creation-Date: 2009-04-17 15:38+0000\n"
+"PO-Revision-Date: 2013-03-23 18:11+0200\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi\n"
+"X-Generator: Lokalize 1.5\n"
 
-#: ../src/nautilus-open-terminal.c:444 ../src/nautilus-open-terminal.c:457
-msgid "Open in _Terminal"
-msgstr "Avaa _päätteessä"
+#: ../src/nautilus-open-terminal.c:284
+#| msgid "Open in _Terminal"
+msgid "Open in _Remote Terminal"
+msgstr "Avaa _etäpäätteessä"
 
-#: ../src/nautilus-open-terminal.c:446
+#: ../src/nautilus-open-terminal.c:286
+#| msgid "Open in _Terminal"
+msgid "Open in _Local Terminal"
+msgstr "Avaa paikallises_sa päätteessä"
+
+#: ../src/nautilus-open-terminal.c:290 ../src/nautilus-open-terminal.c:301
 msgid "Open the currently selected folder in a terminal"
 msgstr "Avaa valittu kansio päätteessä"
 
-#: ../src/nautilus-open-terminal.c:448 ../src/nautilus-open-terminal.c:458
+#: ../src/nautilus-open-terminal.c:292 ../src/nautilus-open-terminal.c:303
+#: ../src/nautilus-open-terminal.c:313
 msgid "Open the currently open folder in a terminal"
-msgstr "Avaa tämänhetkinen avoin kansio päätteessä"
+msgstr "Avaa avoinna oleva kansio päätteessä"
 
-#: ../src/nautilus-open-terminal.c:454
-msgid "Open _Terminal"
-msgstr "Avaa _pääte"
+#: ../src/nautilus-open-terminal.c:298 ../src/nautilus-open-terminal.c:312
+#| msgid "Open in _Terminal"
+msgid "Open in T_erminal"
+msgstr "Avaa _päätteessä"
 
-#: ../src/nautilus-open-terminal.c:455
+#: ../src/nautilus-open-terminal.c:309
+#| msgid "Open _Terminal"
+msgid "Open T_erminal"
+msgstr "Avaa p_ääte"
+
+#: ../src/nautilus-open-terminal.c:310
 msgid "Open a terminal"
 msgstr "Avaa pääte"
 
-#: ../src/nautilus-open-terminal.c:489 ../src/nautilus-open-terminal.c:502
+#: ../src/nautilus-open-terminal.c:325 ../src/nautilus-open-terminal.c:338
 msgid "Open in _Midnight Commander"
 msgstr "Avaa _Midnight Commanderissa"
 
-#: ../src/nautilus-open-terminal.c:491
+#: ../src/nautilus-open-terminal.c:327
 msgid ""
 "Open the currently selected folder in the terminal file manager Midnight "
 "Commander"
 msgstr ""
-"Avaa valittu kansio päätteessä Midnight Commander-tiedostonhallintaohjelmassa"
+"Avaa valittu kansio päätteessä Midnight Commander "
+"-tiedostonhallintaohjelmassa"
 
-#: ../src/nautilus-open-terminal.c:493 ../src/nautilus-open-terminal.c:503
+#: ../src/nautilus-open-terminal.c:329 ../src/nautilus-open-terminal.c:339
 msgid ""
 "Open the currently open folder in the terminal file manager Midnight "
 "Commander"
 msgstr ""
-"Avaa avattu kansio päätteessä Midnight Commander-tiedostonhallintaohjelmassa"
+"Avaa avattu kansio päätteessä Midnight Commander "
+"-tiedostonhallintaohjelmassa"
 
-#: ../src/nautilus-open-terminal.c:499
+#: ../src/nautilus-open-terminal.c:335
 msgid "Open _Midnight Commander"
 msgstr "Avaa _Midnight Commander"
 
-#: ../src/nautilus-open-terminal.c:500
+#: ../src/nautilus-open-terminal.c:336
 msgid "Open the terminal file manager Midnight Commander"
-msgstr "Avaa Midnight Commander-tiedostonhallinta päätteessä"
+msgstr "Avaa Midnight Commander -tiedostonhallinta päätteessä"
 
 #: ../nautilus-open-terminal.schemas.in.h:1
 msgid ""
@@ -92,3 +111,4 @@ msgid ""
 "Whether opening a terminal on the desktop opens a terminal in the home "
 "directory"
 msgstr "Käynnistetään työpöydältä avattu pääte kotikansioon"
+
